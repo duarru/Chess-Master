@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xadrez.Board;
+﻿using Xadrez.Board;
 using Xadrez.Pallets;
-
 namespace Xadrez.Parts
 {
     class Piece

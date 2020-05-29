@@ -7,8 +7,8 @@ namespace Xadrez
     {
         static void Main(string[] args)
         {
-            BoardChess tab = new BoardChess(8,8);
-
+            BoardChess boardChess = new BoardChess(8,8);
+            Chess.Show(boardChess);
         }
     }
 }
