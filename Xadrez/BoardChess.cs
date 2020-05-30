@@ -14,13 +14,13 @@ namespace Xadrez
             {
                 for (int j = 0; j < board.Collumn; j++)
                 {
-                    if (board.TakePiece(i,j)== null)
+                    if (board.PieceOnTheBoard(i,j)== null)
                     {
                         Console.Write("- ");
                     }
                     else
                     {
-                        Console.Write(board.TakePiece(i, j) + " ");
+                        Console.Write(board.PieceOnTheBoard(i, j) + " ");
                     }
                 }
                 Console.WriteLine();
