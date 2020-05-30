@@ -1,5 +1,6 @@
-﻿using System;
-using Xadrez.Board;
+﻿using Xadrez.Board;
+using Xadrez.Pallets;
+using Xadrez.Parts;
 
 namespace Xadrez
 {
@@ -7,8 +8,12 @@ namespace Xadrez
     {
         static void Main(string[] args)
         {
-            BoardChess boardChess = new BoardChess(8,8);
-            Chess.Show(boardChess);
+            Quadrant quadrant = new Quadrant(8,8);
+            quadrant.PutPiece(new Tower(quadrant, Collor.BLACK), new Quadrant(0, 0));
+            quadrant.PutPiece(new Tower(quadrant, Collor.BLACK), new Quadrant(1, 3));
+            quadrant.PutPiece(new King(quadrant, Collor.BLACK), new Quadrant(2, 4));
+
+            BoardChess.Show(quadrant);
         }
     }
 }

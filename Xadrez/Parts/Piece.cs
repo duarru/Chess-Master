@@ -2,16 +2,23 @@
 using Xadrez.Pallets;
 namespace Xadrez.Parts
 {
+    /// <summary>
+    /// Representa as peças do Xadrez.
+    /// </summary>
     class Piece
     {
-        public BoardChess Position { get; set; }
-        public BoardChess BoardChess { get; protected set; }
+        /// <summary>A posição.</summary>
+        public Quadrant Position { get; set; }
+        /// <summary></summary>
+        public Quadrant BoardChess { get; protected set; }
+        /// <summary>A cor da peça.</summary>
         public Collor Collor { get; protected set; }
+        /// <summary>A quantidade de movimento.</summary>
         public int Movement { get; protected set; }
 
-        public Piece(BoardChess position, BoardChess boardChess, Collor collor)
+        public Piece(Quadrant boardChess, Collor collor)
         {
-            Position = position;
+            Position = null;
             BoardChess = boardChess;
             Collor = collor;
             Movement = 0;

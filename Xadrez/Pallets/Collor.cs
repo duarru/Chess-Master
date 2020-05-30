@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Xadrez.Pallets
+﻿namespace Xadrez.Pallets
 {
+    /// <summary>
+    /// Representa as cores das peças.
+    /// </summary>
     enum Collor
     {
         WHITE, 

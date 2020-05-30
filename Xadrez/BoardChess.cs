@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xadrez.Board;
 
 namespace Xadrez
 {
-    class Chess
+    /// <summary>
+    /// Classe representa a tela do Xadrez.
+    /// </summary>
+    class BoardChess
     {
-        public static void Show(BoardChess board)
+        public static void Show(Quadrant board)
         {
             for (int i = 0; i < board.Line; i++)
             {
@@ -19,7 +20,7 @@ namespace Xadrez
                     }
                     else
                     {
-                        Console.WriteLine(board.TakePiece(i, j) + " ");
+                        Console.Write(board.TakePiece(i, j) + " ");
                     }
                 }
                 Console.WriteLine();

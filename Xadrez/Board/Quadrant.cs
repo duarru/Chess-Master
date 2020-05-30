@@ -4,7 +4,7 @@
 /// </summary>
 namespace Xadrez.Board
 {
-    class BoardChess
+    class Quadrant
     {
         /// <summary>linha, sequência de casas horizontais.</summary>
         public int Line { get; set; }
@@ -12,7 +12,7 @@ namespace Xadrez.Board
         public int Collumn { get; set; }
         /// <summary>representa as peças do jogo.</summary>
         private Piece[,] Piece;
-        public BoardChess(int line, int collumn)
+        public Quadrant(int line, int collumn)
         {
             Line = line;
             Collumn = collumn;
@@ -25,6 +25,11 @@ namespace Xadrez.Board
         public Piece TakePiece(int line, int collum)
         {
             return Piece[line, collum];
+        }
+        public void PutPiece(Piece piece, Quadrant position)
+        {
+            Piece[position.Line, position.Collumn] = piece;
+            piece.Position = position;
         }
         public override string ToString()
         {
