@@ -22,6 +22,6 @@ namespace Xadrez.Parts
             BoardChess = boardChess;
             Collor = collor;
             Movement = 0;
-        }
+        } 
     }
 }
