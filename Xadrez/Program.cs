@@ -9,23 +9,20 @@ namespace Xadrez
     {
         static void Main(string[] args)
         {
-            Quadrant x = new Quadrant('c', 7);
-            Console.WriteLine(x.Message());
-            Console.WriteLine(x.MessagePosition());
+            try
+            {
+                Quadrant quadrant = new Quadrant(8, 8);
+                quadrant.PutPiece(new Tower(quadrant, Collor.BLACK), new Quadrant(0, 0));
+                quadrant.PutPiece(new Tower(quadrant, Collor.BLACK), new Quadrant(1, 3));
+                quadrant.PutPiece(new King(quadrant, Collor.BLACK), new Quadrant(0, 2));
+                quadrant.PutPiece(new Tower(quadrant, Collor.WHITE), new Quadrant(3, 5));
 
-            /*try
-              {
-                  Quadrant quadrant = new Quadrant(8, 8);
-                  quadrant.PutPiece(new Tower(quadrant, Collor.BLACK), new Quadrant(0, 0));
-                  quadrant.PutPiece(new Tower(quadrant, Collor.BLACK), new Quadrant(1, 9));
-                  quadrant.PutPiece(new King(quadrant, Collor.BLACK), new Quadrant(0, 2));
-
-                  BoardChess.Show(quadrant);
-              }
-              catch (ChessException c)
-              {
-                  Console.WriteLine(c.Message);
-              }*/
+                BoardChess.Show(quadrant);
+            }
+            catch (ChessException c)
+            {
+                Console.WriteLine(c.Message);
+            }
         }
     }
 }
