@@ -1,5 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
+using System.Runtime.InteropServices.ComTypes;
 using Xadrez.Board;
+using Xadrez.Manager;
 using Xadrez.Pallets;
 using Xadrez.Parts;
 
@@ -14,22 +19,68 @@ namespace Xadrez
         {
             for (int i = 0; i < board.Line; i++)
             {
-                Console.Write(8-i + " ");
+                Console.Write(8 - i + " ");
                 for (int j = 0; j < board.Collumn; j++)
                 {
-                    if (board.PieceOnTheBoard(i,j)== null)
+                    if (board.PieceOnTheBoard(i, j) == null)
                     {
-                        Console.Write("- ");
+                        if (i % 2 == 0 && j % 2 == 0)
+                        {
+                            ConsoleColor background = Console.BackgroundColor;
+                            Console.BackgroundColor = ConsoleColor.White;
+                            Console.Write("   ");
+                            Console.BackgroundColor = background;
+                        }
+                        else if (!(i % 2 == 0) && !(j % 2 == 0))
+                        {
+                            ConsoleColor background = Console.BackgroundColor;
+                            Console.BackgroundColor = ConsoleColor.White;
+                            Console.Write("   ");
+                            Console.BackgroundColor = background;
+                        }
+                        else
+                        {
+                            ConsoleColor background = Console.BackgroundColor;
+                            Console.BackgroundColor = ConsoleColor.DarkGray;
+                            Console.Write("   ");
+                            Console.BackgroundColor = background;
+                        }
                     }
                     else
                     {
-                        EditCollor(board.PieceOnTheBoard(i, j));
-                        Console.Write(" ");
+                        if (i % 2 == 0 && j % 2 == 0)
+                        {
+                            ConsoleColor background = Console.BackgroundColor;
+                            Console.BackgroundColor = ConsoleColor.White;
+                            EditCollor(board.PieceOnTheBoard(i, j));
+                            Console.BackgroundColor = background;
+                        }
+                        else if (!(i % 2 == 0) && !(j % 2 == 0))
+                        {
+                            ConsoleColor background = Console.BackgroundColor;
+                            Console.BackgroundColor = ConsoleColor.White;
+                            EditCollor(board.PieceOnTheBoard(i, j));
+                            Console.BackgroundColor = background;
+                        }
+                        else
+                        {
+                            ConsoleColor background = Console.BackgroundColor;
+                            Console.BackgroundColor = ConsoleColor.DarkGray;
+                            EditCollor(board.PieceOnTheBoard(i, j));
+                            Console.BackgroundColor = background;
+                        }
                     }
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("  a b c d e f g h");
+            Console.WriteLine("   a  b  c  d  e  f  g  h");
+        }
+        public static Quadrant Input()
+        {
+            string input = Console.ReadLine();
+            char collumn = input[0];
+            int line = int.Parse(input[1] + "");
+            return new Quadrant(collumn,line);
         }
         /// <summary>Edita a cor do texto.</summary>
         /// <param name="piece"></param>
@@ -37,17 +88,17 @@ namespace Xadrez
         {
             if(piece.Collor == Collor.WHITE)
             {
-                ConsoleColor temp = Console.ForegroundColor;
+                ConsoleColor fireground = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write(piece);
-                Console.ForegroundColor = temp;
+                Console.ForegroundColor = fireground;
             }
-            else
+            else if(piece.Collor == Collor.DARKGREY)
             {
-                ConsoleColor temp = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+                ConsoleColor fireground = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Black;
                 Console.Write(piece);
-                Console.ForegroundColor = temp;
+                Console.ForegroundColor = fireground;
             }
         }
     }

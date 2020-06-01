@@ -15,6 +15,8 @@
         PURPLE,  
         GREY,
         BROWN,
-        LILAC
+        LILAC,
+        DARKRED,
+        DARKGREY
     }
 }

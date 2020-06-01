@@ -38,12 +38,12 @@ namespace Xadrez.Board
         }
         /// <summary>peça está no tabuleiro.</summary>
         /// <param name="quadrant"></param>
-        /// <returns>retorna sua posição(peça) no tabuleiro.</returns>
+        /// <returns>retorna a peça no tabuleiro.</returns>
         public Piece PieceOnTheBoard(Quadrant quadrant)
         {
             return Piece[quadrant.Line, quadrant.Collumn];
         }
-        /// <summary>pega a peça e a coloca no tabuleiro.</summary>
+        /// <summary>coloca a peça no tabuleiro.</summary>
         /// <param name="piece"></param>
         /// <param name="position"></param>
         public void PutPiece(Piece piece, Quadrant position)
@@ -54,6 +54,20 @@ namespace Xadrez.Board
             }
             Piece[position.Line, position.Collumn] = piece;
             piece.Position = position;
+        }
+        /// <summary>pega a peça e a move, deixando o local vazio.</summary>
+        /// <param name="quadrant"></param>
+        /// <returns>a peça escolhida.</returns>
+        public Piece TakePart(Quadrant quadrant)
+        {
+            if ( PieceOnTheBoard(quadrant) == null)
+            {
+                return null;
+            }
+            Piece temp = PieceOnTheBoard(quadrant);
+            temp.Position = null;
+            Piece[quadrant.Line, quadrant.Collumn] = null;
+            return temp;
         }
         /// <summary>verifica se o jogador entrou com algum dado fora do contexto do tabuleiro.</summary>
         /// <param name="quadrant"></param>
@@ -74,13 +88,13 @@ namespace Xadrez.Board
         }
         /// <summary>apresenta a mensagem no formato do xadrez.</summary>
         /// <returns>coluna em caracter e a linha</returns>
-        public virtual string Message()
+        public string ShowPosition()
         {
-            return $" {CollumnChar}{Line}";
+            return $"{CollumnChar}{Line}";
         }
         /// <summary>calculo para subtrair linha e coluna, garantindo o limite do tabuleiro.</summary>
         /// <returns></returns>
-        public Quadrant MessagePosition()
+        public Quadrant ShowPositonChess()
         {
             return new Quadrant(8 - Line, CollumnChar - 'a'); ;
         }

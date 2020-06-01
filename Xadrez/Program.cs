@@ -3,6 +3,9 @@ using Xadrez.Exception;
 using Xadrez.Pallets;
 using Xadrez.Parts;
 using System;
+using Xadrez.Manager;
+using System.ComponentModel.Design;
+
 namespace Xadrez
 {
     class Program
@@ -11,13 +14,19 @@ namespace Xadrez
         {
             try
             {
-                Quadrant quadrant = new Quadrant(8, 8);
-                quadrant.PutPiece(new Tower(quadrant, Collor.BLACK), new Quadrant(0, 0));
-                quadrant.PutPiece(new Tower(quadrant, Collor.BLACK), new Quadrant(1, 3));
-                quadrant.PutPiece(new King(quadrant, Collor.BLACK), new Quadrant(0, 2));
-                quadrant.PutPiece(new Tower(quadrant, Collor.WHITE), new Quadrant(3, 5));
+                GameManager playGame = new GameManager();
+                while (!playGame.Winner)
+                {
+                    Console.Clear();
+                    BoardChess.Show(playGame.Chess);
+                    Console.Write("Make your play, TAKE your piece:");
+                    Quadrant take = BoardChess.Input().ShowPositonChess();
+                    Console.Write($"Make your play, PUT your piece: ");
+                    Quadrant put = BoardChess.Input().ShowPositonChess();
 
-                BoardChess.Show(quadrant);
+                    playGame.Move(take, put);
+                }
+
             }
             catch (ChessException c)
             {

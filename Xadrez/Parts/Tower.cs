@@ -10,7 +10,7 @@ namespace Xadrez.Parts
         }
         public override string ToString()
         {
-            return "T";
+            return " T ";
         }
     }
 }

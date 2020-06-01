@@ -23,5 +23,9 @@ namespace Xadrez.Parts
             Collor = collor;
             Movement = 0;
         } 
+        public void Move()
+        {
+            Movement++;
+        }
     }
 }
