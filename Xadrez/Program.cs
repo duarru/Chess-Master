@@ -23,7 +23,10 @@ namespace Xadrez
                     Console.WriteLine();
                     Console.Write("Make your play, TAKE your piece:");
                     Quadrant take = BoardChess.Input().ShowPositonChess();
-                    BoardChess.Show(playGame.Chess);
+                    bool[,] quadrantsToMove = playGame.Chess.PieceOnTheBoard(take).CharacteringMove();
+                    Console.Clear();
+
+                    BoardChess.Show(playGame.Chess, quadrantsToMove);
                     Console.WriteLine();
                     Console.Write($"Make your play, PUT your piece: ");
                     Quadrant put = BoardChess.Input().ShowPositonChess();

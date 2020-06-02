@@ -23,14 +23,11 @@ namespace Xadrez.Parts
             Collor = collor;
             Movement = 0;
         }
-        public bool Move(Quadrant quadrant)
-        {
-            Piece piece = BoardChess.TakePart(quadrant);
-            return piece == null || piece.Collor != Collor;
-        }
         public void Move()
         {
             Movement++;
         }
+
+        public abstract bool[,] CharacteringMove();
     }
 }

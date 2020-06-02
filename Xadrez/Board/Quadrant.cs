@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml;
-using Xadrez.Exception;
+﻿using Xadrez.Exception;
 using Xadrez.Parts;
 /// <summary>
 /// Representa o quadrante.
@@ -42,6 +40,11 @@ namespace Xadrez.Board
         public Piece PieceOnTheBoard(Quadrant quadrant)
         {
             return Piece[quadrant.Line, quadrant.Collumn];
+        }
+        public void QuadrantsToMove(int line, int collumn)
+        {
+            Line = line;
+            Collumn = collumn;
         }
         /// <summary>coloca a peça no tabuleiro.</summary>
         /// <param name="piece"></param>
