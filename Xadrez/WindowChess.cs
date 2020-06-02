@@ -8,9 +8,11 @@ namespace Xadrez
     /// <summary>
     /// Classe representa a tela do Xadrez.
     /// </summary>
-    class BoardChess
+    class WindowChess
     {
-        public static void Show(Quadrant board)
+        /// <summary>Imprime o tabuleiro.</summary>
+        /// <param name="board"></param>
+        public static void Show(BoardChess board)
         {
             Console.WriteLine();
             for (int i = 0; i < board.Line; i++)
@@ -18,7 +20,7 @@ namespace Xadrez
                 Console.Write($" {8 - i} ");
                 for (int j = 0; j < board.Collumn; j++)
                 {
-                    EditCollor(board.PieceOnTheBoard(i, j), i, j);
+                    EditCollor(board.Piece(i, j), i, j);
                 }
                 Console.WriteLine();
             }
@@ -26,10 +28,13 @@ namespace Xadrez
             Console.WriteLine("    a  b  c  d  e  f  g  h");
             Console.WriteLine();
         }
-        public static void Show(Quadrant board, bool[,] quadrantsToMove)
+        /// <summary>Re imprime o tabuleiro com os movimentos possiveis.</summary>
+        /// <param name="board"></param>
+        /// <param name="quadrantsToMove"></param>
+        public static void Show(BoardChess board, bool[,] quadrantsToMove)
         {
             ConsoleColor background = Console.BackgroundColor;
-            ConsoleColor changeBackground = ConsoleColor.Cyan;
+            ConsoleColor changeBackground = ConsoleColor.DarkGray;
             Console.WriteLine();
             for (int i = 0; i < board.Line; i++)
             {
@@ -44,9 +49,8 @@ namespace Xadrez
                     {
                         Console.BackgroundColor = background;
                     }
-                    EditCollor(board.PieceOnTheBoard(i, j), i, j);
                     Console.BackgroundColor = background;
-
+                    EditCollor(board.Piece(i, j));
                 }
                 Console.WriteLine();
             }
@@ -55,14 +59,40 @@ namespace Xadrez
             Console.WriteLine();
             Console.BackgroundColor = background;
         }
-
-        public static Quadrant Input()
+        /// <summary>Le a posição.</summary>
+        /// <returns></returns>
+        public static PositionChess ReadPosition()
         {
             string input = Console.ReadLine();
             char collumn = input[0];
             int line = int.Parse(input[1] + "");
-            return new Quadrant(collumn, line);
+            return new PositionChess(collumn, line);
         }
+        public static void EditCollor(Piece piece)
+        {
+            if (piece == null)
+            {
+                Console.Write(" - ");
+            }
+            else
+            {
+                if(piece.Collor == Collor.WHITE)
+                {
+                    ConsoleColor fireground = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.Write(piece);
+                    Console.ForegroundColor = fireground;
+                }
+                else
+                {
+                    ConsoleColor fireground = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write(piece);
+                    Console.ForegroundColor = fireground;
+                }
+            }
+        }
+
         /// <summary>Edita a cor do texto.</summary>
         /// <param name="piece"></param>
         public static void EditCollor(Piece piece, int i, int j)

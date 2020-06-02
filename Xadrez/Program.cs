@@ -19,17 +19,18 @@ namespace Xadrez
                 while (!playGame.Winner)
                 {
                     Console.Clear();
-                    BoardChess.Show(playGame.Chess);
+                    WindowChess.Show(playGame.Chess);
+
                     Console.WriteLine();
                     Console.Write("Make your play, TAKE your piece:");
-                    Quadrant take = BoardChess.Input().ShowPositonChess();
-                    bool[,] quadrantsToMove = playGame.Chess.PieceOnTheBoard(take).CharacteringMove();
+                    Position take = WindowChess.ReadPosition().ToPosition();
+                    bool[,] quadrantsToMove = playGame.Chess.Piece(take).CharacteringMove();
+                    
                     Console.Clear();
-
-                    BoardChess.Show(playGame.Chess, quadrantsToMove);
+                    WindowChess.Show(playGame.Chess, quadrantsToMove);
                     Console.WriteLine();
                     Console.Write($"Make your play, PUT your piece: ");
-                    Quadrant put = BoardChess.Input().ShowPositonChess();
+                    Position put = WindowChess.ReadPosition().ToPosition();
 
                     playGame.Move(take, put);
                 }
@@ -39,6 +40,7 @@ namespace Xadrez
             {
                 Console.WriteLine(c.Message);
             }
+            Console.ReadLine();
         }
     }
 }
