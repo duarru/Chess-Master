@@ -17,89 +17,68 @@ namespace Xadrez
     {
         public static void Show(Quadrant board)
         {
+            Console.WriteLine();
             for (int i = 0; i < board.Line; i++)
             {
-                Console.Write(8 - i + " ");
+                Console.Write($" {8 - i} ");
                 for (int j = 0; j < board.Collumn; j++)
                 {
-                    if (board.PieceOnTheBoard(i, j) == null)
-                    {
-                        if (i % 2 == 0 && j % 2 == 0)
-                        {
-                            ConsoleColor background = Console.BackgroundColor;
-                            Console.BackgroundColor = ConsoleColor.White;
-                            Console.Write("   ");
-                            Console.BackgroundColor = background;
-                        }
-                        else if (!(i % 2 == 0) && !(j % 2 == 0))
-                        {
-                            ConsoleColor background = Console.BackgroundColor;
-                            Console.BackgroundColor = ConsoleColor.White;
-                            Console.Write("   ");
-                            Console.BackgroundColor = background;
-                        }
-                        else
-                        {
-                            ConsoleColor background = Console.BackgroundColor;
-                            Console.BackgroundColor = ConsoleColor.DarkGray;
-                            Console.Write("   ");
-                            Console.BackgroundColor = background;
-                        }
-                    }
-                    else
-                    {
-                        if (i % 2 == 0 && j % 2 == 0)
-                        {
-                            ConsoleColor background = Console.BackgroundColor;
-                            Console.BackgroundColor = ConsoleColor.White;
-                            EditCollor(board.PieceOnTheBoard(i, j));
-                            Console.BackgroundColor = background;
-                        }
-                        else if (!(i % 2 == 0) && !(j % 2 == 0))
-                        {
-                            ConsoleColor background = Console.BackgroundColor;
-                            Console.BackgroundColor = ConsoleColor.White;
-                            EditCollor(board.PieceOnTheBoard(i, j));
-                            Console.BackgroundColor = background;
-                        }
-                        else
-                        {
-                            ConsoleColor background = Console.BackgroundColor;
-                            Console.BackgroundColor = ConsoleColor.DarkGray;
-                            EditCollor(board.PieceOnTheBoard(i, j));
-                            Console.BackgroundColor = background;
-                        }
-                    }
+                    EditCollor(board.PieceOnTheBoard(i, j), i, j);
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("   a  b  c  d  e  f  g  h");
+            Console.WriteLine();
+            Console.WriteLine("    a  b  c  d  e  f  g  h");
+            Console.WriteLine();
         }
+        
         public static Quadrant Input()
         {
             string input = Console.ReadLine();
             char collumn = input[0];
             int line = int.Parse(input[1] + "");
-            return new Quadrant(collumn,line);
+            return new Quadrant(collumn, line);
         }
         /// <summary>Edita a cor do texto.</summary>
         /// <param name="piece"></param>
-        public static void EditCollor(Piece piece)
+        public static void EditCollor(Piece piece, int i, int j)
         {
-            if(piece.Collor == Collor.WHITE)
+            ConsoleColor background = Console.BackgroundColor;
+            ConsoleColor fireground = Console.ForegroundColor;
+            if (piece == null)
             {
-                ConsoleColor fireground = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.Write(piece);
-                Console.ForegroundColor = fireground;
+                if (i % 2 == 0 && j % 2 == 0 || !(i % 2 == 0) && !(j % 2 == 0))
+                {
+                    Console.BackgroundColor = ConsoleColor.White;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                }
+                Console.Write("   ");
             }
-            else if(piece.Collor == Collor.DARKGREY)
+            else
             {
-                ConsoleColor fireground = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Black;
+                if (piece.Collor == Collor.WHITE)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                }
+                else if (piece.Collor == Collor.DARKGREY)
+                {
+                    Console.ForegroundColor = ConsoleColor.Black;
+                }
+                if (i % 2 == 0 && j % 2 == 0 || !(i % 2 == 0) && !(j % 2 == 0))
+                {
+                    Console.BackgroundColor = ConsoleColor.White;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                }
                 Console.Write(piece);
-                Console.ForegroundColor = fireground;
             }
+            Console.ForegroundColor = fireground;
+            Console.BackgroundColor = background;
         }
     }
 }

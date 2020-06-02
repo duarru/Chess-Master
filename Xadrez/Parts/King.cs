@@ -7,7 +7,7 @@ namespace Xadrez.Parts
     {
         public King(Quadrant boardChess, Collor collor):base(boardChess, collor)
         {
-        }
+        } 
         public override string ToString()
         {
             return " K ";

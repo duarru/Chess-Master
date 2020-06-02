@@ -5,6 +5,7 @@ using Xadrez.Parts;
 using System;
 using Xadrez.Manager;
 using System.ComponentModel.Design;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Xadrez
 {
@@ -19,8 +20,11 @@ namespace Xadrez
                 {
                     Console.Clear();
                     BoardChess.Show(playGame.Chess);
+                    Console.WriteLine();
                     Console.Write("Make your play, TAKE your piece:");
                     Quadrant take = BoardChess.Input().ShowPositonChess();
+                    BoardChess.Show(playGame.Chess);
+                    Console.WriteLine();
                     Console.Write($"Make your play, PUT your piece: ");
                     Quadrant put = BoardChess.Input().ShowPositonChess();
 

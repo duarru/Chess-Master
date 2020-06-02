@@ -5,7 +5,7 @@ namespace Xadrez.Parts
     /// <summary>
     /// Representa as peças do Xadrez.
     /// </summary>
-    class Piece
+    abstract class Piece
     {
         /// <summary>A posição.</summary>
         public Quadrant Position { get; set; }
@@ -22,7 +22,12 @@ namespace Xadrez.Parts
             BoardChess = boardChess;
             Collor = collor;
             Movement = 0;
-        } 
+        }
+        public bool Move(Quadrant quadrant)
+        {
+            Piece piece = BoardChess.TakePart(quadrant);
+            return piece == null || piece.Collor != Collor;
+        }
         public void Move()
         {
             Movement++;

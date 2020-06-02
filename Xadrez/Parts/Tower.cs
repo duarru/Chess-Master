@@ -1,4 +1,5 @@
-﻿using Xadrez.Board;
+﻿using System.Drawing;
+using Xadrez.Board;
 using Xadrez.Pallets;
 
 namespace Xadrez.Parts
