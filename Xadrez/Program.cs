@@ -20,7 +20,8 @@ namespace Xadrez
                 {
                     Console.Clear();
                     WindowChess.Show(playGame.Chess);
-
+                    Console.WriteLine();
+                    Console.Write("Turn " + playGame.CountTurn() + " " + playGame.Player());
                     Console.WriteLine();
                     Console.Write("     Make your play, TAKE your piece: ");
                     Position take = WindowChess.ReadPosition().ToPosition();
@@ -32,7 +33,7 @@ namespace Xadrez
                     Console.Write("     Make your play, PUT your piece: ");
                     Position put = WindowChess.ReadPosition().ToPosition();
 
-                    playGame.Move(take, put);
+                    playGame.InitMove(take, put);
                 }
 
             }

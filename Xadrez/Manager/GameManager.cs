@@ -1,4 +1,6 @@
-﻿using Xadrez.Board;
+﻿using System.Drawing;
+using System.Transactions;
+using Xadrez.Board;
 using Xadrez.Pallets;
 using Xadrez.Parts;
 
@@ -7,8 +9,8 @@ namespace Xadrez.Manager
     class GameManager
     {
         public BoardChess Chess{ get; private set; }
-        private int Turn;
-        private Collor CurrentPlayer;
+        public int Turn { get; private set; }
+        public Collor CurrentPlayer { get; private set; }
         public bool Winner { get; private set; }
 
         public GameManager()
@@ -28,6 +30,32 @@ namespace Xadrez.Manager
             Chess.PutPiece(piece, put);
         }
 
+        public void InitMove(Position take, Position put)
+        {
+            Move(take, put);
+            Turn++;
+            ChangePlayer(CurrentPlayer, Turn);
+        }
+        public int CountTurn()
+        {
+            return Turn;
+        }
+        public Collor Player()
+        {
+            return CurrentPlayer;
+        }
+        private void ChangePlayer(Collor current, int turn)
+        {
+            if(CurrentPlayer == Collor.WHITE)
+            {
+                CurrentPlayer = Collor.BLACK;
+            }
+            else
+            {
+                CurrentPlayer = Collor.WHITE;
+            }
+            turn++;
+        }
         private void InitChessPosition()
         {
             Chess.PutPiece(new Tower(Chess, Collor.WHITE), new PositionChess('a', 1).ToPosition());
