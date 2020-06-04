@@ -33,9 +33,9 @@ namespace Xadrez.Manager
             Chess.PutPiece(new Tower(Chess, Collor.WHITE), new PositionChess('a', 1).ToPosition());
             Chess.PutPiece(new Tower(Chess, Collor.WHITE), new PositionChess('h', 1).ToPosition());
             Chess.PutPiece(new King(Chess, Collor.WHITE), new PositionChess('e', 1).ToPosition());
-            Chess.PutPiece(new Tower(Chess, Collor.DARKGREY), new PositionChess('a', 8).ToPosition());
-            Chess.PutPiece(new Tower(Chess, Collor.DARKGREY), new PositionChess('h', 8).ToPosition());
-            Chess.PutPiece(new King(Chess, Collor.DARKGREY), new PositionChess('d', 8).ToPosition());
+            Chess.PutPiece(new Tower(Chess, Collor.BLACK), new PositionChess('a', 8).ToPosition());
+            Chess.PutPiece(new Tower(Chess, Collor.BLACK), new PositionChess('h', 8).ToPosition());
+            Chess.PutPiece(new King(Chess, Collor.BLACK), new PositionChess('d', 8).ToPosition());
         }
     }
 }

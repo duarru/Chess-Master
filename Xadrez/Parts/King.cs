@@ -1,4 +1,5 @@
-﻿using Xadrez.Board;
+﻿using System;
+using Xadrez.Board;
 using Xadrez.Pallets;
 
 namespace Xadrez.Parts
@@ -66,7 +67,8 @@ namespace Xadrez.Parts
 
         public override string ToString()
         {
-            return " K ";
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            return "\u2655 ";
         }
     }
 }

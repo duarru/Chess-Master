@@ -17,7 +17,7 @@ namespace Xadrez
             Console.WriteLine();
             for (int i = 0; i < board.Line; i++)
             {
-                Console.Write($" {8 - i} ");
+                Console.Write($"{8 - i} ");
                 for (int j = 0; j < board.Collumn; j++)
                 {
                     EditCollor(board.Piece(i, j), i, j);
@@ -25,7 +25,7 @@ namespace Xadrez
                 Console.WriteLine();
             }
             Console.WriteLine();
-            Console.WriteLine("    a  b  c  d  e  f  g  h");
+            Console.WriteLine("  a b c d e f g h");
             Console.WriteLine();
         }
         /// <summary>Re imprime o tabuleiro com os movimentos possiveis.</summary>
@@ -38,7 +38,7 @@ namespace Xadrez
             Console.WriteLine();
             for (int i = 0; i < board.Line; i++)
             {
-                Console.Write($" {8 - i} ");
+                Console.Write($"{8 - i} ");
                 for (int j = 0; j < board.Collumn; j++)
                 {
                     if (quadrantsToMove[i, j])
@@ -49,13 +49,13 @@ namespace Xadrez
                     {
                         Console.BackgroundColor = background;
                     }
-                    Console.BackgroundColor = background;
                     EditCollor(board.Piece(i, j));
+                    Console.BackgroundColor = background;
                 }
                 Console.WriteLine();
             }
             Console.WriteLine();
-            Console.WriteLine("    a  b  c  d  e  f  g  h");
+            Console.WriteLine("    a   b   c   d   e   f   g   h");
             Console.WriteLine();
             Console.BackgroundColor = background;
         }
@@ -72,7 +72,7 @@ namespace Xadrez
         {
             if (piece == null)
             {
-                Console.Write(" - ");
+                Console.Write("\u25a2 ");
             }
             else
             {
@@ -83,7 +83,7 @@ namespace Xadrez
                     Console.Write(piece);
                     Console.ForegroundColor = fireground;
                 }
-                else
+                else if (piece.Collor == Collor.BLACK)
                 {
                     ConsoleColor fireground = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.Magenta;
@@ -109,7 +109,7 @@ namespace Xadrez
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                 }
-                Console.Write("   ");
+                Console.Write("  ");
             }
             else
             {
@@ -125,7 +125,7 @@ namespace Xadrez
                         Console.BackgroundColor = ConsoleColor.DarkGray;
                     }
                 }
-                else if (piece.Collor == Collor.DARKGREY)
+                else if (piece.Collor == Collor.BLACK)
                 {
                     Console.ForegroundColor = ConsoleColor.Black;
                     if (i % 2 == 0 && j % 2 == 0 || !(i % 2 == 0) && !(j % 2 == 0))

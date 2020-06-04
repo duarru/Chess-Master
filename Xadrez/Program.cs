@@ -22,14 +22,14 @@ namespace Xadrez
                     WindowChess.Show(playGame.Chess);
 
                     Console.WriteLine();
-                    Console.Write("Make your play, TAKE your piece:");
+                    Console.Write("     Make your play, TAKE your piece: ");
                     Position take = WindowChess.ReadPosition().ToPosition();
                     bool[,] quadrantsToMove = playGame.Chess.Piece(take).CharacteringMove();
                     
                     Console.Clear();
                     WindowChess.Show(playGame.Chess, quadrantsToMove);
                     Console.WriteLine();
-                    Console.Write($"Make your play, PUT your piece: ");
+                    Console.Write("     Make your play, PUT your piece: ");
                     Position put = WindowChess.ReadPosition().ToPosition();
 
                     playGame.Move(take, put);

@@ -1,4 +1,5 @@
-﻿using Xadrez.Board;
+﻿using System;
+using Xadrez.Board;
 using Xadrez.Pallets;
 namespace Xadrez.Parts
 {
@@ -15,7 +16,6 @@ namespace Xadrez.Parts
         public Collor Collor { get; protected set; }
         /// <summary>A quantidade de movimento.</summary>
         public int Movement { get; protected set; }
-
         /// <summary>Constructor da peça.</summary>
         /// <param name="boardChess"></param>
         /// <param name="collor"></param>

@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using Xadrez.Board;
 using Xadrez.Pallets;
+using System;
 
 namespace Xadrez.Parts
 {
@@ -60,9 +61,9 @@ namespace Xadrez.Parts
             return characteringMoveTower;
         }
 
-        public override string ToString()
-        {
-            return " T ";
+        public override string ToString() {
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            return "\u2656 ";
         }
     }
 }
