@@ -64,7 +64,7 @@ namespace Xadrez.Board
         {
             if (!CheckBoardLimit(quadrant))
             {
-                throw new ChessException("invalid quadrant!");
+                throw new ChessException("      invalid quadrant!");
             }
         }
 
@@ -75,7 +75,7 @@ namespace Xadrez.Board
         {
             if (QuadrantIsBusy(position))
             {
-                throw new ChessException("You can't do that.");
+                throw new ChessException("      You can't do that.");
             }
             Pieces[position.Line, position.Collumn] = piece;
             piece.Position = position;

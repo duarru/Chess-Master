@@ -24,7 +24,6 @@ namespace Xadrez
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine();
             Console.WriteLine("  a b c d e f g h");
             Console.WriteLine();
         }
@@ -54,8 +53,7 @@ namespace Xadrez
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine();
-            Console.WriteLine("    a   b   c   d   e   f   g   h");
+            Console.WriteLine("  a b c d e f g h");
             Console.WriteLine();
             Console.BackgroundColor = background;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Xadrez.Board;
+using Xadrez.Manager;
 using Xadrez.Pallets;
 namespace Xadrez.Parts
 {
@@ -31,11 +32,35 @@ namespace Xadrez.Parts
         {
             Movement++;
         }
+        /// <summary>Recebe o movimento.</summary>
+        /// <param name="quadrant"></param>
+        /// <returns></returns>
         public bool Move(Position quadrant)
         {
             Piece piece = BoardChess.Piece(quadrant);
             return piece == null || piece.Collor != Collor;
         }
+        public bool IsPossibleTakeMoving()
+        {
+            bool [,]move = CharacteringMove();
+            for(int i = 0; i< BoardChess.Line; i++)
+            {
+                for(int j = 0; j < BoardChess.Collumn; j++)
+                {
+                    if (move[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        public bool IsPossiblePut(Position quadrant)
+        {
+            return CharacteringMove()[quadrant.Line, quadrant.Collumn];
+        }
+        /// <summary>Caracteristica do seu movimento.</summary>
+        /// <returns></returns>
         public abstract bool[,] CharacteringMove();
     }
 }
