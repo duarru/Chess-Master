@@ -62,8 +62,7 @@ namespace Xadrez.Parts
         }
 
         public override string ToString() {
-            Console.OutputEncoding = System.Text.Encoding.Unicode;
-            return "\u2656 ";
+            return image[2];
         }
     }
 }

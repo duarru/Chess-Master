@@ -21,25 +21,21 @@ namespace Xadrez
                     try
                     {
                         Console.Clear();
-                        WindowChess.Show(playGame.Chess);
+                        WindowChess.StartChessMatch(playGame);
+                        
                         Console.WriteLine();
-                        Console.Write($"      Turn {playGame.CountTurn()}\n" +
-                            $"      Current player: {playGame.PlayerImage()} \u27ae {playGame.Player()}");
-                        Console.WriteLine();
-                        Console.Write("      Make your play, TAKE your piece: ");
+                        Console.Write(" Make your play, TAKE your piece: ");
                         Position take = WindowChess.ReadPosition().ToPosition();
                         playGame.CheckTakeAndMove(take);
-
                         bool[,] quadrantsToMove = playGame.Chess.Piece(take).CharacteringMove();
-
                         Console.Clear();
 
                         WindowChess.Show(playGame.Chess, quadrantsToMove);
                         Console.WriteLine();
-                        Console.Write($"      Turn {playGame.CountTurn()}\n" +
-                            $"      Current player: {playGame.PlayerImage()} \u27ae {playGame.Player()}");
+                        Console.Write($" Turn {playGame.CountTurn()}\n" +
+                            $" Current player: {playGame.PlayerImage()} \u27ae {playGame.Player()}");
                         Console.WriteLine();
-                        Console.Write("      Make your play, PUT your piece: ");
+                        Console.Write(" Make your play, PUT your piece: ");
                         Position put = WindowChess.ReadPosition().ToPosition();
                         playGame.CheckPutInTheQuadrant(take, put);
 

@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xadrez.Board;
 using Xadrez.Pallets;
-
 namespace Xadrez.Parts
 {
+    /// <summary>O Rei.</summary>
     class King : Piece
     {
+        /// <summary>Construtor.</summary>
+        /// <param name="boardChess"></param>
+        /// <param name="collor"></param>
         public King(BoardChess boardChess, Collor collor) : base(boardChess, collor)
         {
         }
-
+        /// <summary>Metodo sobrescrito abstrato, caracteristica especifica do movimento do rei.</summary>
+        /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
             bool[,] characteringMoveKing = new bool[BoardChess.Line, BoardChess.Collumn];
@@ -65,10 +70,11 @@ namespace Xadrez.Parts
             return characteringMoveKing;
         }
 
+        /// <summary>Unicode para imagem do rei, fonte MS Gothic.</summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            Console.OutputEncoding = System.Text.Encoding.Unicode;
-            return "\u2655 ";
+            return image[0];
         }
     }
 }

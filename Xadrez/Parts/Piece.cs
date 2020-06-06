@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xadrez.Board;
 using Xadrez.Manager;
 using Xadrez.Pallets;
@@ -20,12 +21,15 @@ namespace Xadrez.Parts
         /// <summary>Constructor da peça.</summary>
         /// <param name="boardChess"></param>
         /// <param name="collor"></param>
+        public List<string> image = new List<string>() { "\u2654 ", "\u2654 ", "\u2655 ", "\u2656 ", "\u2657 ", "\u2658 ", "\u2659 " };
+
         public Piece(BoardChess boardChess, Collor collor)
         {
             Position = null;
             BoardChess = boardChess;
             Collor = collor;
             Movement = 0;
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
         }
         /// <summary>Movimenta a peça.</summary>
         public void Move()
@@ -42,10 +46,10 @@ namespace Xadrez.Parts
         }
         public bool IsPossibleTakeMoving()
         {
-            bool [,]move = CharacteringMove();
-            for(int i = 0; i< BoardChess.Line; i++)
+            bool[,] move = CharacteringMove();
+            for (int i = 0; i < BoardChess.Line; i++)
             {
-                for(int j = 0; j < BoardChess.Collumn; j++)
+                for (int j = 0; j < BoardChess.Collumn; j++)
                 {
                     if (move[i, j])
                     {
