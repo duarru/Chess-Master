@@ -39,7 +39,7 @@ namespace Xadrez
                         Position put = WindowChess.ReadPosition().ToPosition();
                         playGame.CheckPutInTheQuadrant(take, put);
 
-                        playGame.InitMove(take, put);
+                        playGame.PerformMotion(take, put);
                     }catch(ChessException error)
                     {
                         Console.WriteLine(error.Message);

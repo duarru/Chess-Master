@@ -21,8 +21,10 @@ namespace Xadrez.Parts
         /// <summary>Constructor da peça.</summary>
         /// <param name="boardChess"></param>
         /// <param name="collor"></param>
-        public List<string> image = new List<string>() { "\u2654 ", "\u2654 ", "\u2655 ", "\u2656 ", "\u2657 ", "\u2658 ", "\u2659 " };
-
+        public List<string> image = new List<string>() { "\u2654 ", "\u2655 ", "\u2656 ", "\u2657 ", "\u2658 ", "\u2659 "};
+        /// <summary> Constructor </summary>
+        /// <param name="boardChess"></param>
+        /// <param name="collor"></param>
         public Piece(BoardChess boardChess, Collor collor)
         {
             Position = null;
@@ -36,6 +38,10 @@ namespace Xadrez.Parts
         {
             Movement++;
         }
+        public void MoonWalker()
+        {
+            Movement--;
+        }
         /// <summary>Recebe o movimento.</summary>
         /// <param name="quadrant"></param>
         /// <returns></returns>
@@ -44,6 +50,9 @@ namespace Xadrez.Parts
             Piece piece = BoardChess.Piece(quadrant);
             return piece == null || piece.Collor != Collor;
         }
+
+        /// <summary>Movimenta se possível. </summary>
+        /// <returns></returns>
         public bool IsPossibleTakeMoving()
         {
             bool[,] move = CharacteringMove();
@@ -59,11 +68,14 @@ namespace Xadrez.Parts
             }
             return false;
         }
+        /// <summary>Coloca a peça se possível.</summary>
+        /// <param name="quadrant"></param>
+        /// <returns></returns>
         public bool IsPossiblePut(Position quadrant)
         {
             return CharacteringMove()[quadrant.Line, quadrant.Collumn];
         }
-        /// <summary>Caracteristica do seu movimento.</summary>
+        /// <summary>Movimentos possíveis, caracteristicas do movimento.</summary>
         /// <returns></returns>
         public abstract bool[,] CharacteringMove();
     }

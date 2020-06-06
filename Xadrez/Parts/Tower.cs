@@ -7,9 +7,14 @@ namespace Xadrez.Parts
 {
     class Tower : Piece
     {
+        /// <summary>Construtor.</summary>
+        /// <param name="boardChess"></param>
+        /// <param name="collor"></param>
         public Tower(BoardChess boardChess, Collor collor) : base(boardChess, collor)
         {
         }
+        /// <summary>Movimento caracteristico da peça torre.</summary>
+        /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
             bool[,] characteringMoveTower = new bool[BoardChess.Line, BoardChess.Collumn];
@@ -60,7 +65,8 @@ namespace Xadrez.Parts
             }
             return characteringMoveTower;
         }
-
+        /// <summary>retorna a imagem unicode da torre, fonte MS Gothic.</summary>
+        /// <returns></returns>
         public override string ToString() {
             return image[2];
         }

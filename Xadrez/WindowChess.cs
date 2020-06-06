@@ -13,31 +13,30 @@ namespace Xadrez
     /// </summary>
     class WindowChess
     {
+        /// <summary>Imprime a partida, cria a tela de apresentação.</summary>
+        /// <param name="playGame"></param>
         public static void StartChessMatch(GameManager playGame)
-        {
+        { 
             Show(playGame.Chess);
             Console.WriteLine();
-            Console.Write(" Current player: ");
-            Console.Write($"{playGame.PlayerImage()} \u27ae {playGame.Player()} \n" +
-                $" Turn {playGame.CountTurn()}") ;
+            Console.Write(" Current player: ");/// Current player: WHITE
+            Console.WriteLine($"{playGame.PlayerImage()} \u27ae {playGame.Player()}");
+            Console.Write($" Turn {playGame.CountTurn()}") ;/// Turn 1
+            if (playGame.Xeque)
+            {
+                ConsoleColor foreground = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write(" YOUR ARE IN XEQUE!");
+                Console.ForegroundColor = foreground;
+            }
             Console.WriteLine();
-            Console.Write(" Dead " + playGame.Player() + " pieces: ");
+            Console.Write(" Dead " + playGame.Player() + " pieces: ");/// Dead WHITE pieces: []
             SetCapturedPiece(playGame.PiecesCaptureSepareteCollor(playGame.Player()), playGame);
         }
-        public static void StartChessMatch(GameManager playGame, bool[,] quadrantsToMove)
-        {
-            Console.Clear();
-            Show(playGame.Chess, quadrantsToMove);
-            Console.WriteLine();
-            Console.Write("      Current player: ");
-            Console.Write($"{playGame.PlayerImage()} \u27ae {playGame.Player()} \n" +
-                $"      Turn {playGame.CountTurn()}");
-
-            Console.WriteLine();
-            Console.Write("      Dead " + playGame.Player() + " pieces: ");
-            SetCapturedPiece(playGame.PiecesCaptureSepareteCollor(playGame.Player()), playGame);
-        }
-        public static void SetCapturedPiece(HashSet<Piece> captured, GameManager playGame) {
+        /// <summary>Imprime o conjunto de peças.</summary>
+        /// <param name="conjuntoCapetured"></param>
+        /// <param name="playGame"></param>
+        public static void SetCapturedPiece(HashSet<Piece> conjuntoCapetured, GameManager playGame) {
             ConsoleColor foreground = Console.ForegroundColor;
             if ( playGame.Player() == Collor.WHITE)
             {
@@ -49,7 +48,7 @@ namespace Xadrez
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write("\u2620 \u3010");
             }
-            foreach (Piece capture in captured)
+            foreach (Piece capture in conjuntoCapetured)
             {
                 Console.Write(capture + " ");
             }
