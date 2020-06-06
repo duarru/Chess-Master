@@ -46,7 +46,8 @@ namespace Xadrez
                         Console.ReadLine();
                     }
                 }
-
+                Console.Clear();
+                WindowChess.StartChessMatch(playGame);
             }
             catch (ChessException c)
             {

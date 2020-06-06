@@ -3,6 +3,9 @@ using Xadrez.Exception;
 using Xadrez.Pallets;
 using Xadrez.Parts;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
+using System.ComponentModel;
+
 namespace Xadrez.Manager
 {
     class GameManager
@@ -64,7 +67,7 @@ namespace Xadrez.Manager
             piece.Move();
             Piece captured = Chess.TakePart(put);
             Chess.PutPiece(piece, put);
-            if(captured != null)
+            if (captured != null)
             {
                 Captured.Add(captured);
             }
@@ -78,7 +81,7 @@ namespace Xadrez.Manager
         {
             Piece piece = Chess.TakePart(put);
             piece.MoonWalker();
-            if(captured != null)
+            if (captured != null)
             {
                 Chess.PutPiece(captured, put);
                 Captured.Remove(captured);
@@ -91,21 +94,29 @@ namespace Xadrez.Manager
         public void PerformMotion(Position take, Position put)
         {
             Piece captured = Move(take, put);
-            if (InCheck(Player()))
+            if (InXeque(Player()))
             {
                 RewindMove(take, put, captured);
                 throw new ChessException("Your cannot put yourself in check.");
             }
 
-            if (InCheck(AnotherPlayer(Player()))){
+            if (InXeque(AnotherPlayer(Player())))
+            {
                 Xeque = true;
             }
             else
             {
                 Xeque = false;
             }
-            Turn++;
-            ChangePlayer(Player(), Turn, Image);
+            if (XequeMate(AnotherPlayer(Player())))
+            {
+                Winner = true;
+            }
+            else
+            {
+                Turn++;
+                ChangePlayer(Player(), Turn, Image);
+            }
         }
         /// <summary>Controla a vez da jogada.</summary>
         /// <param name="current"></param>
@@ -173,9 +184,9 @@ namespace Xadrez.Manager
         /// <returns>null se não existir rei.</returns>
         private Piece TheKing(Collor collor)
         {
-            foreach(Piece found in PiecesOnBoardChess(collor))
+            foreach (Piece found in PiecesOnBoardChess(collor))
             {
-                if(found is King)
+                if (found is King)
                 {
                     return found;
                 }
@@ -185,17 +196,17 @@ namespace Xadrez.Manager
         /// <summary>Está em xeque.</summary>
         /// <param name="collor"></param>
         /// <returns></returns>
-        public bool InCheck(Collor collor)
+        public bool InXeque(Collor collor)
         {
             Piece king = TheKing(collor);
-            if(king == null)
+            if (king == null)
             {
                 throw new ChessException($"Not have of collor the king {collor} on board chess.");
             }
-            foreach(Piece move in PiecesOnBoardChess(AnotherPlayer(collor)))
+            foreach (Piece move in PiecesOnBoardChess(AnotherPlayer(collor)))
             {
                 bool[,] movePossible = move.CharacteringMove();
-                if(movePossible[king.Position.Line, king.Position.Collumn])
+                if (movePossible[king.Position.Line, king.Position.Collumn])
                 {
                     return true;
                 }
@@ -203,6 +214,37 @@ namespace Xadrez.Manager
             return false;
         }
 
+        public bool XequeMate(Collor collor)
+        {
+            if (!InXeque(collor))
+            {
+                return false;
+            }
+            foreach (Piece xequeMate in PiecesOnBoardChess(collor))
+            {
+                bool[,] xeque = xequeMate.CharacteringMove();
+                for (int i = 0; i < Chess.Line; i++)
+                {
+                    for (int j = 0; j < Chess.Collumn; j++)
+                    {
+                        if (xeque[i, j])
+                        {
+                            Position take = xequeMate.Position;
+                            Position put = new Position(i, j);
+                            Piece captured = Move(take, put);
+                            bool inXequeMate = InXeque(collor);
+                            RewindMove(take, put, captured);
+
+                            if (!inXequeMate)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
         /// <summary>Excecção de movimento.</summary>
         /// <param name="quadrant"></param>
         public void CheckTakeAndMove(Position quadrant)

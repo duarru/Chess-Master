@@ -22,16 +22,27 @@ namespace Xadrez
             Console.Write(" Current player: ");/// Current player: WHITE
             Console.WriteLine($"{playGame.PlayerImage()} \u27ae {playGame.Player()}");
             Console.Write($" Turn {playGame.CountTurn()}") ;/// Turn 1
-            if (playGame.Xeque)
+            if (!playGame.Winner)
+            {
+                if (playGame.Xeque)
+                {
+                    ConsoleColor foreground = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write(" YOUR ARE IN XEQUE!");
+                    Console.ForegroundColor = foreground;
+                }
+                Console.WriteLine();
+                Console.Write(" Dead " + playGame.Player() + " pieces: ");/// Dead WHITE pieces: []
+                SetCapturedPiece(playGame.PiecesCaptureSepareteCollor(playGame.Player()), playGame);
+            }
+            else
             {
                 ConsoleColor foreground = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.Write(" YOUR ARE IN XEQUE!");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write($" XEQUEMATE \n" +
+                    $" WINNER IS {playGame.Player()}");
                 Console.ForegroundColor = foreground;
             }
-            Console.WriteLine();
-            Console.Write(" Dead " + playGame.Player() + " pieces: ");/// Dead WHITE pieces: []
-            SetCapturedPiece(playGame.PiecesCaptureSepareteCollor(playGame.Player()), playGame);
         }
         /// <summary>Imprime o conjunto de peças.</summary>
         /// <param name="conjuntoCapetured"></param>
