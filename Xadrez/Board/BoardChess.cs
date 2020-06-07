@@ -1,6 +1,5 @@
 ﻿using Xadrez.Exception;
 using Xadrez.Parts;
-
 namespace Xadrez.Board
 {
     /// <summary>Tabuleiro</summary>

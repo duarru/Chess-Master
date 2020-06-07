@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using System.Text;
-
-namespace Xadrez.Board
+﻿namespace Xadrez.Board
 {
     /// <summary>Posição do quadrante.</summary>
     class PositionChess

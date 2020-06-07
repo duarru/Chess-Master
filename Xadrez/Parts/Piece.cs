@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xadrez.Board;
-using Xadrez.Manager;
 using Xadrez.Pallets;
 namespace Xadrez.Parts
 {
@@ -18,10 +17,11 @@ namespace Xadrez.Parts
         public Collor Collor { get; protected set; }
         /// <summary>A quantidade de movimento.</summary>
         public int Movement { get; protected set; }
-        /// <summary>Constructor da peça.</summary>
-        /// <param name="boardChess"></param>
-        /// <param name="collor"></param>
+        /// <summary>Imagens unicode.</summary>
         public List<string> image = new List<string>() { "\u2654 ", "\u2655 ", "\u2656 ", "\u2657 ", "\u2658 ", "\u2659 "};
+        public Piece()
+        {
+        }
         /// <summary> Constructor </summary>
         /// <param name="boardChess"></param>
         /// <param name="collor"></param>

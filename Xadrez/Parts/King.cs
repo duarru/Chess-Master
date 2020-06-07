@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Xadrez.Board;
+﻿using Xadrez.Board;
 using Xadrez.Pallets;
 namespace Xadrez.Parts
 {

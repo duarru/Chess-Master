@@ -3,9 +3,6 @@ using Xadrez.Exception;
 using Xadrez.Pallets;
 using Xadrez.Parts;
 using System.Collections.Generic;
-using System.Reflection.Metadata;
-using System.ComponentModel;
-
 namespace Xadrez.Manager
 {
     class GameManager
@@ -285,17 +282,40 @@ namespace Xadrez.Manager
         private void InitChessPosition()
         {
 
-            PutPieceOnBoard('a', 1, new Tower(Chess, Collor.WHITE));
-
+            PutPieceOnBoard('a', 1, new Rock(Chess, Collor.WHITE));
+            PutPieceOnBoard('b', 1, new Knight(Chess, Collor.WHITE));
+            PutPieceOnBoard('c', 1, new Bishop(Chess, Collor.WHITE));
+            PutPieceOnBoard('d', 1, new Queen(Chess, Collor.WHITE));
             PutPieceOnBoard('e', 1, new King(Chess, Collor.WHITE));
+            PutPieceOnBoard('f', 1, new Bishop(Chess, Collor.WHITE));
+            PutPieceOnBoard('g', 1, new Knight(Chess, Collor.WHITE));
+            PutPieceOnBoard('h', 1, new Rock(Chess, Collor.WHITE));
+            PutPieceOnBoard('a', 2, new Pawn(Chess, Collor.WHITE));
+            PutPieceOnBoard('b', 2, new Pawn(Chess, Collor.WHITE));
+            PutPieceOnBoard('c', 2, new Pawn(Chess, Collor.WHITE));
+            PutPieceOnBoard('d', 2, new Pawn(Chess, Collor.WHITE));
+            PutPieceOnBoard('e', 2, new Pawn(Chess, Collor.WHITE));
+            PutPieceOnBoard('f', 2, new Pawn(Chess, Collor.WHITE));
+            PutPieceOnBoard('g', 2, new Pawn(Chess, Collor.WHITE));
+            PutPieceOnBoard('h', 2, new Pawn(Chess, Collor.WHITE));
 
-            PutPieceOnBoard('h', 1, new Tower(Chess, Collor.WHITE));
-
-            PutPieceOnBoard('a', 8, new Tower(Chess, Collor.BLACK));
-
+            PutPieceOnBoard('a', 8, new Rock(Chess, Collor.BLACK));
+            PutPieceOnBoard('b', 8, new Knight(Chess, Collor.BLACK));
+            PutPieceOnBoard('c', 8, new Bishop(Chess, Collor.BLACK));
             PutPieceOnBoard('d', 8, new King(Chess, Collor.BLACK));
+            PutPieceOnBoard('e', 8, new Queen(Chess, Collor.BLACK));
+            PutPieceOnBoard('f', 8, new Bishop(Chess, Collor.BLACK));
+            PutPieceOnBoard('g', 8, new Knight(Chess, Collor.BLACK));
+            PutPieceOnBoard('h', 8, new Rock(Chess, Collor.BLACK));
+            PutPieceOnBoard('a', 7, new Pawn(Chess, Collor.BLACK));
+            PutPieceOnBoard('b', 7, new Pawn(Chess, Collor.BLACK));
+            PutPieceOnBoard('c', 7, new Pawn(Chess, Collor.BLACK));
+            PutPieceOnBoard('d', 7, new Pawn(Chess, Collor.BLACK));
+            PutPieceOnBoard('e', 7, new Pawn(Chess, Collor.BLACK));
+            PutPieceOnBoard('f', 7, new Pawn(Chess, Collor.BLACK));
+            PutPieceOnBoard('g', 7, new Pawn(Chess, Collor.BLACK));
+            PutPieceOnBoard('h', 7, new Pawn(Chess, Collor.BLACK));
 
-            PutPieceOnBoard('h', 8, new Tower(Chess, Collor.BLACK));
 
         }
     }

@@ -1,12 +1,7 @@
 ﻿using Xadrez.Board;
 using Xadrez.Exception;
-using Xadrez.Pallets;
-using Xadrez.Parts;
 using System;
 using Xadrez.Manager;
-using System.ComponentModel.Design;
-using System.Runtime.InteropServices.ComTypes;
-
 namespace Xadrez
 {
     class Program

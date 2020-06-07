@@ -1,6 +1,4 @@
-﻿using Xadrez.Exception;
-using Xadrez.Parts;
-/// <summary>
+﻿/// <summary>
 /// Representa o quadrante.
 /// </summary>
 namespace Xadrez.Board
@@ -20,7 +18,7 @@ namespace Xadrez.Board
             Line = line;
             Collumn = collumn;
         }
-        /// <summary>Quadrantes de movimentação.</summary>
+        /// <summary>Quadrantes de movimentação, define os valores da posição.</summary>
         /// <param name="line"></param>
         /// <param name="collumn"></param>
         public void QuadrantsToMove(int line, int collumn)

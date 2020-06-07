@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Xadrez.Board;
 using Xadrez.Manager;
 using Xadrez.Pallets;
 using Xadrez.Parts;
-
 namespace Xadrez
 {
     /// <summary>
