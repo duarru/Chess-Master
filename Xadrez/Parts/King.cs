@@ -18,49 +18,49 @@ namespace Chess.Parts
             Position quadrant = new Position(0, 0);
             //cima.
             quadrant.QuadrantsToMove(position.line - 1, position.collumn);
-            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal superior direita.
             quadrant.QuadrantsToMove(position.line - 1, position.collumn + 1);
-            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //direita.
             quadrant.QuadrantsToMove(position.line, position.collumn + 1);
-            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal inferior direita.
             quadrant.QuadrantsToMove(position.line + 1, position.collumn + 1);
-            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //baixo.
             quadrant.QuadrantsToMove(position.line + 1, position.collumn);
-            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal inferior esquerda.
             quadrant.QuadrantsToMove(position.line + 1, position.collumn - 1);
-            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //esquerda
             quadrant.QuadrantsToMove(position.line, position.collumn - 1);
-            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal superior esquerda.
             quadrant.QuadrantsToMove(position.line - 1, position.collumn - 1);
-            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }

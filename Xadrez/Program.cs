@@ -35,7 +35,7 @@ namespace Chess
                         playGame.CheckPutInTheQuadrant(take, put);
 
                         playGame.PerformMotion(take, put);
-                    }catch(ChessException error)
+                    }catch(ExceptionChess error)
                     {
                         Console.WriteLine(error.Message);
                         Console.ReadLine();
@@ -44,7 +44,7 @@ namespace Chess
                 Console.Clear();
                 WindowChess.StartChessMatch(playGame);
             }
-            catch (ChessException c)
+            catch (ExceptionChess c)
             {
                 Console.WriteLine(c.Message);
             }

@@ -21,7 +21,7 @@ namespace Chess.Parts
             Position quadrant = new Position(0, 0);
             //diagonal esquerda.
             quadrant.QuadrantsToMove(position.line - 1, position.collumn -1);
-            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
                 if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
@@ -32,7 +32,7 @@ namespace Chess.Parts
             }
             //diagonal direita.
             quadrant.QuadrantsToMove(position.line - 1, position.collumn + 1);
-            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
                 if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
@@ -43,7 +43,7 @@ namespace Chess.Parts
             }
             //diagonal direita baixo.
             quadrant.QuadrantsToMove(position.line + 1, position.collumn + 1);
-            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
                 if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
@@ -54,7 +54,7 @@ namespace Chess.Parts
             }
             //diagonal esquerda baixo.
             quadrant.QuadrantsToMove(position.line + 1, position.collumn - 1);
-            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
+            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
                 if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)

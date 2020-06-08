@@ -94,7 +94,7 @@ namespace Chess.Manager
             if (InXeque(Player()))
             {
                 RewindMove(take, put, captured);
-                throw new ChessException("Your cannot put yourself in check.");
+                throw new ExceptionChess("Your cannot put yourself in check.");
             }
 
             if (InXeque(AnotherPlayer(Player())))
@@ -198,7 +198,7 @@ namespace Chess.Manager
             Piece king = TheKing(collor);
             if (king == null)
             {
-                throw new ChessException($"Not have of collor the king {collor} on board chess.");
+                throw new ExceptionChess($"Not have of collor the king {collor} on board chess.");
             }
             foreach (Piece move in PiecesOnBoardChess(AnotherPlayer(collor)))
             {
@@ -248,15 +248,15 @@ namespace Chess.Manager
         {
             if (Chess.Piece(quadrant) == null)
             {
-                throw new ChessException("      There is not piece here.");
+                throw new ExceptionChess("      There is not piece here.");
             }
             if (Player() != Chess.Piece(quadrant).collor)
             {
-                throw new ChessException($"      It's the turn of \u27ae {Player()}");
+                throw new ExceptionChess($"      It's the turn of \u27ae {Player()}");
             }
             if (!Chess.Piece(quadrant).IsPossibleTakeMoving())
             {
-                throw new ChessException("      There is not movement");
+                throw new ExceptionChess("      There is not movement");
             }
         }
         /// <summary>Exceção para soltar a peça.</summary>
@@ -266,7 +266,7 @@ namespace Chess.Manager
         {
             if (!Chess.Piece(take).IsPossiblePut(put))
             {
-                throw new ChessException("      It's not a valided moving");
+                throw new ExceptionChess("      It's not a valided moving");
             }
         }
         /// <summary>Coloca uma nova peça.</summary>

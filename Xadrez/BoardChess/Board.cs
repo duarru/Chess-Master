@@ -1,5 +1,8 @@
 ﻿using Chess.Exception;
 using Chess.Parts;
+using System.Collections.Generic;
+using System.Reflection;
+
 namespace Chess.BoardChess
 {
     class Board
@@ -10,6 +13,9 @@ namespace Chess.BoardChess
         public int collumns { get; set; }
         /// <summary>Matriz privativa das peças</summary>
         private Piece[,] pieces;
+        /// <summary>Lista das imagens para os metodos de exceção do tabuleiro.</summary>
+        public List<string> image = new List<string> { " \u2716 " };
+
 
         /// <summary>Constructor do Tabuleiro.</summary>
         /// <param name="lines"></param>
@@ -30,12 +36,12 @@ namespace Chess.BoardChess
             return pieces[line, collumn];
         }
 
-        /// <summary>Sobrecarga do metodo da peça, passando apenas o quadrante.</summary>
-        /// <param name="quadrant"></param>
+        /// <summary>Sobrecarga do metodo da peça, square retorna linha e coluna da matriz peças.</summary>
+        /// <param name="square"></param>
         /// <returns></returns>
-        public Piece Piece(Position quadrant)
+        public Piece Piece(Position square)
         {
-            return pieces[quadrant.line, quadrant.collumn];
+            return pieces[square.line, square.collumn];
         }
 
         /// <summary>coloca a peça no tabuleiro.</summary>
@@ -43,40 +49,33 @@ namespace Chess.BoardChess
         /// <param name="put"></param>
         public void PutPiece(Piece piece, Position put)
         {
-            if (QuadrantIsBusy(put))
+            if (ExistPiece(put))
             {
-                throw new ChessException("      You can't do that.");
+                throw new ExceptionChess("      You can't do that.");
             }
             pieces[put.line, put.collumn] = piece;
             piece.position = put;
         }
-        /// <summary>Verifica se tem alguma peça no quadrante.</summary>
-        /// <param name="quadrant"></param>
-        /// <returns></returns>
-        public bool QuadrantIsBusy(Position quadrant)
-        {
-            ToValidate(quadrant);
-            return Piece(quadrant) != null;
-        }
 
-        /// <summary>verifica se o jogador entrou com algum dado fora do limite do tabuleiro.</summary>
-        /// <param name="quadrant"></param>
+
+        /// <summary>Retorna verdadeiro ou falso caso um dado esteja fora dos limites do Tabuleiro.</summary>
+        /// <param name="square"></param>
         /// <returns>verdadeiro ou falso</returns>
-        public bool CheckBoardLimit(Position quadrant)
+        public bool ExceptionBoardLimit(Position square)
         {
-            if (quadrant.line < 0 || quadrant.collumn < 0 || quadrant.line >= lines || quadrant.collumn >= collumns)
+            if (square.line < 0 || square.collumn < 0 || square.line >= lines || square.collumn >= collumns)
             {
                 return false;
             }
             return true;
         }
-        /// <summary>Invalida o movimento, se a verificação do limite for falso.</summary>
-        /// <param name="quadrant"></param>
-        public void ToValidate(Position quadrant)
+        /// <summary>Verifica se a posição é válida.</summary>
+        /// <param name="square"></param>
+        public void ExceptionValidedLimit(Position square)
         {
-            if (!CheckBoardLimit(quadrant))
+            if (!ExceptionBoardLimit(square))
             {
-                throw new ChessException("      invalid quadrant!");
+                throw new ExceptionChess(image + "invalid square.");
             }
         }
 
@@ -95,6 +94,14 @@ namespace Chess.BoardChess
             pieces[quadrant.line, quadrant.collumn] = null;
             return temp;
         }
-
+            
+        /// <summary>Verifica se tem alguma peça na casa(square).</summary>
+        /// <param name="square"></param>
+        /// <returns></returns>
+        public bool ExistPiece(Position square)
+        {
+            ExceptionValidedLimit(square);
+            return Piece(square) != null;
+        }
     }
 }
