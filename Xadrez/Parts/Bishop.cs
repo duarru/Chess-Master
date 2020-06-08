@@ -1,6 +1,6 @@
-﻿using Xadrez.BoardChess;
-using Xadrez.Pallets;
-namespace Xadrez.Parts
+﻿using Chess.BoardChess;
+using Chess.Pallets;
+namespace Chess.Parts
 {
     class Bishop : Piece
     {
@@ -17,47 +17,47 @@ namespace Xadrez.Parts
         /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
-            bool[,] characteringMoveBishop = new bool[BoardChess.Line, BoardChess.Collumn];
+            bool[,] characteringMoveBishop = new bool[board.lines, board.collumns];
             Position quadrant = new Position(0, 0);
             //diagonal esquerda.
-            quadrant.QuadrantsToMove(Position.line - 1, Position.collumn -1);
-            while (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line - 1, position.collumn -1);
+            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
-                if (BoardChess.Piece(quadrant) != null && BoardChess.Piece(quadrant).Collor != Collor)
+                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }
                 quadrant.QuadrantsToMove(quadrant.line - 1, quadrant.collumn - 1);
             }
             //diagonal direita.
-            quadrant.QuadrantsToMove(Position.line - 1, Position.collumn + 1);
-            while (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line - 1, position.collumn + 1);
+            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
-                if (BoardChess.Piece(quadrant) != null && BoardChess.Piece(quadrant).Collor != Collor)
+                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }
                 quadrant.QuadrantsToMove(quadrant.line - 1, quadrant.collumn + 1);
             }
             //diagonal direita baixo.
-            quadrant.QuadrantsToMove(Position.line + 1, Position.collumn + 1);
-            while (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line + 1, position.collumn + 1);
+            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
-                if (BoardChess.Piece(quadrant) != null && BoardChess.Piece(quadrant).Collor != Collor)
+                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }
                 quadrant.QuadrantsToMove(quadrant.line + 1, quadrant.collumn + 1);
             }
             //diagonal esquerda baixo.
-            quadrant.QuadrantsToMove(Position.line + 1, Position.collumn - 1);
-            while (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line + 1, position.collumn - 1);
+            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
-                if (BoardChess.Piece(quadrant) != null && BoardChess.Piece(quadrant).Collor != Collor)
+                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }

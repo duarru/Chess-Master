@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Xadrez.BoardChess;
-using Xadrez.Pallets;
+using Chess.BoardChess;
+using Chess.Pallets;
 
-namespace Xadrez.Parts
+namespace Chess.Parts
 {
     class Pawn : Piece
     {
@@ -15,15 +15,15 @@ namespace Xadrez.Parts
         /// <returns></returns>
         private bool CaptureRadius(Position quadrant)
         {
-            Piece piece = BoardChess.Piece(quadrant);
-            return piece != null && piece.Collor != Collor;
+            Piece piece = board.Piece(quadrant);
+            return piece != null && piece.collor != collor;
         }
         /// <summary>Livre, se for o primeiro movimento.</summary>
         /// <param name="quadrant"></param>
         /// <returns></returns>
         private bool FisrMovement(Position quadrant)
         {
-            return BoardChess.Piece(quadrant) == null;
+            return board.Piece(quadrant) == null;
         }
         public override string ToString()
         {
@@ -32,60 +32,60 @@ namespace Xadrez.Parts
         public override bool[,] CharacteringMove()
         {
             
-                bool[,] characteringMovePawn = new bool[BoardChess.Line, BoardChess.Collumn];
+                bool[,] characteringMovePawn = new bool[board.lines, board.collumns];
                 Position quadrant = new Position(0, 0);
-            if (Collor.Equals(Collor.WHITE))
+            if (collor.Equals(Collor.WHITE))
             {
                 //cima.
-                quadrant.QuadrantsToMove(Position.line - 1, Position.collumn);
-                if (BoardChess.CheckBoardLimit(quadrant) && FisrMovement(quadrant))
+                quadrant.QuadrantsToMove(position.line - 1, position.collumn);
+                if (board.CheckBoardLimit(quadrant) && FisrMovement(quadrant))
                 {
                     characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                 }
                 //duas casas para cima.
-                quadrant.QuadrantsToMove(Position.line - 2, Position.collumn);
-                if (BoardChess.CheckBoardLimit(quadrant) && Movement.Equals(0))
+                quadrant.QuadrantsToMove(position.line - 2, position.collumn);
+                if (board.CheckBoardLimit(quadrant) && movement.Equals(0))
                 {
                     characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                 }
                 //diagonal de capitura esquerda.
-                quadrant.QuadrantsToMove(Position.line - 1, Position.collumn - 1);
-                if (BoardChess.CheckBoardLimit(quadrant) && CaptureRadius(quadrant))
+                quadrant.QuadrantsToMove(position.line - 1, position.collumn - 1);
+                if (board.CheckBoardLimit(quadrant) && CaptureRadius(quadrant))
                 {
                     characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                 }
                 //diagonal de capitura diireita.
-                quadrant.QuadrantsToMove(Position.line - 1, Position.collumn + 1);
-                if (BoardChess.CheckBoardLimit(quadrant) && CaptureRadius(quadrant))
+                quadrant.QuadrantsToMove(position.line - 1, position.collumn + 1);
+                if (board.CheckBoardLimit(quadrant) && CaptureRadius(quadrant))
                 {
                     characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                 }
             }
             else
             {
-                if (Collor.Equals(Collor.BLACK))
+                if (collor.Equals(Collor.BLACK))
                 {
                     //baxo.
-                    quadrant.QuadrantsToMove(Position.line + 1, Position.collumn);
-                    if (BoardChess.CheckBoardLimit(quadrant) && FisrMovement(quadrant))
+                    quadrant.QuadrantsToMove(position.line + 1, position.collumn);
+                    if (board.CheckBoardLimit(quadrant) && FisrMovement(quadrant))
                     {
                         characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                     }
                     //duas casas para baixo.
-                    quadrant.QuadrantsToMove(Position.line + 2, Position.collumn);
-                    if (BoardChess.CheckBoardLimit(quadrant) && Movement.Equals(0))
+                    quadrant.QuadrantsToMove(position.line + 2, position.collumn);
+                    if (board.CheckBoardLimit(quadrant) && movement.Equals(0))
                     {
                         characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                     }
                     //diagonal de capitura direita.
-                    quadrant.QuadrantsToMove(Position.line + 1, Position.collumn + 1);
-                    if (BoardChess.CheckBoardLimit(quadrant) && CaptureRadius(quadrant))
+                    quadrant.QuadrantsToMove(position.line + 1, position.collumn + 1);
+                    if (board.CheckBoardLimit(quadrant) && CaptureRadius(quadrant))
                     {
                         characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                     }
                     //diagonal de capitura esquerda.
-                    quadrant.QuadrantsToMove(Position.line + 1, Position.collumn - 1);
-                    if (BoardChess.CheckBoardLimit(quadrant) && CaptureRadius(quadrant))
+                    quadrant.QuadrantsToMove(position.line + 1, position.collumn - 1);
+                    if (board.CheckBoardLimit(quadrant) && CaptureRadius(quadrant))
                     {
                         characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                     }

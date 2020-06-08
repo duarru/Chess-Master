@@ -1,9 +1,9 @@
-﻿using Xadrez.BoardChess;
-using Xadrez.Exception;
-using Xadrez.Pallets;
-using Xadrez.Parts;
+﻿using Chess.BoardChess;
+using Chess.Exception;
+using Chess.Pallets;
+using Chess.Parts;
 using System.Collections.Generic;
-namespace Xadrez.Manager
+namespace Chess.Manager
 {
     class GameManager
     {
@@ -139,7 +139,7 @@ namespace Xadrez.Manager
             HashSet<Piece> separetePieceCollor = new HashSet<Piece>();
             foreach (Piece x in Captured)
             {
-                if (x.Collor.Equals(collor))
+                if (x.collor.Equals(collor))
                 {
                     separetePieceCollor.Add(x);
                 }
@@ -154,7 +154,7 @@ namespace Xadrez.Manager
             HashSet<Piece> piecesOnBoard = new HashSet<Piece>();
             foreach (Piece x in Pieces)
             {
-                if (x.Collor.Equals(collor))
+                if (x.collor.Equals(collor))
                 {
                     piecesOnBoard.Add(x);
                 }
@@ -203,7 +203,7 @@ namespace Xadrez.Manager
             foreach (Piece move in PiecesOnBoardChess(AnotherPlayer(collor)))
             {
                 bool[,] movePossible = move.CharacteringMove();
-                if (movePossible[king.Position.line, king.Position.collumn])
+                if (movePossible[king.position.line, king.position.collumn])
                 {
                     return true;
                 }
@@ -220,13 +220,13 @@ namespace Xadrez.Manager
             foreach (Piece xequeMate in PiecesOnBoardChess(collor))
             {
                 bool[,] xeque = xequeMate.CharacteringMove();
-                for (int i = 0; i < Chess.Line; i++)
+                for (int i = 0; i < Chess.lines; i++)
                 {
-                    for (int j = 0; j < Chess.Collumn; j++)
+                    for (int j = 0; j < Chess.collumns; j++)
                     {
                         if (xeque[i, j])
                         {
-                            Position take = xequeMate.Position;
+                            Position take = xequeMate.position;
                             Position put = new Position(i, j);
                             Piece captured = Move(take, put);
                             bool inXequeMate = InXeque(collor);
@@ -250,7 +250,7 @@ namespace Xadrez.Manager
             {
                 throw new ChessException("      There is not piece here.");
             }
-            if (Player() != Chess.Piece(quadrant).Collor)
+            if (Player() != Chess.Piece(quadrant).collor)
             {
                 throw new ChessException($"      It's the turn of \u27ae {Player()}");
             }

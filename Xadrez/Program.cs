@@ -1,8 +1,8 @@
-﻿using Xadrez.BoardChess;
-using Xadrez.Exception;
+﻿using Chess.BoardChess;
+using Chess.Exception;
 using System;
-using Xadrez.Manager;
-namespace Xadrez
+using Chess.Manager;
+namespace Chess
 {
     class Program
     {

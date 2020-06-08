@@ -1,6 +1,6 @@
-﻿using Xadrez.BoardChess;
-using Xadrez.Pallets;
-namespace Xadrez.Parts
+﻿using Chess.BoardChess;
+using Chess.Pallets;
+namespace Chess.Parts
 {
     /// <summary>O Rei.</summary>
     class King : Piece
@@ -15,53 +15,53 @@ namespace Xadrez.Parts
         /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
-            bool[,] characteringMoveKing = new bool[BoardChess.Line, BoardChess.Collumn];
+            bool[,] characteringMoveKing = new bool[board.lines, board.collumns];
             Position quadrant = new Position(0, 0);
             //cima.
-            quadrant.QuadrantsToMove(Position.line - 1, Position.collumn);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line - 1, position.collumn);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal superior direita.
-            quadrant.QuadrantsToMove(Position.line - 1, Position.collumn + 1);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line - 1, position.collumn + 1);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //direita.
-            quadrant.QuadrantsToMove(Position.line, Position.collumn + 1);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line, position.collumn + 1);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal inferior direita.
-            quadrant.QuadrantsToMove(Position.line + 1, Position.collumn + 1);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line + 1, position.collumn + 1);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //baixo.
-            quadrant.QuadrantsToMove(Position.line + 1, Position.collumn);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line + 1, position.collumn);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal inferior esquerda.
-            quadrant.QuadrantsToMove(Position.line + 1, Position.collumn - 1);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line + 1, position.collumn - 1);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //esquerda
-            quadrant.QuadrantsToMove(Position.line, Position.collumn - 1);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line, position.collumn - 1);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal superior esquerda.
-            quadrant.QuadrantsToMove(Position.line - 1, Position.collumn - 1);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line - 1, position.collumn - 1);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }

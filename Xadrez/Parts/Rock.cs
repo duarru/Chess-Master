@@ -1,6 +1,6 @@
-﻿using Xadrez.BoardChess;
-using Xadrez.Pallets;
-namespace Xadrez.Parts
+﻿using Chess.BoardChess;
+using Chess.Pallets;
+namespace Chess.Parts
 {
     class Rock : Piece
     {
@@ -14,47 +14,47 @@ namespace Xadrez.Parts
         /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
-            bool[,] characteringMoveRock = new bool[BoardChess.Line, BoardChess.Collumn];
+            bool[,] characteringMoveRock = new bool[board.lines, board.collumns];
             Position quadrant = new Position(0, 0);
             //cima.
-            quadrant.QuadrantsToMove(Position.line - 1, Position.collumn);
-            while (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line - 1, position.collumn);
+            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveRock[quadrant.line, quadrant.collumn] = true;
-                if(BoardChess.Piece(quadrant) != null && BoardChess.Piece(quadrant).Collor != Collor)
+                if(board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }
                 quadrant.line = quadrant.line - 1;
             }
             //baixo.
-            quadrant.QuadrantsToMove(Position.line + 1, Position.collumn);
-            while (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line + 1, position.collumn);
+            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveRock[quadrant.line, quadrant.collumn] = true;
-                if (BoardChess.Piece(quadrant) != null && BoardChess.Piece(quadrant).Collor != Collor)
+                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }
                 quadrant.line = quadrant.line + 1;
             }
             //direita.
-            quadrant.QuadrantsToMove(Position.line, Position.collumn + 1);
-            while (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line, position.collumn + 1);
+            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveRock[quadrant.line, quadrant.collumn] = true;
-                if (BoardChess.Piece(quadrant) != null && BoardChess.Piece(quadrant).Collor != Collor)
+                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }
                 quadrant.collumn = quadrant.collumn + 1;
             }
             //esquerda.
-            quadrant.QuadrantsToMove(Position.line, Position.collumn - 1);
-            while (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line, position.collumn - 1);
+            while (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveRock[quadrant.line, quadrant.collumn] = true;
-                if (BoardChess.Piece(quadrant) != null && BoardChess.Piece(quadrant).Collor != Collor)
+                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }

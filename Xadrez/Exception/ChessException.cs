@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Xadrez.Exception
+namespace Chess.Exception
 {
     /// <summary>retorna mensagem de erro.</summary>
     class ChessException : ApplicationException

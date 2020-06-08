@@ -1,4 +1,4 @@
-﻿namespace Xadrez.BoardChess
+﻿namespace Chess.BoardChess
 {
     class Position
     {
@@ -23,7 +23,7 @@
             this.line = line;
             this.collumn = collumn;
         }
-        /// <summary>Retorna a mensagem "linha, coluna"</summary>
+        /// <summary>Sobreposição mensagem linha, coluna.</summary>
         /// <returns></returns>
         public override string ToString()
         {

@@ -1,54 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
-using Xadrez.BoardChess;
-using Xadrez.Pallets;
-namespace Xadrez.Parts
+using Chess.BoardChess;
+using Chess.Pallets;
+namespace Chess.Parts
 {
     /// <summary>
     /// Representa as peças do Xadrez.
     /// </summary>
     abstract class Piece
     {
-        /// <summary>A posição.</summary>
-        public Position Position { get; set; }
-        /// <summary>O tabuleiro.</summary>
-        public BoardChess.Board BoardChess { get; protected set; }
-        /// <summary>A cor da peça.</summary>
-        public Collor Collor { get; protected set; }
+        /// <summary>Posicao da classe Peça.</summary>
+        public Position position { get; set; }
+        /// <summary>Tabuleiro da classe Peça.</summary>
+        public Board board { get; protected set; }
+        /// <summary>Cor da classe Peça.</summary>
+        public Collor collor { get; protected set; }
         /// <summary>A quantidade de movimento.</summary>
-        public int Movement { get; protected set; }
+        public int movement { get; protected set; }
         /// <summary>Imagens unicode.</summary>
-        public List<string> image = new List<string>() { "\u2654 ", "\u2655 ", "\u2656 ", "\u2657 ", "\u2658 ", "\u2659 "};
+        public List<string> image = new List<string>() { " \u2654 ", " \u2655 ", " \u2656 ", " \u2657 ", " \u2658 ", " \u2659 "};
         public Piece()
         {
         }
-        /// <summary> Constructor </summary>
+        /// <summary> Constructor da classe Peça.</summary>
         /// <param name="boardChess"></param>
         /// <param name="collor"></param>
         public Piece(BoardChess.Board boardChess, Collor collor)
         {
-            Position = null;
-            BoardChess = boardChess;
-            Collor = collor;
-            Movement = 0;
-            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            position = null;
+            board = boardChess;
+            this.collor = collor;
+            movement = 0;
+            Console.OutputEncoding = System.Text.Encoding.Unicode; // para as imagens das peças.
         }
         /// <summary>Movimenta a peça.</summary>
         public void Move()
         {
-            Movement++;
+            movement++;
         }
         public void MoonWalker()
         {
-            Movement--;
+            movement--;
         }
         /// <summary>Recebe o movimento.</summary>
         /// <param name="quadrant"></param>
         /// <returns></returns>
         public bool Move(Position quadrant)
         {
-            Piece piece = BoardChess.Piece(quadrant);
-            return piece == null || piece.Collor != Collor;
+            Piece piece = board.Piece(quadrant);
+            return piece == null || piece.collor != collor;
         }
 
         /// <summary>Movimenta se possível. </summary>
@@ -56,9 +56,9 @@ namespace Xadrez.Parts
         public bool IsPossibleTakeMoving()
         {
             bool[,] move = CharacteringMove();
-            for (int i = 0; i < BoardChess.Line; i++)
+            for (int i = 0; i < board.lines; i++)
             {
-                for (int j = 0; j < BoardChess.Collumn; j++)
+                for (int j = 0; j < board.collumns; j++)
                 {
                     if (move[i, j])
                     {

@@ -1,7 +1,7 @@
-﻿using Xadrez.BoardChess;
-using Xadrez.Pallets;
+﻿using Chess.BoardChess;
+using Chess.Pallets;
 
-namespace Xadrez.Parts
+namespace Chess.Parts
 {
     class Knight : Piece
     {
@@ -16,53 +16,53 @@ namespace Xadrez.Parts
         }
         public override bool[,] CharacteringMove()
         {
-            bool[,] characteringMoveKnight = new bool[BoardChess.Line, BoardChess.Collumn];
+            bool[,] characteringMoveKnight = new bool[board.lines, board.collumns];
             Position quadrant = new Position(0, 0);
             //1 para cima 2 lado esquerdo. ok
-            quadrant.QuadrantsToMove(Position.line - 1, Position.collumn - 2);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line - 1, position.collumn - 2);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKnight[quadrant.line, quadrant.collumn] = true;
             }
             //2 para cima 1 lado esquerdo. ok
-            quadrant.QuadrantsToMove(Position.line - 2, Position.collumn - 1);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line - 2, position.collumn - 1);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKnight[quadrant.line, quadrant.collumn] = true;
             }
             //2 para cima 1 lado direito. ok
-            quadrant.QuadrantsToMove(Position.line - 2, Position.collumn + 1);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line - 2, position.collumn + 1);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKnight[quadrant.line, quadrant.collumn] = true;
             }
             //1 para cima 2 lado direito. ok
-            quadrant.QuadrantsToMove(Position.line - 1, Position.collumn + 2);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line - 1, position.collumn + 2);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKnight[quadrant.line, quadrant.collumn] = true;
             }
             //1 lado direito 2 para cima. ok
-            quadrant.QuadrantsToMove(Position.line + 1, Position.collumn + 2);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line + 1, position.collumn + 2);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKnight[quadrant.line, quadrant.collumn] = true;
             }
             //2 lado direito 1 para cima. ok
-            quadrant.QuadrantsToMove(Position.line + 2, Position.collumn + 1);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line + 2, position.collumn + 1);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKnight[quadrant.line, quadrant.collumn] = true;
             }
             //2 lado direito 1 para baixo ok
-            quadrant.QuadrantsToMove(Position.line + 2, Position.collumn -1);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line + 2, position.collumn -1);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKnight[quadrant.line, quadrant.collumn] = true;
             }
             //1 para direita 2 para baixo ok 
-            quadrant.QuadrantsToMove(Position.line + 1, Position.collumn - 2);
-            if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
+            quadrant.QuadrantsToMove(position.line + 1, position.collumn - 2);
+            if (board.CheckBoardLimit(quadrant) && Move(quadrant))
             {
                 characteringMoveKnight[quadrant.line, quadrant.collumn] = true;
             }

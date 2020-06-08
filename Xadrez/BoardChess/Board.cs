@@ -1,23 +1,23 @@
-﻿using Xadrez.Exception;
-using Xadrez.Parts;
-namespace Xadrez.BoardChess
+﻿using Chess.Exception;
+using Chess.Parts;
+namespace Chess.BoardChess
 {
     class Board
     {
         /// <summary>Linha da classe Tabuleiro (Board).</summary>
-        public int Line { get; set; }
+        public int lines { get; set; }
         /// <summary>Coluna da classe Tabuleiro (Board).</summary>
-        public int Collumn { get; set; }
-        /// <summary>Matriz das peças</summary>
-        private Piece[,] Pieces;
+        public int collumns { get; set; }
+        /// <summary>Matriz privativa das peças</summary>
+        private Piece[,] pieces;
 
         /// <summary>Constructor do Tabuleiro.</summary>
-        /// <param name="line"></param>
-        /// <param name="collumn"></param>
-        public Board(int line, int collumn) {
-            Line = line;
-            Collumn = collumn;
-            Pieces = new Piece[Line, Collumn];
+        /// <param name="lines"></param>
+        /// <param name="collumns"></param>
+        public Board(int lines, int collumns) {
+            this.lines = lines;
+            this.collumns = collumns;
+            pieces = new Piece[lines, collumns];
         }
 
         /// <summary>Retorna a peça no quadrante line e collumn.</summary>
@@ -26,7 +26,7 @@ namespace Xadrez.BoardChess
         /// <returns></returns>
         public Piece Piece(int line, int collumn)
         {
-            return Pieces[line, collumn];
+            return pieces[line, collumn];
         }
 
         /// <summary>Sobrecarga do metodo da peça, passando apenas o quadrante.</summary>
@@ -34,7 +34,7 @@ namespace Xadrez.BoardChess
         /// <returns></returns>
         public Piece Piece(Position quadrant)
         {
-            return Pieces[quadrant.line, quadrant.collumn];
+            return pieces[quadrant.line, quadrant.collumn];
         }
 
         /// <summary>Verifica se tem alguma peça no quadrante.</summary>
@@ -51,7 +51,7 @@ namespace Xadrez.BoardChess
         /// <returns>verdadeiro ou falso</returns>
         public bool CheckBoardLimit(Position quadrant)
         {
-            if (quadrant.line < 0 || quadrant.collumn < 0 || quadrant.line >= Line || quadrant.collumn >= Collumn)
+            if (quadrant.line < 0 || quadrant.collumn < 0 || quadrant.line >= lines || quadrant.collumn >= collumns)
             {
                 return false;
             }
@@ -76,8 +76,8 @@ namespace Xadrez.BoardChess
             {
                 throw new ChessException("      You can't do that.");
             }
-            Pieces[position.line, position.collumn] = piece;
-            piece.Position = position;
+            pieces[position.line, position.collumn] = piece;
+            piece.position = position;
         }
         /// <summary>Pega a peça do tabuleiro.</summary>
         /// <param name="quadrant"></param>
@@ -89,8 +89,8 @@ namespace Xadrez.BoardChess
                 return null;
             }
             Piece temp = Piece(quadrant);
-            temp.Position = null;
-            Pieces[quadrant.line, quadrant.collumn] = null;
+            temp.position = null;
+            pieces[quadrant.line, quadrant.collumn] = null;
             return temp;
         }
 

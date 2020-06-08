@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Xadrez.BoardChess;
-using Xadrez.Manager;
-using Xadrez.Pallets;
-using Xadrez.Parts;
-namespace Xadrez
+using Chess.BoardChess;
+using Chess.Manager;
+using Chess.Pallets;
+using Chess.Parts;
+namespace Chess
 {
     /// <summary>
     /// Classe representa a tela do Xadrez.
@@ -70,10 +70,10 @@ namespace Xadrez
         public static void Show(BoardChess.Board board)
         {
             Console.WriteLine();
-            for (int i = 0; i < board.Line; i++)
+            for (int i = 0; i < board.lines; i++)
             {
                 Console.Write($"{8 - i} ");
-                for (int j = 0; j < board.Collumn; j++)
+                for (int j = 0; j < board.collumns; j++)
                 {
                     EditCollor(board.Piece(i, j), i, j);
                 }
@@ -90,10 +90,10 @@ namespace Xadrez
             ConsoleColor background = Console.BackgroundColor;
             ConsoleColor changeBackground = ConsoleColor.DarkGray;
             Console.WriteLine();
-            for (int i = 0; i < board.Line; i++)
+            for (int i = 0; i < board.lines; i++)
             {
                 Console.Write($"{8 - i} ");
-                for (int j = 0; j < board.Collumn; j++)
+                for (int j = 0; j < board.collumns; j++)
                 {
                     if (quadrantsToMove[i, j])
                     {
@@ -131,14 +131,14 @@ namespace Xadrez
             }
             else
             {
-                if(piece.Collor == Collor.WHITE)
+                if(piece.collor == Collor.WHITE)
                 {
                     ConsoleColor fireground = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkBlue; // mude a cor aqui
                     Console.Write(piece);
                     Console.ForegroundColor = fireground;
                 }
-                else if (piece.Collor == Collor.BLACK)
+                else if (piece.collor == Collor.BLACK)
                 {
                     ConsoleColor fireground = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkRed; // mude a cor aqui
@@ -168,7 +168,7 @@ namespace Xadrez
             }
             else
             {
-                if (piece.Collor == Collor.WHITE)
+                if (piece.collor == Collor.WHITE)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkBlue; // mude a cor aqui
                     if (i % 2 == 0 && j % 2 == 0 || !(i % 2 == 0) && !(j % 2 == 0))
@@ -180,7 +180,7 @@ namespace Xadrez
                         Console.BackgroundColor = ConsoleColor.DarkGray;
                     }
                 }
-                else if (piece.Collor == Collor.BLACK)
+                else if (piece.collor == Collor.BLACK)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed; // mude a cor aqui
                     if (i % 2 == 0 && j % 2 == 0 || !(i % 2 == 0) && !(j % 2 == 0))
