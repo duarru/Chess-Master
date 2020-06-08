@@ -1,4 +1,4 @@
-﻿using Xadrez.Board;
+﻿using Xadrez.BoardChess;
 using Xadrez.Exception;
 using Xadrez.Pallets;
 using Xadrez.Parts;
@@ -8,7 +8,7 @@ namespace Xadrez.Manager
     class GameManager
     {
         /// <summary>Tabuleiro.</summary>
-        public BoardChess Chess { get; private set; }
+        public BoardChess.Board Chess { get; private set; }
         /// <summary>Turno da jogada.</summary>
         public int Turn { get; private set; }
         /// <summary>Vez do jogador.</summary>
@@ -26,7 +26,7 @@ namespace Xadrez.Manager
         /// <summary>Construtor partida de xadrez.</summary>
         public GameManager()
         {
-            Chess = new BoardChess(8, 8);
+            Chess = new BoardChess.Board(8, 8);
             Turn = 1;
             CurrentPlayer = Collor.WHITE;
             Image = "\u2655";
@@ -203,7 +203,7 @@ namespace Xadrez.Manager
             foreach (Piece move in PiecesOnBoardChess(AnotherPlayer(collor)))
             {
                 bool[,] movePossible = move.CharacteringMove();
-                if (movePossible[king.Position.Line, king.Position.Collumn])
+                if (movePossible[king.Position.line, king.Position.collumn])
                 {
                     return true;
                 }

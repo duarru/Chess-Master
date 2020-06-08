@@ -1,4 +1,4 @@
-﻿using Xadrez.Board;
+﻿using Xadrez.BoardChess;
 using Xadrez.Exception;
 using System;
 using Xadrez.Manager;

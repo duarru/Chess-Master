@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Xadrez.Board;
+using Xadrez.BoardChess;
 using Xadrez.Pallets;
 namespace Xadrez.Parts
 {
@@ -12,7 +12,7 @@ namespace Xadrez.Parts
         /// <summary>A posição.</summary>
         public Position Position { get; set; }
         /// <summary>O tabuleiro.</summary>
-        public BoardChess BoardChess { get; protected set; }
+        public BoardChess.Board BoardChess { get; protected set; }
         /// <summary>A cor da peça.</summary>
         public Collor Collor { get; protected set; }
         /// <summary>A quantidade de movimento.</summary>
@@ -25,7 +25,7 @@ namespace Xadrez.Parts
         /// <summary> Constructor </summary>
         /// <param name="boardChess"></param>
         /// <param name="collor"></param>
-        public Piece(BoardChess boardChess, Collor collor)
+        public Piece(BoardChess.Board boardChess, Collor collor)
         {
             Position = null;
             BoardChess = boardChess;
@@ -73,7 +73,7 @@ namespace Xadrez.Parts
         /// <returns></returns>
         public bool IsPossiblePut(Position quadrant)
         {
-            return CharacteringMove()[quadrant.Line, quadrant.Collumn];
+            return CharacteringMove()[quadrant.line, quadrant.collumn];
         }
         /// <summary>Movimentos possíveis, caracteristicas do movimento.</summary>
         /// <returns></returns>

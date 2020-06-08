@@ -1,20 +1,20 @@
 ﻿using Xadrez.Exception;
 using Xadrez.Parts;
-namespace Xadrez.Board
+namespace Xadrez.BoardChess
 {
-    /// <summary>Tabuleiro</summary>
-    class BoardChess
+    class Board
     {
-        /// <summary>Line e Collumn representa o quadrante da posição.</summary>
+        /// <summary>Linha da classe Tabuleiro (Board).</summary>
         public int Line { get; set; }
+        /// <summary>Coluna da classe Tabuleiro (Board).</summary>
         public int Collumn { get; set; }
-        /// <summary>Peças do Xadrez, a matriz que representa o quadrante onde a peça está.</summary>
+        /// <summary>Matriz das peças</summary>
         private Piece[,] Pieces;
 
         /// <summary>Constructor do Tabuleiro.</summary>
         /// <param name="line"></param>
         /// <param name="collumn"></param>
-        public BoardChess(int line, int collumn) {
+        public Board(int line, int collumn) {
             Line = line;
             Collumn = collumn;
             Pieces = new Piece[Line, Collumn];
@@ -34,7 +34,7 @@ namespace Xadrez.Board
         /// <returns></returns>
         public Piece Piece(Position quadrant)
         {
-            return Pieces[quadrant.Line, quadrant.Collumn];
+            return Pieces[quadrant.line, quadrant.collumn];
         }
 
         /// <summary>Verifica se tem alguma peça no quadrante.</summary>
@@ -51,7 +51,7 @@ namespace Xadrez.Board
         /// <returns>verdadeiro ou falso</returns>
         public bool CheckBoardLimit(Position quadrant)
         {
-            if (quadrant.Line < 0 || quadrant.Collumn < 0 || quadrant.Line >= Line || quadrant.Collumn >= Collumn)
+            if (quadrant.line < 0 || quadrant.collumn < 0 || quadrant.line >= Line || quadrant.collumn >= Collumn)
             {
                 return false;
             }
@@ -76,7 +76,7 @@ namespace Xadrez.Board
             {
                 throw new ChessException("      You can't do that.");
             }
-            Pieces[position.Line, position.Collumn] = piece;
+            Pieces[position.line, position.collumn] = piece;
             piece.Position = position;
         }
         /// <summary>Pega a peça do tabuleiro.</summary>
@@ -90,7 +90,7 @@ namespace Xadrez.Board
             }
             Piece temp = Piece(quadrant);
             temp.Position = null;
-            Pieces[quadrant.Line, quadrant.Collumn] = null;
+            Pieces[quadrant.line, quadrant.collumn] = null;
             return temp;
         }
 

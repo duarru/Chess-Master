@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Xadrez.Board;
+using Xadrez.BoardChess;
 using Xadrez.Manager;
 using Xadrez.Pallets;
 using Xadrez.Parts;
@@ -67,7 +67,7 @@ namespace Xadrez
 
         /// <summary>Imprime o tabuleiro.</summary>
         /// <param name="board"></param>
-        public static void Show(BoardChess board)
+        public static void Show(BoardChess.Board board)
         {
             Console.WriteLine();
             for (int i = 0; i < board.Line; i++)
@@ -85,7 +85,7 @@ namespace Xadrez
         /// <summary>Re imprime o tabuleiro com os movimentos possiveis.</summary>
         /// <param name="board"></param>
         /// <param name="quadrantsToMove"></param>
-        public static void Show(BoardChess board, bool[,] quadrantsToMove)
+        public static void Show(BoardChess.Board board, bool[,] quadrantsToMove)
         {
             ConsoleColor background = Console.BackgroundColor;
             ConsoleColor changeBackground = ConsoleColor.DarkGray;

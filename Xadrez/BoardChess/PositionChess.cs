@@ -1,4 +1,4 @@
-﻿namespace Xadrez.Board
+﻿namespace Xadrez.BoardChess
 {
     /// <summary>Posição do quadrante.</summary>
     class PositionChess

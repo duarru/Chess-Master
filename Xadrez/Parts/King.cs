@@ -1,4 +1,4 @@
-﻿using Xadrez.Board;
+﻿using Xadrez.BoardChess;
 using Xadrez.Pallets;
 namespace Xadrez.Parts
 {
@@ -8,7 +8,7 @@ namespace Xadrez.Parts
         /// <summary>Construtor.</summary>
         /// <param name="boardChess"></param>
         /// <param name="collor"></param>
-        public King(BoardChess boardChess, Collor collor) : base(boardChess, collor)
+        public King(BoardChess.Board boardChess, Collor collor) : base(boardChess, collor)
         {
         }
         /// <summary>Metodo sobrescrito abstrato, caracteristica especifica do movimento do rei.</summary>
@@ -18,52 +18,52 @@ namespace Xadrez.Parts
             bool[,] characteringMoveKing = new bool[BoardChess.Line, BoardChess.Collumn];
             Position quadrant = new Position(0, 0);
             //cima.
-            quadrant.QuadrantsToMove(Position.Line - 1, Position.Collumn);
+            quadrant.QuadrantsToMove(Position.line - 1, Position.collumn);
             if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
             {
-                characteringMoveKing[quadrant.Line, quadrant.Collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal superior direita.
-            quadrant.QuadrantsToMove(Position.Line - 1, Position.Collumn + 1);
+            quadrant.QuadrantsToMove(Position.line - 1, Position.collumn + 1);
             if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
             {
-                characteringMoveKing[quadrant.Line, quadrant.Collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //direita.
-            quadrant.QuadrantsToMove(Position.Line, Position.Collumn + 1);
+            quadrant.QuadrantsToMove(Position.line, Position.collumn + 1);
             if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
             {
-                characteringMoveKing[quadrant.Line, quadrant.Collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal inferior direita.
-            quadrant.QuadrantsToMove(Position.Line + 1, Position.Collumn + 1);
+            quadrant.QuadrantsToMove(Position.line + 1, Position.collumn + 1);
             if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
             {
-                characteringMoveKing[quadrant.Line, quadrant.Collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //baixo.
-            quadrant.QuadrantsToMove(Position.Line + 1, Position.Collumn);
+            quadrant.QuadrantsToMove(Position.line + 1, Position.collumn);
             if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
             {
-                characteringMoveKing[quadrant.Line, quadrant.Collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal inferior esquerda.
-            quadrant.QuadrantsToMove(Position.Line + 1, Position.Collumn - 1);
+            quadrant.QuadrantsToMove(Position.line + 1, Position.collumn - 1);
             if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
             {
-                characteringMoveKing[quadrant.Line, quadrant.Collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //esquerda
-            quadrant.QuadrantsToMove(Position.Line, Position.Collumn - 1);
+            quadrant.QuadrantsToMove(Position.line, Position.collumn - 1);
             if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
             {
-                characteringMoveKing[quadrant.Line, quadrant.Collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal superior esquerda.
-            quadrant.QuadrantsToMove(Position.Line - 1, Position.Collumn - 1);
+            quadrant.QuadrantsToMove(Position.line - 1, Position.collumn - 1);
             if (BoardChess.CheckBoardLimit(quadrant) && Move(quadrant))
             {
-                characteringMoveKing[quadrant.Line, quadrant.Collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             return characteringMoveKing;
         }
