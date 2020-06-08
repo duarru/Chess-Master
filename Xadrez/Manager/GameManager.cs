@@ -7,66 +7,70 @@ namespace Chess.Manager
 {
     class GameManager
     {
-        /// <summary>Tabuleiro.</summary>
-        public BoardChess.Board Chess { get; private set; }
+        /// <summary>Tabuleiro da classe GameManager.</summary>
+        public Board chess { get; private set; }
         /// <summary>Turno da jogada.</summary>
-        public int Turn { get; private set; }
-        /// <summary>Vez do jogador.</summary>
-        public Collor CurrentPlayer { get; private set; }
-        /// <summary>Conjunto de peças.</summary>
-        public HashSet<Piece> Pieces { get; set; }
-        /// <summary>Conjuntos de peças capturadas.</summary>
-        public HashSet<Piece> Captured { get; set; }
-        /// <summary>Vencedor.</summary>
-        public bool Winner { get; private set; }
+        public int turn { get; private set; }
+        /// <summary>Jogador autal.</summary>
+        public Collor currentPlayer { get; private set; }
+        /// <summary>Conjunto de peças da classe GameManager.</summary>
+        public HashSet<Piece> pieces { get; set; }
+        /// <summary>Conjuntos de peças capturadas da classe GamaManager.</summary>
+        public HashSet<Piece> captured { get; set; }
+        /// <summary>Vencedor verdadeiro ou falso.</summary>
+        public bool winner { get; private set; }
         /// <summary>Imagem do jogador.</summary>
-        public string Image { get; private set; }
-        public bool Xeque { get; private set; }
+        public string image { get; private set; }
+        /// <summary>Check verdadeiro ou falso.</summary>
+        public bool Check { get; private set; }
 
         /// <summary>Construtor partida de xadrez.</summary>
         public GameManager()
         {
-            Chess = new BoardChess.Board(8, 8);
-            Turn = 1;
-            CurrentPlayer = Collor.WHITE;
-            Image = "\u2655";
-            Pieces = new HashSet<Piece>();
-            Captured = new HashSet<Piece>();
+            chess = new Board(8, 8);
+            turn = 1;
+            currentPlayer = Collor.WHITE;
+            image = "\u2654";
+            pieces = new HashSet<Piece>();
+            captured = new HashSet<Piece>();
             InitChessPosition();
-            Winner = false;
-            Xeque = false;
+            winner = false;
+            Check = false;
         }
 
         /// <summary>Conta o turno das jogadas.</summary>
         /// <returns></returns>
         public int CountTurn()
         {
-            return Turn;
+            return turn++;
         }
+
         /// <summaty>Apresenta a imagem do jogador.</summary>
         /// <returns></returns>
         public string PlayerImage()
         {
-            return Image;
+            return image;
         }
+
         /// <summary>Jogador atual.</summary>
         /// <returns></returns>
         public Collor Player()
         {
-            return CurrentPlayer;
+            return currentPlayer;
         }
+
         /// <summary>Executa o movimento, pega as peças.</summary>
         /// <param name="take"></param>
         /// <param name="put"></param>
         public Piece Move(Position take, Position put)
         {
-            Piece piece = Chess.TakePart(take);
+            Piece piece = chess.TakePart(take);
             piece.Move();
-            Piece captured = Chess.TakePart(put);
-            Chess.PutPiece(piece, put);
+            Piece captured = chess.TakePart(put);
+            chess.PutPiece(piece, put);
             if (captured != null)
             {
-                Captured.Add(captured);
+                this.captured.Add(captured);
             }
             return captured;
         }
@@ -76,16 +80,16 @@ namespace Chess.Manager
         /// <param name="captured"></param>
         public void RewindMove(Position take, Position put, Piece captured)
         {
-            Piece piece = Chess.TakePart(put);
-            piece.MoonWalker();
+            Piece piece = chess.TakePart(put);
+            piece.RewindMovement();
             if (captured != null)
             {
-                Chess.PutPiece(captured, put);
-                Captured.Remove(captured);
+                chess.PutPiece(captured, put);
+                this.captured.Remove(captured);
             }
-            Chess.PutPiece(piece, take);
+            chess.PutPiece(piece, take);
         }
-        /// <summary>Realiza o movimento, </summary>
+        /// <summary>Realiza o movimento.</summary>
         /// <param name="take"></param>
         /// <param name="put"></param>
         public void PerformMotion(Position take, Position put)
@@ -99,37 +103,37 @@ namespace Chess.Manager
 
             if (InXeque(AnotherPlayer(Player())))
             {
-                Xeque = true;
+                Check = true;
             }
             else
             {
-                Xeque = false;
+                Check = false;
             }
             if (XequeMate(AnotherPlayer(Player())))
             {
-                Winner = true;
+                winner = true;
             }
             else
             {
-                Turn++;
-                ChangePlayer(Player(), Turn, Image);
+                CountTurn();
+                ChangePlayer(Player());
             }
         }
         /// <summary>Controla a vez da jogada.</summary>
         /// <param name="current"></param>
         /// <param name="turn"></param>
         /// <param name="image"></param>
-        private void ChangePlayer(Collor current, int turn, string image)
+        private Collor ChangePlayer(Collor currentPlayer)
         {
             if (Player() == Collor.WHITE)
             {
-                CurrentPlayer = Collor.BLACK;
+                currentPlayer = Collor.BLACK;
             }
             else
             {
-                CurrentPlayer = Collor.WHITE;
+                currentPlayer = Collor.WHITE;
             }
-            turn++;
+            return currentPlayer;
         }
         /// <summary>Conjunto das peças capturadas separadas por cor.</summary>
         /// <param name="collor"></param>
@@ -137,7 +141,7 @@ namespace Chess.Manager
         public HashSet<Piece> PiecesCaptureSepareteCollor(Collor collor)
         {
             HashSet<Piece> separetePieceCollor = new HashSet<Piece>();
-            foreach (Piece x in Captured)
+            foreach (Piece x in captured)
             {
                 if (x.collor.Equals(collor))
                 {
@@ -152,7 +156,7 @@ namespace Chess.Manager
         public HashSet<Piece> PiecesOnBoardChess(Collor collor)
         {
             HashSet<Piece> piecesOnBoard = new HashSet<Piece>();
-            foreach (Piece x in Pieces)
+            foreach (Piece x in pieces)
             {
                 if (x.collor.Equals(collor))
                 {
@@ -220,9 +224,9 @@ namespace Chess.Manager
             foreach (Piece xequeMate in PiecesOnBoardChess(collor))
             {
                 bool[,] xeque = xequeMate.CharacteringMove();
-                for (int i = 0; i < Chess.lines; i++)
+                for (int i = 0; i < chess.lines; i++)
                 {
-                    for (int j = 0; j < Chess.collumns; j++)
+                    for (int j = 0; j < chess.collumns; j++)
                     {
                         if (xeque[i, j])
                         {
@@ -246,15 +250,15 @@ namespace Chess.Manager
         /// <param name="quadrant"></param>
         public void CheckTakeAndMove(Position quadrant)
         {
-            if (Chess.Piece(quadrant) == null)
+            if (chess.Piece(quadrant) == null)
             {
                 throw new ExceptionChess("      There is not piece here.");
             }
-            if (Player() != Chess.Piece(quadrant).collor)
+            if (Player() != chess.Piece(quadrant).collor)
             {
                 throw new ExceptionChess($"      It's the turn of \u27ae {Player()}");
             }
-            if (!Chess.Piece(quadrant).IsPossibleTakeMoving())
+            if (!chess.Piece(quadrant).IsPossibleTakeMoving())
             {
                 throw new ExceptionChess("      There is not movement");
             }
@@ -264,7 +268,7 @@ namespace Chess.Manager
         /// <param name="put"></param>
         public void CheckPutInTheQuadrant(Position take, Position put)
         {
-            if (!Chess.Piece(take).IsPossiblePut(put))
+            if (!chess.Piece(take).IsPossiblePut(put))
             {
                 throw new ExceptionChess("      It's not a valided moving");
             }
@@ -275,47 +279,47 @@ namespace Chess.Manager
         /// <param name="piece"></param>
         public void PutPieceOnBoard(char collumn, int line, Piece piece)
         {
-            Chess.PutPiece(piece, new PositionChess(collumn, line).ToPosition());
-            Pieces.Add(piece);
+            chess.PutPiece(piece, new PositionChess(collumn, line).ToPosition());
+            pieces.Add(piece);
         }
         /// <summary>Posição inicial.</summary>
         private void InitChessPosition()
         {
-            PutPieceOnBoard('a', 1, new Rock(Chess, Collor.WHITE));
+            PutPieceOnBoard('a', 1, new Rock(chess, Collor.WHITE));
 
-            PutPieceOnBoard('a', 1, new Rock(Chess, Collor.WHITE));
-            PutPieceOnBoard('b', 1, new Knight(Chess, Collor.WHITE));
-            PutPieceOnBoard('c', 1, new Bishop(Chess, Collor.WHITE));
-            PutPieceOnBoard('d', 1, new Queen(Chess, Collor.WHITE));
-            PutPieceOnBoard('e', 1, new King(Chess, Collor.WHITE));
-            PutPieceOnBoard('f', 1, new Bishop(Chess, Collor.WHITE));
-            PutPieceOnBoard('g', 1, new Knight(Chess, Collor.WHITE));
-            PutPieceOnBoard('h', 1, new Rock(Chess, Collor.WHITE));
-            PutPieceOnBoard('a', 2, new Pawn(Chess, Collor.WHITE));
-            PutPieceOnBoard('b', 2, new Pawn(Chess, Collor.WHITE));
-            PutPieceOnBoard('c', 2, new Pawn(Chess, Collor.WHITE));
-            PutPieceOnBoard('d', 2, new Pawn(Chess, Collor.WHITE));
-            PutPieceOnBoard('e', 2, new Pawn(Chess, Collor.WHITE));
-            PutPieceOnBoard('f', 2, new Pawn(Chess, Collor.WHITE));
-            PutPieceOnBoard('g', 2, new Pawn(Chess, Collor.WHITE));
-            PutPieceOnBoard('h', 2, new Pawn(Chess, Collor.WHITE));
+            PutPieceOnBoard('a', 1, new Rock(chess, Collor.WHITE));
+            PutPieceOnBoard('b', 1, new Knight(chess, Collor.WHITE));
+            PutPieceOnBoard('c', 1, new Bishop(chess, Collor.WHITE));
+            PutPieceOnBoard('d', 1, new Queen(chess, Collor.WHITE));
+            PutPieceOnBoard('e', 1, new King(chess, Collor.WHITE));
+            PutPieceOnBoard('f', 1, new Bishop(chess, Collor.WHITE));
+            PutPieceOnBoard('g', 1, new Knight(chess, Collor.WHITE));
+            PutPieceOnBoard('h', 1, new Rock(chess, Collor.WHITE));
+            PutPieceOnBoard('a', 2, new Pawn(chess, Collor.WHITE));
+            PutPieceOnBoard('b', 2, new Pawn(chess, Collor.WHITE));
+            PutPieceOnBoard('c', 2, new Pawn(chess, Collor.WHITE));
+            PutPieceOnBoard('d', 2, new Pawn(chess, Collor.WHITE));
+            PutPieceOnBoard('e', 2, new Pawn(chess, Collor.WHITE));
+            PutPieceOnBoard('f', 2, new Pawn(chess, Collor.WHITE));
+            PutPieceOnBoard('g', 2, new Pawn(chess, Collor.WHITE));
+            PutPieceOnBoard('h', 2, new Pawn(chess, Collor.WHITE));
 
-            PutPieceOnBoard('a', 8, new Rock(Chess, Collor.BLACK));
-            PutPieceOnBoard('b', 8, new Knight(Chess, Collor.BLACK));
-            PutPieceOnBoard('c', 8, new Bishop(Chess, Collor.BLACK));
-            PutPieceOnBoard('d', 8, new King(Chess, Collor.BLACK));
-            PutPieceOnBoard('e', 8, new Queen(Chess, Collor.BLACK));
-            PutPieceOnBoard('f', 8, new Bishop(Chess, Collor.BLACK));
-            PutPieceOnBoard('g', 8, new Knight(Chess, Collor.BLACK));
-            PutPieceOnBoard('h', 8, new Rock(Chess, Collor.BLACK));
-            PutPieceOnBoard('a', 7, new Pawn(Chess, Collor.BLACK));
-            PutPieceOnBoard('b', 7, new Pawn(Chess, Collor.BLACK));
-            PutPieceOnBoard('c', 7, new Pawn(Chess, Collor.BLACK));
-            PutPieceOnBoard('d', 7, new Pawn(Chess, Collor.BLACK));
-            PutPieceOnBoard('e', 7, new Pawn(Chess, Collor.BLACK));
-            PutPieceOnBoard('f', 7, new Pawn(Chess, Collor.BLACK));
-            PutPieceOnBoard('g', 7, new Pawn(Chess, Collor.BLACK));
-            PutPieceOnBoard('h', 7, new Pawn(Chess, Collor.BLACK));
+            PutPieceOnBoard('a', 8, new Rock(chess, Collor.BLACK));
+            PutPieceOnBoard('b', 8, new Knight(chess, Collor.BLACK));
+            PutPieceOnBoard('c', 8, new Bishop(chess, Collor.BLACK));
+            PutPieceOnBoard('d', 8, new King(chess, Collor.BLACK));
+            PutPieceOnBoard('e', 8, new Queen(chess, Collor.BLACK));
+            PutPieceOnBoard('f', 8, new Bishop(chess, Collor.BLACK));
+            PutPieceOnBoard('g', 8, new Knight(chess, Collor.BLACK));
+            PutPieceOnBoard('h', 8, new Rock(chess, Collor.BLACK));
+            PutPieceOnBoard('a', 7, new Pawn(chess, Collor.BLACK));
+            PutPieceOnBoard('b', 7, new Pawn(chess, Collor.BLACK));
+            PutPieceOnBoard('c', 7, new Pawn(chess, Collor.BLACK));
+            PutPieceOnBoard('d', 7, new Pawn(chess, Collor.BLACK));
+            PutPieceOnBoard('e', 7, new Pawn(chess, Collor.BLACK));
+            PutPieceOnBoard('f', 7, new Pawn(chess, Collor.BLACK));
+            PutPieceOnBoard('g', 7, new Pawn(chess, Collor.BLACK));
+            PutPieceOnBoard('h', 7, new Pawn(chess, Collor.BLACK));
 
 
         }

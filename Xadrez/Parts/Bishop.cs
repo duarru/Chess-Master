@@ -4,7 +4,7 @@ namespace Chess.Parts
 {
     class Bishop : Piece
     {
-        public Bishop(BoardChess.Board boardChess, Collor collor) : base(boardChess, collor)
+        public Bishop(Board board, Collor collor) : base(board, collor)
         {
         }
         /// <summary>Unicode para imagem do bispo, fonte MS Gothic.</summary>
@@ -17,53 +17,53 @@ namespace Chess.Parts
         /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
-            bool[,] characteringMoveBishop = new bool[board.lines, board.collumns];
-            Position quadrant = new Position(0, 0);
+            bool[,] moveBishop = new bool[board.lines, board.collumns];
+            Position square = new Position(0, 0);
             //diagonal esquerda.
-            quadrant.QuadrantsToMove(position.line - 1, position.collumn -1);
-            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
+            square.SquareToMove(position.line - 1, position.collumn -1);
+            while (board.ExceptionBoardLimit(square) && Move(square))
             {
-                characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
-                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
+                moveBishop[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
                 {
                     break;
                 }
-                quadrant.QuadrantsToMove(quadrant.line - 1, quadrant.collumn - 1);
+                square.SquareToMove(square.line - 1, square.collumn - 1);
             }
             //diagonal direita.
-            quadrant.QuadrantsToMove(position.line - 1, position.collumn + 1);
-            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
+            square.SquareToMove(position.line - 1, position.collumn + 1);
+            while (board.ExceptionBoardLimit(square) && Move(square))
             {
-                characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
-                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
+                moveBishop[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
                 {
                     break;
                 }
-                quadrant.QuadrantsToMove(quadrant.line - 1, quadrant.collumn + 1);
+                square.SquareToMove(square.line - 1, square.collumn + 1);
             }
             //diagonal direita baixo.
-            quadrant.QuadrantsToMove(position.line + 1, position.collumn + 1);
-            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
+            square.SquareToMove(position.line + 1, position.collumn + 1);
+            while (board.ExceptionBoardLimit(square) && Move(square))
             {
-                characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
-                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
+                moveBishop[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
                 {
                     break;
                 }
-                quadrant.QuadrantsToMove(quadrant.line + 1, quadrant.collumn + 1);
+                square.SquareToMove(square.line + 1, square.collumn + 1);
             }
             //diagonal esquerda baixo.
-            quadrant.QuadrantsToMove(position.line + 1, position.collumn - 1);
-            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
+            square.SquareToMove(position.line + 1, position.collumn - 1);
+            while (board.ExceptionBoardLimit(square) && Move(square))
             {
-                characteringMoveBishop[quadrant.line, quadrant.collumn] = true;
-                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
+                moveBishop[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
                 {
                     break;
                 }
-                quadrant.QuadrantsToMove(quadrant.line + 1, quadrant.collumn - 1);
+                square.SquareToMove(square.line + 1, square.collumn - 1);
             }
-            return characteringMoveBishop;
+            return moveBishop;
         }
     }
 }

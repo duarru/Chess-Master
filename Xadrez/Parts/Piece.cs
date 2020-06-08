@@ -25,7 +25,7 @@ namespace Chess.Parts
         /// <summary> Constructor da classe Peça.</summary>
         /// <param name="boardChess"></param>
         /// <param name="collor"></param>
-        public Piece(BoardChess.Board boardChess, Collor collor)
+        public Piece(Board boardChess, Collor collor)
         {
             position = null;
             board = boardChess;
@@ -33,12 +33,13 @@ namespace Chess.Parts
             movement = 0;
             Console.OutputEncoding = System.Text.Encoding.Unicode; // para as imagens das peças.
         }
-        /// <summary>Movimenta a peça.</summary>
+        /// <summary>Incrementa o movimento.</summary>
         public void Move()
         {
             movement++;
         }
-        public void MoonWalker()
+        /// <summary>Decrementa o movimento.</summary>
+        public void RewindMovement()
         {
             movement--;
         }

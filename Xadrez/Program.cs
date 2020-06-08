@@ -11,7 +11,7 @@ namespace Chess
             try
             {
                 GameManager playGame = new GameManager();
-                while (!playGame.Winner)
+                while (!playGame.winner)
                 {
                     try
                     {
@@ -20,18 +20,18 @@ namespace Chess
                         
                         Console.WriteLine();
                         Console.Write(" Make your play, TAKE your piece: ");
-                        Position take = WindowChess.ReadPosition().ToPosition();
+                        Position take = WindowChess.ReadSquare().ToPosition();
                         playGame.CheckTakeAndMove(take);
-                        bool[,] quadrantsToMove = playGame.Chess.Piece(take).CharacteringMove();
+                        bool[,] quadrantsToMove = playGame.chess.Piece(take).CharacteringMove();
                         Console.Clear();
 
-                        WindowChess.Show(playGame.Chess, quadrantsToMove);
+                        WindowChess.BoardShow(playGame.chess, quadrantsToMove);
                         Console.WriteLine();
                         Console.Write($" Turn {playGame.CountTurn()}\n" +
                             $" Current player: {playGame.PlayerImage()} \u27ae {playGame.Player()}");
                         Console.WriteLine();
                         Console.Write(" Make your play, PUT your piece: ");
-                        Position put = WindowChess.ReadPosition().ToPosition();
+                        Position put = WindowChess.ReadSquare().ToPosition();
                         playGame.CheckPutInTheQuadrant(take, put);
 
                         playGame.PerformMotion(take, put);
