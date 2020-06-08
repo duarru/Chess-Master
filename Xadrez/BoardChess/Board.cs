@@ -14,7 +14,8 @@ namespace Chess.BoardChess
         /// <summary>Constructor do Tabuleiro.</summary>
         /// <param name="lines"></param>
         /// <param name="collumns"></param>
-        public Board(int lines, int collumns) {
+        public Board(int lines, int collumns)
+        {
             this.lines = lines;
             this.collumns = collumns;
             pieces = new Piece[lines, collumns];
@@ -37,6 +38,18 @@ namespace Chess.BoardChess
             return pieces[quadrant.line, quadrant.collumn];
         }
 
+        /// <summary>coloca a peça no tabuleiro.</summary>
+        /// <param name="piece"></param>
+        /// <param name="put"></param>
+        public void PutPiece(Piece piece, Position put)
+        {
+            if (QuadrantIsBusy(put))
+            {
+                throw new ChessException("      You can't do that.");
+            }
+            pieces[put.line, put.collumn] = piece;
+            piece.position = put;
+        }
         /// <summary>Verifica se tem alguma peça no quadrante.</summary>
         /// <param name="quadrant"></param>
         /// <returns></returns>
@@ -67,18 +80,7 @@ namespace Chess.BoardChess
             }
         }
 
-        /// <summary>coloca a peça no tabuleiro.</summary>
-        /// <param name="piece"></param>
-        /// <param name="position"></param>
-        public void PutPiece(Piece piece, Position position)
-        {
-            if (QuadrantIsBusy(position))
-            {
-                throw new ChessException("      You can't do that.");
-            }
-            pieces[position.line, position.collumn] = piece;
-            piece.position = position;
-        }
+
         /// <summary>Pega a peça do tabuleiro.</summary>
         /// <param name="quadrant"></param>
         /// <returns>peça</returns>

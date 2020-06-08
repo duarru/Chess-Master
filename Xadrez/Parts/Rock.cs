@@ -5,9 +5,9 @@ namespace Chess.Parts
     class Rock : Piece
     {
         /// <summary>Construtor.</summary>
-        /// <param name="boardChess"></param>
+        /// <param name="board"></param>
         /// <param name="collor"></param>
-        public Rock(BoardChess.Board boardChess, Collor collor) : base(boardChess, collor)
+        public Rock(Board board, Collor collor) : base(board, collor)
         {
         }
         /// <summary>Movimento caracteristico da peça torre.</summary>
@@ -62,7 +62,7 @@ namespace Chess.Parts
             }
             return characteringMoveRock;
         }
-        /// <summary>retorna a imagem unicode da torre, fonte MS Gothic.</summary>
+        /// <summary>Sobreposição retorna a imagem da torre (Rock).</summary>
         /// <returns></returns>
         public override string ToString() {
             return image[2];

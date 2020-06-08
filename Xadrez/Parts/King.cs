@@ -2,13 +2,12 @@
 using Chess.Pallets;
 namespace Chess.Parts
 {
-    /// <summary>O Rei.</summary>
     class King : Piece
     {
-        /// <summary>Construtor.</summary>
-        /// <param name="boardChess"></param>
+        /// <summary>Construtor da classe Rei (King).</summary>
+        /// <param name="board"></param>
         /// <param name="collor"></param>
-        public King(BoardChess.Board boardChess, Collor collor) : base(boardChess, collor)
+        public King(Board board, Collor collor) : base(board, collor)
         {
         }
         /// <summary>Metodo sobrescrito abstrato, caracteristica especifica do movimento do rei.</summary>
@@ -68,7 +67,7 @@ namespace Chess.Parts
             return characteringMoveKing;
         }
 
-        /// <summary>Unicode para imagem do rei, fonte MS Gothic.</summary>
+        /// <summary>Sobreposição retorna a imagem do rei (King).</summary>
         /// <returns></returns>
         public override string ToString()
         {
