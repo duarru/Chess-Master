@@ -1,33 +1,33 @@
 ﻿namespace Chess.BoardChess
 {
-    /// <summary>Posição do quadrante.</summary>
     class PositionChess
     {
-        /// <summary>Coluna.</summary>
-        public char Collumn { get; set; }
-        /// <summary>Linha.</summary>
-        public int Line { get; set; }
+        /// <summary>Coluna da classe Posição do Xadrez.</summary>
+        public char collumn { get; set; }
+        /// <summary>Linha da classe Posição do Xadrez.</summary>
+        public int line { get; set; }
 
-        /// <summary>Constructor.</summary>
+        /// <summary>Constructor da classe Posição do Xadrez.</summary>
         /// <param name="collumn"></param>
         /// <param name="line"></param>
         public PositionChess(char collumn, int line)
         {
-            Collumn = collumn;
-            Line = line;
+            this.collumn = collumn;
+            this.line = line;
         }
 
         /// <summary>Posição em relação ao Xadrez.</summary>
-        /// <returns></returns>
+        /// <returns>mensagem linha, coluna.</returns>
         public Position ToPosition()
         {
-            return new Position(8 - Line, Collumn - 'a');
+            return new Position(8 - line, collumn - 'a');
         }
-        /// <summary>sobrescreve a mensagem coluna linha um do lado do outro ex:(a1)</summary>
-        /// <returns></returns>
+
+        /// <summary>Sobreposição retorna mensagem coluna e linha.</summary>
+        /// <returns>mensagem ('a1').</returns>
         public override string ToString()
         {
-            return "" + Collumn + Line;
+            return "" + collumn + line;
         }
     }
 }
