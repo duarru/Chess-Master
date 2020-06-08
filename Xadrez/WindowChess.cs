@@ -108,7 +108,7 @@ namespace Chess
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("  a b c d e f g h");
+            Console.WriteLine("   a   b   c   d   e   f   g   h");
             Console.WriteLine();
             Console.BackgroundColor = background;
         }
@@ -127,7 +127,7 @@ namespace Chess
         {
             if (piece == null)
             {
-                Console.Write("\u25a2 ");
+                Console.Write(" \u25a2 ");
             }
             else
             {
@@ -164,7 +164,7 @@ namespace Chess
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                 }
-                Console.Write("  ");
+                Console.Write("   ");
             }
             else
             {

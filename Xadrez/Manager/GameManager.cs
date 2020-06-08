@@ -281,6 +281,7 @@ namespace Chess.Manager
         /// <summary>Posição inicial.</summary>
         private void InitChessPosition()
         {
+            PutPieceOnBoard('a', 1, new Rock(Chess, Collor.WHITE));
 
             PutPieceOnBoard('a', 1, new Rock(Chess, Collor.WHITE));
             PutPieceOnBoard('b', 1, new Knight(Chess, Collor.WHITE));

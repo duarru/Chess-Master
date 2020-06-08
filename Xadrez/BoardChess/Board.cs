@@ -51,12 +51,11 @@ namespace Chess.BoardChess
         {
             if (ExistPiece(put))
             {
-                throw new ExceptionChess("      You can't do that.");
+                throw new ExceptionChess(image[0] + " You can't do that.");
             }
             pieces[put.line, put.collumn] = piece;
             piece.position = put;
         }
-
 
         /// <summary>Retorna verdadeiro ou falso caso um dado esteja fora dos limites do Tabuleiro.</summary>
         /// <param name="square"></param>
@@ -75,7 +74,7 @@ namespace Chess.BoardChess
         {
             if (!ExceptionBoardLimit(square))
             {
-                throw new ExceptionChess(image + "invalid square.");
+                throw new ExceptionChess(image[0] + " invalid square.");
             }
         }
 
