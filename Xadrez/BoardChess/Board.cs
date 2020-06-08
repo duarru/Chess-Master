@@ -20,10 +20,10 @@ namespace Chess.BoardChess
             pieces = new Piece[lines, collumns];
         }
 
-        /// <summary>Retorna a peça no quadrante line e collumn.</summary>
+        /// <summary>Retorna a matriz peças.</summary>
         /// <param name="line"></param>
         /// <param name="collumn"></param>
-        /// <returns></returns>
+        /// <returns>matriz peça.</returns>
         public Piece Piece(int line, int collumn)
         {
             return pieces[line, collumn];

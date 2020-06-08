@@ -15,7 +15,7 @@ namespace Chess
         /// <param name="playGame"></param>
         public static void StartChessMatch(GameManager playGame)
         { 
-            Show(playGame.Chess);
+            BoardShow(playGame.Chess);
             Console.WriteLine();
             Console.Write(" Current player: ");/// Current player: WHITE
             Console.WriteLine($"{playGame.PlayerImage()} \u27ae {playGame.Player()}");
@@ -67,19 +67,19 @@ namespace Chess
 
         /// <summary>Imprime o tabuleiro.</summary>
         /// <param name="board"></param>
-        public static void Show(BoardChess.Board board)
+        public static void BoardShow(Board board)
         {
             Console.WriteLine();
             for (int i = 0; i < board.lines; i++)
             {
-                Console.Write($"{8 - i} ");
+                Console.Write($" {8 - i} ");
                 for (int j = 0; j < board.collumns; j++)
                 {
                     EditCollor(board.Piece(i, j), i, j);
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("  a b c d e f g h");
+            Console.WriteLine("   a  b  c  d  e  f  g  h");
             Console.WriteLine();
         }
         /// <summary>Re imprime o tabuleiro com os movimentos possiveis.</summary>
