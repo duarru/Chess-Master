@@ -15,6 +15,7 @@ namespace Xadrez
                 {
                     Console.Clear();
                     WindowChess.StartChessMatch(playerGame);
+                    Console.WriteLine("Make your move ");
                     Position takePiece = WindowChess.InputRead().ToPosition();
                 }
             }

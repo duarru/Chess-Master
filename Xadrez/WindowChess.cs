@@ -12,7 +12,10 @@ namespace Xadrez
     class WindowChess
     {
         public static List<string> image = new List<string>() { "\u2717", "\u2620", "\u3010", " \u3011" };
-
+        public static List<string> alphabet = new List<string>() { "    \u24b6", "  \u24b7", "  \u24b8", "  \u24b9",
+                                                                   "  \u24ba", "  \u24bb", "  \u24bc", "  \u24bd" };
+        public static List<string> numbers = new List<string>() { "\u2780", "\u2781", "\u2782", "\u2783",
+                                                                   "\u2784", "\u2785", "\u2786", "\u2787" };
         /// <summary>Imprime a partida, cria a tela de apresentação.</summary>
         /// <param name="playGame"></param>
         public static void StartChessMatch(GameManager playGame)
@@ -74,17 +77,18 @@ namespace Xadrez
         /// <param name="board"></param>
         public static void BoardShow(Board board)
         {
-            Console.WriteLine();
+            //Console.WriteLine();
             for (int i = 0; i < board.lines; i++)
             {
-                Console.Write($" {8 - i} ");
+                Console.Write($" {numbers[7 - i]} ");
                 for (int j = 0; j < board.collumns; j++)
                 {
                     EditCollor(board.Piece(i, j), i, j);
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("     a   b   c   d   e   f   g   h");
+            Console.WriteLine($"{ alphabet[0]}{ alphabet[1]}{ alphabet[2]}{ alphabet[3]}" +
+                $"{ alphabet[4]}{ alphabet[5]}{ alphabet[6]}{ alphabet[7]}");
             Console.WriteLine();
         }
         /// <summary>Re imprime o tabuleiro com os movimentos possiveis.</summary>
@@ -95,14 +99,15 @@ namespace Xadrez
             Console.WriteLine();
             for (int i = 0; i < board.lines; i++)
             {
-                Console.Write($"{8 - i} ");
+                Console.Write($" {numbers[7-i]} ");
                 for (int j = 0; j < board.collumns; j++)
                 {
                     EditCollor(board.Piece(i, j), i, j, squareToMove);
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("  a   b   c   d   e   f   g   h");
+            Console.WriteLine($"{ alphabet[0]}{ alphabet[1]}{ alphabet[2]}{ alphabet[3]}" +
+                            $"{ alphabet[4]}{ alphabet[5]}{ alphabet[6]}{ alphabet[7]}");
             Console.WriteLine();
         }
         /// <summary>Edita as cores das peças.</summary>
