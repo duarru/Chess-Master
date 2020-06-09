@@ -14,7 +14,7 @@ namespace Xadrez.BoardChess
         /// <summary>Matriz privativa das peças</summary>
         private Piece[,] pieces;
         /// <summary>Lista das imagens para os metodos de exceção do tabuleiro.</summary>
-        public List<string> image = new List<string> { " \u2716 " };
+        public List<string> image = new List<string> { " \u2716  " };
 
 
         /// <summary>Constructor do Tabuleiro.</summary>

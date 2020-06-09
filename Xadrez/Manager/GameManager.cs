@@ -20,7 +20,7 @@ namespace Xadrez.Manager
         /// <summary>Vencedor verdadeiro ou falso.</summary>
         public bool winner { get; private set; }
         /// <summary>Imagens.</summary>
-        public List<string> image = new List<string>() { "\u2654", "\u27ae" };
+        public List<string> image = new List<string>() { "\u2654", "\u27ae", " \u2716  " };
         /// <summary>Check verdadeiro ou falso.</summary>
         public bool Check { get; private set; }
 
@@ -36,19 +36,15 @@ namespace Xadrez.Manager
             winner = false;
             Check = false;
         }
-
+        public Collor Player()
+        {
+            return currentPlayer;
+        }
         /// <summary>Conta o turno das jogadas.</summary>
         /// <returns></returns>
         public int CountTurn()
         {
             return turn;
-        }
-
-        /// <summary>Jogador atual.</summary>
-        /// <returns></returns>
-        public Collor Player()
-        {
-            return currentPlayer;
         }
 
         /// <summary>Executa o movimento, pega as peças.</summary>
@@ -87,13 +83,13 @@ namespace Xadrez.Manager
         public void PerformMotion(Position take, Position put)
         {
             Piece captured = Movable(take, put);
-            if (InXeque(Player()))
+            if (InXeque(currentPlayer))
             {
                 RewindMove(take, put, captured);
-                throw new ExceptionChess("Your cannot put yourself in check.");
+                throw new ExceptionChess($"{image[2]} Your cannot put yourself in check.");
             }
 
-            if (InXeque(AnotherPlayer(Player())))
+            if (InXeque(AnotherPlayer(currentPlayer)))
             {
                 Check = true;
             }
@@ -101,23 +97,23 @@ namespace Xadrez.Manager
             {
                 Check = false;
             }
-            if (XequeMate(AnotherPlayer(Player())))
+            if (XequeMate(AnotherPlayer(currentPlayer)))
             {
                 winner = true;
             }
             else
             {
                 turn++;
-                ChangePlayer(Player());
+                ChangePlayer();
             }
         }
-        /// <summary>Controla a vez da jogada.</summary>
+        /// <summary>Muda o jogador,controla a vez de cada um.</summary>
         /// <param name="current"></param>
         /// <param name="turn"></param>
         /// <param name="image"></param>
-        private Collor ChangePlayer(Collor currentPlayer)
+        private void ChangePlayer()
         {
-            if (Player() == Collor.WHITE)
+            if (currentPlayer == Collor.WHITE)
             {
                 currentPlayer = Collor.BLACK;
             }
@@ -125,7 +121,6 @@ namespace Xadrez.Manager
             {
                 currentPlayer = Collor.WHITE;
             }
-            return currentPlayer;
         }
         /// <summary>Conjunto das peças capturadas separadas por cor.</summary>
         /// <param name="collor"></param>
@@ -239,20 +234,21 @@ namespace Xadrez.Manager
             return true;
         }
         /// <summary>Excecção de movimento.</summary>
-        /// <param name="quadrant"></param>
-        public void CheckTakeAndMove(Position quadrant)
+        /// <param name="square"></param>
+        public void ExceptionTakeMove(Position square)
         {
-            if (chess.Piece(quadrant) == null)
+            chess.ExceptionValidedLimit(square);
+            if (chess.Piece(square) == null)
             {
-                throw new ExceptionChess("      There is not piece here.");
+                throw new ExceptionChess($" {image[2]} There is not piece here.");
             }
-            if (Player() != chess.Piece(quadrant).collor)
+            if (currentPlayer != chess.Piece(square).collor)
             {
-                throw new ExceptionChess($"      It's the turn of \u27ae {Player()}");
+                throw new ExceptionChess($" It's the turn of {image[1]} {Player()}");
             }
-            if (!chess.Piece(quadrant).IsPossibleTakeMoving())
+            if (!chess.Piece(square).IsPossibleTakeMoving())
             {
-                throw new ExceptionChess("      There is not movement");
+                throw new ExceptionChess($" {image[2]} There is not movement");
             }
         }
         /// <summary>Exceção para soltar a peça.</summary>
@@ -310,8 +306,6 @@ namespace Xadrez.Manager
             LoadSquarePiece('f', 7, new Pawn(chess, Collor.BLACK));
             LoadSquarePiece('g', 7, new Pawn(chess, Collor.BLACK));
             LoadSquarePiece('h', 7, new Pawn(chess, Collor.BLACK));
-
-
         }
     }
 }

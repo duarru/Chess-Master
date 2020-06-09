@@ -44,11 +44,11 @@ namespace Xadrez.Parts
             movement--;
         }
         /// <summary>Recebe o movimento.</summary>
-        /// <param name="quadrant"></param>
+        /// <param name="square"></param>
         /// <returns></returns>
-        public bool Move(Position quadrant)
+        public bool Move(Position square)
         {
-            Piece piece = board.Piece(quadrant);
+            Piece piece = board.Piece(square);
             return piece == null || piece.collor != collor;
         }
 

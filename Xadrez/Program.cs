@@ -10,19 +10,44 @@ namespace Xadrez
         {
             try
             {
-                GameManager playerGame = new GameManager();
-                while (!playerGame.winner)
+                GameManager playGame = new GameManager();
+                while (!playGame.winner)
                 {
-                    Console.Clear();
-                    WindowChess.StartChessMatch(playerGame);
-                    Console.WriteLine("Make your move ");
-                    Position takePiece = WindowChess.InputRead().ToPosition();
+                    try
+                    {
+                        Console.Clear();
+                        WindowChess.StartChessMatch(playGame);
+
+                        Console.Write(" Make your move ");
+                        Position take = WindowChess.InputRead().ToPosition();
+                        playGame.ExceptionTakeMove(take);
+                        bool[,] movablePiece = playGame.chess.Piece(take).CharacteringMove();
+
+                        Console.Clear();
+
+                        WindowChess.BoardShow(playGame.chess, movablePiece);
+                        Console.Write(" Drop your move ");
+
+                        Position putPiece = WindowChess.InputRead().ToPosition();
+                        playGame.PerformMotion(take, putPiece);
+                    }
+                    catch (ExceptionChess e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
+                    catch (System.IndexOutOfRangeException range)
+                    {
+                        Console.WriteLine($" {range.Message}");
+                        Console.ReadLine();
+                    }
                 }
             }
             catch (ExceptionChess e)
             {
                 Console.WriteLine(e.Message);
             }
+            
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Xadrez
     /// </summary>
     class WindowChess
     {
-        public static List<string> image = new List<string>() { "\u2717", "\u2620", "\u3010", " \u3011" };
+        public static List<string> image = new List<string>() { " \u2717  ", "\u2620", "\u3010", " \u3011" };
         public static List<string> alphabet = new List<string>() { "    \u24b6", "  \u24b7", "  \u24b8", "  \u24b9",
                                                                    "  \u24ba", "  \u24bb", "  \u24bc", "  \u24bd" };
         public static List<string> numbers = new List<string>() { "\u2780", "\u2781", "\u2782", "\u2783",
@@ -37,15 +37,16 @@ namespace Xadrez
                     Console.ForegroundColor = foreground;
                 }
                 Console.WriteLine();
-                Console.Write(" Dead " + playGame.Player() + " pieces: ");/// Dead WHITE pieces: []
-                SetCapturedPiece(playGame.PiecesCaptureSepareteCollor(playGame.Player()), playGame);
+                Console.Write(" Dead " + playGame.currentPlayer + " pieces: ");/// Dead WHITE pieces: []
+                SetCapturedPiece(playGame.PiecesCaptureSepareteCollor(playGame.currentPlayer),playGame);
+                Console.WriteLine();
             }
             else
             {
                 ConsoleColor foreground = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write($" XEQUEMATE \n" +
-                    $" WINNER IS {playGame.Player()}");
+                    $" WINNER IS {playGame.currentPlayer}");
                 Console.ForegroundColor = foreground;
             }
         }
@@ -55,7 +56,7 @@ namespace Xadrez
         public static void SetCapturedPiece(HashSet<Piece> conjuntoCapetured, GameManager playGame)
         {
             ConsoleColor foreground = Console.ForegroundColor;
-            if (playGame.Player() == Collor.WHITE)
+            if (playGame.currentPlayer == Collor.WHITE)
             {
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.Write(image[1] + "" + image[2]);
@@ -96,7 +97,6 @@ namespace Xadrez
         /// <param name="squareToMove"></param>
         public static void BoardShow(Board board, bool[,] squareToMove)
         {
-            Console.WriteLine();
             for (int i = 0; i < board.lines; i++)
             {
                 Console.Write($" {numbers[7-i]} ");
