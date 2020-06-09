@@ -3,6 +3,8 @@ using Xadrez.Exception;
 using Xadrez.Pallets;
 using Xadrez.Parts;
 using System.Collections.Generic;
+using System;
+
 namespace Xadrez.Manager
 {
     class GameManager
@@ -20,7 +22,7 @@ namespace Xadrez.Manager
         /// <summary>Vencedor verdadeiro ou falso.</summary>
         public bool winner { get; private set; }
         /// <summary>Imagens.</summary>
-        public List<string> image = new List<string>() { "\u2654", "\u27ae", " \u2716  " };
+        public List<string> image = new List<string>() { "\u2654", "\u27ae", " \u2716  " };//{♔, ➮, ✖}
         /// <summary>Check verdadeiro ou falso.</summary>
         public bool Check { get; private set; }
 
@@ -240,25 +242,25 @@ namespace Xadrez.Manager
             chess.ExceptionValidedLimit(square);
             if (chess.Piece(square) == null)
             {
-                throw new ExceptionChess($" {image[2]} There is not piece here.");
+                throw new ExceptionChess($"{image[2]}There is not piece here.");
             }
             if (currentPlayer != chess.Piece(square).collor)
             {
-                throw new ExceptionChess($" It's the turn of {image[1]} {Player()}");
+                throw new ExceptionChess($"{image[2]}It's the turn of {image[1]} {Player()}");
             }
             if (!chess.Piece(square).IsPossibleTakeMoving())
             {
-                throw new ExceptionChess($" {image[2]} There is not movement");
+                throw new ExceptionChess($"{image[2]} There is not movement");
             }
         }
         /// <summary>Exceção para soltar a peça.</summary>
         /// <param name="take"></param>
         /// <param name="put"></param>
-        public void CheckPutInTheQuadrant(Position take, Position put)
+        public void ExceptionToPut(Position take, Position put)
         {
             if (!chess.Piece(take).IsPossiblePut(put))
             {
-                throw new ExceptionChess("      It's not a valided moving");
+                throw new ExceptionChess($"{image[2]}It's not a valided moving");
             }
         }
         /// <summary>Coloca uma nova peça.</summary>

@@ -70,11 +70,11 @@ namespace Xadrez.Parts
             return false;
         }
         /// <summary>Coloca a peça se possível.</summary>
-        /// <param name="quadrant"></param>
+        /// <param name="square"></param>
         /// <returns></returns>
-        public bool IsPossiblePut(Position quadrant)
+        public bool IsPossiblePut(Position square)
         {
-            return CharacteringMove()[quadrant.line, quadrant.collumn];
+            return CharacteringMove()[square.line, square.collumn];
         }
         /// <summary>Movimentos possíveis, caracteristicas do movimento.</summary>
         /// <returns></returns>

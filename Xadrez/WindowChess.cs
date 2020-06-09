@@ -11,11 +11,12 @@ namespace Xadrez
     /// </summary>
     class WindowChess
     {
-        public static List<string> image = new List<string>() { " \u2717  ", "\u2620", "\u3010", " \u3011" };
+        public static List<string> image = new List<string>() { " \u2717  ", "\u2620", "\u3010", " \u3011" };//{✗, ☠, 【, 】}
         public static List<string> alphabet = new List<string>() { "    \u24b6", "  \u24b7", "  \u24b8", "  \u24b9",
                                                                    "  \u24ba", "  \u24bb", "  \u24bc", "  \u24bd" };
         public static List<string> numbers = new List<string>() { "\u2780", "\u2781", "\u2782", "\u2783",
                                                                    "\u2784", "\u2785", "\u2786", "\u2787" };
+        public static List<string> check = new List<string>() { "\u24b8", "\u24bd", "\u24ba", "\u24c0" };
         /// <summary>Imprime a partida, cria a tela de apresentação.</summary>
         /// <param name="playGame"></param>
         public static void StartChessMatch(GameManager playGame)
@@ -33,7 +34,7 @@ namespace Xadrez
                 {
                     ConsoleColor foreground = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write(" YOUR ARE IN XEQUE!");
+                    Console.Write($" {check[0]}{check[1]}{check[2]}{check[1]}{check[3]}");
                     Console.ForegroundColor = foreground;
                 }
                 Console.WriteLine();

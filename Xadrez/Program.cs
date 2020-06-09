@@ -29,6 +29,7 @@ namespace Xadrez
                         Console.Write(" Drop your move ");
 
                         Position putPiece = WindowChess.InputRead().ToPosition();
+                        playGame.ExceptionToPut(take, putPiece);
                         playGame.PerformMotion(take, putPiece);
                     }
                     catch (ExceptionChess e)
