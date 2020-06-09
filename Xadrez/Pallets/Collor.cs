@@ -1,4 +1,4 @@
-﻿namespace Chess.Pallets
+﻿namespace Xadrez.Pallets
 {
     /// <summary>
     /// Representa as cores das peças.

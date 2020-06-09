@@ -1,4 +1,4 @@
-﻿namespace Chess.BoardChess
+﻿namespace Xadrez.BoardChess
 {
     class PositionChess
     {

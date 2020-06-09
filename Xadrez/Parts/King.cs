@@ -1,6 +1,6 @@
-﻿using Chess.BoardChess;
-using Chess.Pallets;
-namespace Chess.Parts
+﻿using Xadrez.BoardChess;
+using Xadrez.Pallets;
+namespace Xadrez.Parts
 {
     class King : Piece
     {
@@ -14,57 +14,57 @@ namespace Chess.Parts
         /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
-            bool[,] moveKing = new bool[board.lines, board.collumns];
-            Position square = new Position(0, 0);
+            bool[,] characteringMoveKing = new bool[board.lines, board.collumns];
+            Position quadrant = new Position(0, 0);
             //cima.
-            square.SquareToMove(position.line - 1, position.collumn);
-            if (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line - 1, position.collumn);
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveKing[square.line, square.collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal superior direita.
-            square.SquareToMove(position.line - 1, position.collumn + 1);
-            if (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line - 1, position.collumn + 1);
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveKing[square.line, square.collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //direita.
-            square.SquareToMove(position.line, position.collumn + 1);
-            if (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line, position.collumn + 1);
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveKing[square.line, square.collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal inferior direita.
-            square.SquareToMove(position.line + 1, position.collumn + 1);
-            if (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line + 1, position.collumn + 1);
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveKing[square.line, square.collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //baixo.
-            square.SquareToMove(position.line + 1, position.collumn);
-            if (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line + 1, position.collumn);
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveKing[square.line, square.collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal inferior esquerda.
-            square.SquareToMove(position.line + 1, position.collumn - 1);
-            if (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line + 1, position.collumn - 1);
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveKing[square.line, square.collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //esquerda
-            square.SquareToMove(position.line, position.collumn - 1);
-            if (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line, position.collumn - 1);
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveKing[square.line, square.collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
             //diagonal superior esquerda.
-            square.SquareToMove(position.line - 1, position.collumn - 1);
-            if (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line - 1, position.collumn - 1);
+            if (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveKing[square.line, square.collumn] = true;
+                characteringMoveKing[quadrant.line, quadrant.collumn] = true;
             }
-            return moveKing;
+            return characteringMoveKing;
         }
 
         /// <summary>Sobreposição retorna a imagem do rei (King).</summary>

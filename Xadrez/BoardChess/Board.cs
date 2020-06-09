@@ -1,9 +1,9 @@
-﻿using Chess.Exception;
-using Chess.Parts;
+﻿using Xadrez.Exception;
+using Xadrez.Parts;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Chess.BoardChess
+namespace Xadrez.BoardChess
 {
     class Board
     {
@@ -44,6 +44,21 @@ namespace Chess.BoardChess
             return pieces[square.line, square.collumn];
         }
 
+        /// <summary>Pega a peça do tabuleiro.</summary>
+        /// <param name="square"></param>
+        /// <returns>peça</returns>
+        public Piece TakePiece(Position square)
+        {
+            if (Piece(square) == null)
+            {
+                return null;
+            }
+            Piece piece = Piece(square);
+            piece.position = null;
+            pieces[square.line, square.collumn] = null;
+            return piece;
+        }
+
         /// <summary>coloca a peça no tabuleiro.</summary>
         /// <param name="piece"></param>
         /// <param name="put"></param>
@@ -78,22 +93,6 @@ namespace Chess.BoardChess
             }
         }
 
-
-        /// <summary>Pega a peça do tabuleiro.</summary>
-        /// <param name="quadrant"></param>
-        /// <returns>peça</returns>
-        public Piece TakePart(Position quadrant)
-        {
-            if (Piece(quadrant) == null)
-            {
-                return null;
-            }
-            Piece temp = Piece(quadrant);
-            temp.position = null;
-            pieces[quadrant.line, quadrant.collumn] = null;
-            return temp;
-        }
-            
         /// <summary>Verifica se tem alguma peça na casa(square).</summary>
         /// <param name="square"></param>
         /// <returns></returns>

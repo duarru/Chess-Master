@@ -1,9 +1,9 @@
-﻿using Chess.BoardChess;
-using Chess.Exception;
-using Chess.Pallets;
-using Chess.Parts;
+﻿using Xadrez.BoardChess;
+using Xadrez.Exception;
+using Xadrez.Pallets;
+using Xadrez.Parts;
 using System.Collections.Generic;
-namespace Chess.Manager
+namespace Xadrez.Manager
 {
     class GameManager
     {
@@ -19,8 +19,8 @@ namespace Chess.Manager
         public HashSet<Piece> captured { get; set; }
         /// <summary>Vencedor verdadeiro ou falso.</summary>
         public bool winner { get; private set; }
-        /// <summary>Imagem do jogador.</summary>
-        public string image { get; private set; }
+        /// <summary>Imagens.</summary>
+        public List<string> image = new List<string>() { "\u2654", "\u27ae" };
         /// <summary>Check verdadeiro ou falso.</summary>
         public bool Check { get; private set; }
 
@@ -30,10 +30,9 @@ namespace Chess.Manager
             chess = new Board(8, 8);
             turn = 1;
             currentPlayer = Collor.WHITE;
-            image = "\u2654";
             pieces = new HashSet<Piece>();
             captured = new HashSet<Piece>();
-            InitChessPosition();
+            ShowPieces();
             winner = false;
             Check = false;
         }
@@ -42,14 +41,7 @@ namespace Chess.Manager
         /// <returns></returns>
         public int CountTurn()
         {
-            return turn++;
-        }
-
-        /// <summaty>Apresenta a imagem do jogador.</summary>
-        /// <returns></returns>
-        public string PlayerImage()
-        {
-            return image;
+            return turn;
         }
 
         /// <summary>Jogador atual.</summary>
@@ -62,11 +54,11 @@ namespace Chess.Manager
         /// <summary>Executa o movimento, pega as peças.</summary>
         /// <param name="take"></param>
         /// <param name="put"></param>
-        public Piece Move(Position take, Position put)
+        public Piece Movable(Position take, Position put)
         {
-            Piece piece = chess.TakePart(take);
+            Piece piece = chess.TakePiece(take);
             piece.Move();
-            Piece captured = chess.TakePart(put);
+            Piece captured = chess.TakePiece(put);
             chess.PutPiece(piece, put);
             if (captured != null)
             {
@@ -80,7 +72,7 @@ namespace Chess.Manager
         /// <param name="captured"></param>
         public void RewindMove(Position take, Position put, Piece captured)
         {
-            Piece piece = chess.TakePart(put);
+            Piece piece = chess.TakePiece(put);
             piece.RewindMovement();
             if (captured != null)
             {
@@ -94,7 +86,7 @@ namespace Chess.Manager
         /// <param name="put"></param>
         public void PerformMotion(Position take, Position put)
         {
-            Piece captured = Move(take, put);
+            Piece captured = Movable(take, put);
             if (InXeque(Player()))
             {
                 RewindMove(take, put, captured);
@@ -115,7 +107,7 @@ namespace Chess.Manager
             }
             else
             {
-                CountTurn();
+                turn++;
                 ChangePlayer(Player());
             }
         }
@@ -232,7 +224,7 @@ namespace Chess.Manager
                         {
                             Position take = xequeMate.position;
                             Position put = new Position(i, j);
-                            Piece captured = Move(take, put);
+                            Piece captured = Movable(take, put);
                             bool inXequeMate = InXeque(collor);
                             RewindMove(take, put, captured);
 
@@ -277,49 +269,47 @@ namespace Chess.Manager
         /// <param name="collumn"></param>
         /// <param name="line"></param>
         /// <param name="piece"></param>
-        public void PutPieceOnBoard(char collumn, int line, Piece piece)
+        public void LoadSquarePiece(char collumn, int line, Piece piece)
         {
             chess.PutPiece(piece, new PositionChess(collumn, line).ToPosition());
             pieces.Add(piece);
         }
         /// <summary>Posição inicial.</summary>
-        private void InitChessPosition()
+        private void ShowPieces()
         {
-            PutPieceOnBoard('a', 1, new Rock(chess, Collor.WHITE));
+            LoadSquarePiece('a', 1, new Rock(chess, Collor.WHITE));
+            LoadSquarePiece('b', 1, new Knight(chess, Collor.WHITE));
+            LoadSquarePiece('c', 1, new Bishop(chess, Collor.WHITE));
+            LoadSquarePiece('d', 1, new Queen(chess, Collor.WHITE));
+            LoadSquarePiece('e', 1, new King(chess, Collor.WHITE));
+            LoadSquarePiece('f', 1, new Bishop(chess, Collor.WHITE));
+            LoadSquarePiece('g', 1, new Knight(chess, Collor.WHITE));
+            LoadSquarePiece('h', 1, new Rock(chess, Collor.WHITE));
+            LoadSquarePiece('a', 2, new Pawn(chess, Collor.WHITE));
+            LoadSquarePiece('b', 2, new Pawn(chess, Collor.WHITE));
+            LoadSquarePiece('c', 2, new Pawn(chess, Collor.WHITE));
+            LoadSquarePiece('d', 2, new Pawn(chess, Collor.WHITE));
+            LoadSquarePiece('e', 2, new Pawn(chess, Collor.WHITE));
+            LoadSquarePiece('f', 2, new Pawn(chess, Collor.WHITE));
+            LoadSquarePiece('g', 2, new Pawn(chess, Collor.WHITE));
+            LoadSquarePiece('h', 2, new Pawn(chess, Collor.WHITE));
 
-            PutPieceOnBoard('a', 1, new Rock(chess, Collor.WHITE));
-            PutPieceOnBoard('b', 1, new Knight(chess, Collor.WHITE));
-            PutPieceOnBoard('c', 1, new Bishop(chess, Collor.WHITE));
-            PutPieceOnBoard('d', 1, new Queen(chess, Collor.WHITE));
-            PutPieceOnBoard('e', 1, new King(chess, Collor.WHITE));
-            PutPieceOnBoard('f', 1, new Bishop(chess, Collor.WHITE));
-            PutPieceOnBoard('g', 1, new Knight(chess, Collor.WHITE));
-            PutPieceOnBoard('h', 1, new Rock(chess, Collor.WHITE));
-            PutPieceOnBoard('a', 2, new Pawn(chess, Collor.WHITE));
-            PutPieceOnBoard('b', 2, new Pawn(chess, Collor.WHITE));
-            PutPieceOnBoard('c', 2, new Pawn(chess, Collor.WHITE));
-            PutPieceOnBoard('d', 2, new Pawn(chess, Collor.WHITE));
-            PutPieceOnBoard('e', 2, new Pawn(chess, Collor.WHITE));
-            PutPieceOnBoard('f', 2, new Pawn(chess, Collor.WHITE));
-            PutPieceOnBoard('g', 2, new Pawn(chess, Collor.WHITE));
-            PutPieceOnBoard('h', 2, new Pawn(chess, Collor.WHITE));
-
-            PutPieceOnBoard('a', 8, new Rock(chess, Collor.BLACK));
-            PutPieceOnBoard('b', 8, new Knight(chess, Collor.BLACK));
-            PutPieceOnBoard('c', 8, new Bishop(chess, Collor.BLACK));
-            PutPieceOnBoard('d', 8, new King(chess, Collor.BLACK));
-            PutPieceOnBoard('e', 8, new Queen(chess, Collor.BLACK));
-            PutPieceOnBoard('f', 8, new Bishop(chess, Collor.BLACK));
-            PutPieceOnBoard('g', 8, new Knight(chess, Collor.BLACK));
-            PutPieceOnBoard('h', 8, new Rock(chess, Collor.BLACK));
-            PutPieceOnBoard('a', 7, new Pawn(chess, Collor.BLACK));
-            PutPieceOnBoard('b', 7, new Pawn(chess, Collor.BLACK));
-            PutPieceOnBoard('c', 7, new Pawn(chess, Collor.BLACK));
-            PutPieceOnBoard('d', 7, new Pawn(chess, Collor.BLACK));
-            PutPieceOnBoard('e', 7, new Pawn(chess, Collor.BLACK));
-            PutPieceOnBoard('f', 7, new Pawn(chess, Collor.BLACK));
-            PutPieceOnBoard('g', 7, new Pawn(chess, Collor.BLACK));
-            PutPieceOnBoard('h', 7, new Pawn(chess, Collor.BLACK));
+            LoadSquarePiece('a', 8, new Rock(chess, Collor.BLACK));
+            LoadSquarePiece('b', 8, new Knight(chess, Collor.BLACK));
+            LoadSquarePiece('c', 8, new Bishop(chess, Collor.BLACK));
+            LoadSquarePiece('d', 8, new King(chess, Collor.BLACK));
+            LoadSquarePiece('e', 8, new Queen(chess, Collor.BLACK));
+            LoadSquarePiece('f', 8, new Bishop(chess, Collor.BLACK));
+            LoadSquarePiece('g', 8, new Knight(chess, Collor.BLACK));
+            LoadSquarePiece('h', 8, new Rock(chess, Collor.BLACK));
+            LoadSquarePiece('a', 7, new Pawn(chess, Collor.BLACK));
+            LoadSquarePiece('b', 7, new Pawn(chess, Collor.BLACK));
+            LoadSquarePiece('c', 7, new Pawn(chess, Collor.BLACK));
+            LoadSquarePiece('d', 7, new Pawn(chess, Collor.BLACK));
+            LoadSquarePiece('e', 7, new Pawn(chess, Collor.BLACK));
+            LoadSquarePiece('f', 7, new Pawn(chess, Collor.BLACK));
+            LoadSquarePiece('g', 7, new Pawn(chess, Collor.BLACK));
+            LoadSquarePiece('h', 7, new Pawn(chess, Collor.BLACK));
 
 
         }

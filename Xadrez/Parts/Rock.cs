@@ -1,6 +1,6 @@
-﻿using Chess.BoardChess;
-using Chess.Pallets;
-namespace Chess.Parts
+﻿using Xadrez.BoardChess;
+using Xadrez.Pallets;
+namespace Xadrez.Parts
 {
     class Rock : Piece
     {
@@ -14,53 +14,53 @@ namespace Chess.Parts
         /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
-            bool[,] moveRock = new bool[board.lines, board.collumns];
-            Position square = new Position(0, 0);
+            bool[,] characteringMoveRock = new bool[board.lines, board.collumns];
+            Position quadrant = new Position(0, 0);
             //cima.
-            square.SquareToMove(position.line - 1, position.collumn);
-            while (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line - 1, position.collumn);
+            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveRock[square.line, square.collumn] = true;
-                if(board.Piece(square) != null && board.Piece(square).collor != collor)
+                characteringMoveRock[quadrant.line, quadrant.collumn] = true;
+                if(board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }
-                square.line = square.line - 1;
+                quadrant.line = quadrant.line - 1;
             }
             //baixo.
-            square.SquareToMove(position.line + 1, position.collumn);
-            while (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line + 1, position.collumn);
+            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveRock[square.line, square.collumn] = true;
-                if (board.Piece(square) != null && board.Piece(square).collor != collor)
+                characteringMoveRock[quadrant.line, quadrant.collumn] = true;
+                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }
-                square.line = square.line + 1;
+                quadrant.line = quadrant.line + 1;
             }
             //direita.
-            square.SquareToMove(position.line, position.collumn + 1);
-            while (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line, position.collumn + 1);
+            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveRock[square.line, square.collumn] = true;
-                if (board.Piece(square) != null && board.Piece(square).collor != collor)
+                characteringMoveRock[quadrant.line, quadrant.collumn] = true;
+                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }
-                square.collumn = square.collumn + 1;
+                quadrant.collumn = quadrant.collumn + 1;
             }
             //esquerda.
-            square.SquareToMove(position.line, position.collumn - 1);
-            while (board.ExceptionBoardLimit(square) && Move(square))
+            quadrant.SquareToMove(position.line, position.collumn - 1);
+            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
             {
-                moveRock[square.line, square.collumn] = true;
-                if (board.Piece(square) != null && board.Piece(square).collor != collor)
+                characteringMoveRock[quadrant.line, quadrant.collumn] = true;
+                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
                 {
                     break;
                 }
-                square.collumn = square.collumn - 1;
+                quadrant.collumn = quadrant.collumn - 1;
             }
-            return moveRock;
+            return characteringMoveRock;
         }
         /// <summary>Sobreposição retorna a imagem da torre (Rock).</summary>
         /// <returns></returns>

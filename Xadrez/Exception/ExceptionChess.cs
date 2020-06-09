@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Chess.Exception
+namespace Xadrez.Exception
 {
     class ExceptionChess : ApplicationException
     {

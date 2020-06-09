@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using Chess.BoardChess;
-using Chess.Pallets;
+using Xadrez.BoardChess;
+using Xadrez.Pallets;
 
-namespace Chess.Parts
+namespace Xadrez.Parts
 {
     class Pawn : Piece
     {
-        public Pawn(Board board, Collor collor) : base(board, collor)
+        public Pawn(BoardChess.Board boardChess, Collor collor) : base(boardChess, collor)
         {
         }
         /// <summary>Existe inimigo, retorna cor e peça.</summary>
-        /// <param name="square"></param>
+        /// <param name="quadrant"></param>
         /// <returns></returns>
-        private bool CaptureRadius(Position square)
+        private bool CaptureRadius(Position quadrant)
         {
-            Piece piece = board.Piece(square);
+            Piece piece = board.Piece(quadrant);
             return piece != null && piece.collor != collor;
         }
         /// <summary>Livre, se for o primeiro movimento.</summary>
-        /// <param name="square"></param>
+        /// <param name="quadrant"></param>
         /// <returns></returns>
-        private bool FisrMovement(Position square)
+        private bool FisrMovement(Position quadrant)
         {
-            return board.Piece(square) == null;
+            return board.Piece(quadrant) == null;
         }
         public override string ToString()
         {
@@ -31,33 +31,34 @@ namespace Chess.Parts
         }
         public override bool[,] CharacteringMove()
         {
-            bool[,] movePawn = new bool[board.lines, board.collumns];
-            Position squarePawn = new Position(0, 0);
+            
+                bool[,] characteringMovePawn = new bool[board.lines, board.collumns];
+                Position quadrant = new Position(0, 0);
             if (collor.Equals(Collor.WHITE))
             {
                 //cima.
-                squarePawn.SquareToMove(position.line - 1, position.collumn);
-                if (board.ExceptionBoardLimit(squarePawn) && FisrMovement(squarePawn))
+                quadrant.SquareToMove(position.line - 1, position.collumn);
+                if (board.ExceptionBoardLimit(quadrant) && FisrMovement(quadrant))
                 {
-                    movePawn[squarePawn.line, squarePawn.collumn] = true;
+                    characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                 }
                 //duas casas para cima.
-                squarePawn.SquareToMove(position.line - 2, position.collumn);
-                if (board.ExceptionBoardLimit(squarePawn) && movement.Equals(0))
+                quadrant.SquareToMove(position.line - 2, position.collumn);
+                if (board.ExceptionBoardLimit(quadrant) && movement.Equals(0))
                 {
-                    movePawn[squarePawn.line, squarePawn.collumn] = true;
+                    characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                 }
                 //diagonal de capitura esquerda.
-                squarePawn.SquareToMove(position.line - 1, position.collumn - 1);
-                if (board.ExceptionBoardLimit(squarePawn) && CaptureRadius(squarePawn))
+                quadrant.SquareToMove(position.line - 1, position.collumn - 1);
+                if (board.ExceptionBoardLimit(quadrant) && CaptureRadius(quadrant))
                 {
-                    movePawn[squarePawn.line, squarePawn.collumn] = true;
+                    characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                 }
                 //diagonal de capitura diireita.
-                squarePawn.SquareToMove(position.line - 1, position.collumn + 1);
-                if (board.ExceptionBoardLimit(squarePawn) && CaptureRadius(squarePawn))
+                quadrant.SquareToMove(position.line - 1, position.collumn + 1);
+                if (board.ExceptionBoardLimit(quadrant) && CaptureRadius(quadrant))
                 {
-                    movePawn[squarePawn.line, squarePawn.collumn] = true;
+                    characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                 }
             }
             else
@@ -65,32 +66,32 @@ namespace Chess.Parts
                 if (collor.Equals(Collor.BLACK))
                 {
                     //baxo.
-                    squarePawn.SquareToMove(position.line + 1, position.collumn);
-                    if (board.ExceptionBoardLimit(squarePawn) && FisrMovement(squarePawn))
+                    quadrant.SquareToMove(position.line + 1, position.collumn);
+                    if (board.ExceptionBoardLimit(quadrant) && FisrMovement(quadrant))
                     {
-                        movePawn[squarePawn.line, squarePawn.collumn] = true;
+                        characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                     }
                     //duas casas para baixo.
-                    squarePawn.SquareToMove(position.line + 2, position.collumn);
-                    if (board.ExceptionBoardLimit(squarePawn) && movement.Equals(0))
+                    quadrant.SquareToMove(position.line + 2, position.collumn);
+                    if (board.ExceptionBoardLimit(quadrant) && movement.Equals(0))
                     {
-                        movePawn[squarePawn.line, squarePawn.collumn] = true;
+                        characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                     }
                     //diagonal de capitura direita.
-                    squarePawn.SquareToMove(position.line + 1, position.collumn + 1);
-                    if (board.ExceptionBoardLimit(squarePawn) && CaptureRadius(squarePawn))
+                    quadrant.SquareToMove(position.line + 1, position.collumn + 1);
+                    if (board.ExceptionBoardLimit(quadrant) && CaptureRadius(quadrant))
                     {
-                        movePawn[squarePawn.line, squarePawn.collumn] = true;
+                        characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                     }
                     //diagonal de capitura esquerda.
-                    squarePawn.SquareToMove(position.line + 1, position.collumn - 1);
-                    if (board.ExceptionBoardLimit(squarePawn) && CaptureRadius(squarePawn))
+                    quadrant.SquareToMove(position.line + 1, position.collumn - 1);
+                    if (board.ExceptionBoardLimit(quadrant) && CaptureRadius(quadrant))
                     {
-                        movePawn[squarePawn.line, squarePawn.collumn] = true;
+                        characteringMovePawn[quadrant.line, quadrant.collumn] = true;
                     }
                 }
             }
-            return movePawn;
+            return characteringMovePawn;
         }
     }
 }

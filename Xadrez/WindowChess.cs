@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Chess.BoardChess;
-using Chess.Manager;
-using Chess.Pallets;
-using Chess.Parts;
-namespace Chess
+using Xadrez.BoardChess;
+using Xadrez.Manager;
+using Xadrez.Pallets;
+using Xadrez.Parts;
+namespace Xadrez
 {
     /// <summary>
     /// Classe representa a tela do Xadrez.
@@ -19,9 +19,11 @@ namespace Chess
         {
             BoardShow(playGame.chess);
             Console.WriteLine();
-            Console.Write(" Current player: ");/// Current player: WHITE
-            Console.WriteLine($"{playGame.PlayerImage()} \u27ae {playGame.Player()}");
-            Console.Write($" Turn {playGame.CountTurn()}");/// Turn 1
+            /// Current player: WHITE
+            Console.Write(" Current player: ");
+            Console.WriteLine($"{playGame.image[0]} {playGame.image[1]} {playGame.Player()}");
+            /// Turn 1
+            Console.Write($" Turn {playGame.CountTurn()}");
             if (!playGame.winner)
             {
                 if (playGame.Check)
@@ -53,7 +55,7 @@ namespace Chess
             if (playGame.Player() == Collor.WHITE)
             {
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.Write(image[1]+""+image[2]);
+                Console.Write(image[1] + "" + image[2]);
             }
             else
             {
@@ -78,17 +80,17 @@ namespace Chess
                 Console.Write($" {8 - i} ");
                 for (int j = 0; j < board.collumns; j++)
                 {
-                    EditCollor(board.Piece(i, j),i,j);
+                    EditCollor(board.Piece(i, j), i, j);
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("   a   b   c   d   e   f   g   h");
+            Console.WriteLine("     a   b   c   d   e   f   g   h");
             Console.WriteLine();
         }
         /// <summary>Re imprime o tabuleiro com os movimentos possiveis.</summary>
         /// <param name="board"></param>
-        /// <param name="quadrantsToMove"></param>
-        public static void BoardShow(BoardChess.Board board, bool[,] quadrantsToMove)
+        /// <param name="squareToMove"></param>
+        public static void BoardShow(Board board, bool[,] squareToMove)
         {
             Console.WriteLine();
             for (int i = 0; i < board.lines; i++)
@@ -96,11 +98,11 @@ namespace Chess
                 Console.Write($"{8 - i} ");
                 for (int j = 0; j < board.collumns; j++)
                 {
-                    EditCollor(board.Piece(i, j), i, j, quadrantsToMove);
+                    EditCollor(board.Piece(i, j), i, j, squareToMove);
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("   a   b   c   d   e   f   g   h");
+            Console.WriteLine("  a   b   c   d   e   f   g   h");
             Console.WriteLine();
         }
         /// <summary>Edita as cores das peças.</summary>
@@ -122,6 +124,7 @@ namespace Chess
                     Console.BackgroundColor = ConsoleColor.DarkGray;
 
                 }
+                Console.Write("    ");
             }
             else
             {
@@ -151,10 +154,10 @@ namespace Chess
 
                     }
                 }
+                Console.Write(piece);
             }
             Console.BackgroundColor = background;
             Console.ForegroundColor = fireground;
-            Console.Write(piece);
         }
         /// <summary>Edita cor da peça, para os movimentos possiveis das peças.</summary>
         /// <param name="piece"></param>
@@ -179,7 +182,7 @@ namespace Chess
                 }
                 else
                 {
-                    Console.Write("   ");
+                    Console.Write("    ");
                 }
             }
             else
@@ -209,20 +212,21 @@ namespace Chess
                         Console.BackgroundColor = ConsoleColor.DarkGray;
                     }
                 }
+                
+                Console.Write(piece);
             }
             Console.BackgroundColor = background;
             Console.ForegroundColor = fireground;
-            Console.Write(piece);
         }
         /// <summary>Leitura dos dados de entrada para linha e coluna.</summary>
         /// <returns></returns>
-        public static PositionChess ReadSquare()
+        public static PositionChess InputRead()
         {
             string input = Console.ReadLine();
             char collumn = input[0];
             int line = int.Parse(input[1] + "");
             return new PositionChess(collumn, line);
         }
-        
+
     }
 }
