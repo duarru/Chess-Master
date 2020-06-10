@@ -85,13 +85,13 @@ namespace Xadrez.Manager
         public void MovablePerform(Position take, Position put)
         {
             Piece captured = Movable(take, put);
-            if (InXeque(currentPlayer))
+            if (InChedk(currentPlayer))
             {
                 RewindMove(take, put, captured);
                 throw new ExceptionChess($"{image[2]} Your cannot put yourself in check.");
             }
 
-            if (InXeque(AnotherPlayer(currentPlayer)))
+            if (InChedk(AnotherPlayer(currentPlayer)))
             {
                 Check = true;
             }
@@ -99,7 +99,7 @@ namespace Xadrez.Manager
             {
                 Check = false;
             }
-            if (XequeMate(AnotherPlayer(currentPlayer)))
+            if (CheckMate(AnotherPlayer(currentPlayer)))
             {
                 winner = true;
             }
@@ -186,12 +186,12 @@ namespace Xadrez.Manager
         /// <summary>Está em xeque.</summary>
         /// <param name="collor"></param>
         /// <returns></returns>
-        public bool InXeque(Collor collor)
+        public bool InChedk(Collor collor)
         {
             Piece king = TheKing(collor);
             if (king == null)
             {
-                throw new ExceptionChess($"Not have of collor the king {collor} on board chess.");
+                throw new ExceptionChess($"{image[2]}Not have of collor the king {collor} on board chess.");
             }
             foreach (Piece move in PiecesOnBoardChess(AnotherPlayer(collor)))
             {
@@ -204,9 +204,9 @@ namespace Xadrez.Manager
             return false;
         }
 
-        public bool XequeMate(Collor collor)
+        public bool CheckMate(Collor collor)
         {
-            if (!InXeque(collor))
+            if (!InChedk(collor))
             {
                 return false;
             }
@@ -222,7 +222,7 @@ namespace Xadrez.Manager
                             Position take = xequeMate.position;
                             Position put = new Position(i, j);
                             Piece captured = Movable(take, put);
-                            bool inXequeMate = InXeque(collor);
+                            bool inXequeMate = InChedk(collor);
                             RewindMove(take, put, captured);
 
                             if (!inXequeMate)

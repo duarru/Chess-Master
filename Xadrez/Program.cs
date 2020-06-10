@@ -43,12 +43,14 @@ namespace Xadrez
                         Console.ReadLine();
                     }
                 }
+                Console.Clear();
+                WindowChess.StartChessMatch(playGame);
             }
             catch (ExceptionChess e)
             {
                 Console.WriteLine(e.Message);
             }
-
+            Console.ReadLine();
         }
     }
 }
