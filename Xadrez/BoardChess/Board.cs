@@ -66,7 +66,7 @@ namespace Xadrez.BoardChess
         {
             if (ExistPiece(put))
             {
-                throw new ExceptionChess(image[0] + " You can't do that.");
+                throw new ExceptionChess($"{image[0]}You can't do that.");
             }
             pieces[put.line, put.collumn] = piece;
             piece.position = put;
@@ -89,7 +89,7 @@ namespace Xadrez.BoardChess
         {
             if (!ExceptionBoardLimit(square))
             {
-                throw new ExceptionChess(image[0] + " invalid square.");
+                throw new ExceptionChess($"{image[0]}invalid square.");
             }
         }
 

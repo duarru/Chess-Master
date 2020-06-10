@@ -6,7 +6,7 @@ namespace Xadrez.Parts
 {
     class Queen : Piece
     {
-        public Queen(BoardChess.Board boardChess, Collor collor) : base(boardChess, collor)
+        public Queen(Board board, Collor collor) : base(board, collor)
         {
         }
         public override string ToString()
@@ -15,86 +15,97 @@ namespace Xadrez.Parts
         }
         public override bool[,] CharacteringMove()
         {
-            bool[,] characteringMoveQueen= new bool[board.lines, board.collumns];
-            Position quadrant = new Position(0, 0);
-            //diagonal esquerda.
-            quadrant.SquareToMove(position.line - 1, position.collumn - 1);
-            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
+            bool[,] moveQueen = new bool[board.lines, board.collumns];
+            Position square = new Position(0, 0);
+            //diagonal esquerda cima.
+            square.PieceToSquare(position.line - 1, position.collumn - 1);
+            while (board.ExceptionBoardLimit(square) && Move(square))
             {
-                characteringMoveQueen[quadrant.line, quadrant.collumn] = true;
-                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
+                moveQueen[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
                 {
                     break;
                 }
-                quadrant.SquareToMove(quadrant.line - 1, quadrant.collumn - 1);
+                square.PieceToSquare(square.line - 1, square.collumn - 1);
             }
             //cima.
-            quadrant.SquareToMove(position.line - 1, position.collumn);
-            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
+            square.PieceToSquare(position.line - 1, position.collumn);
+            while (board.ExceptionBoardLimit(square) && Move(square))
             {
-                characteringMoveQueen[quadrant.line, quadrant.collumn] = true;
-                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
+                moveQueen[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
                 {
                     break;
                 }
-                quadrant.SquareToMove(quadrant.line - 1, quadrant.collumn);
+                square.PieceToSquare(square.line - 1, square.collumn);
             }
             //diagonal direita.
-            quadrant.SquareToMove(position.line - 1, position.collumn + 1);
-            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
+            square.PieceToSquare(position.line - 1, position.collumn + 1);
+            while (board.ExceptionBoardLimit(square) && Move(square))
             {
-                characteringMoveQueen[quadrant.line, quadrant.collumn] = true;
-                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
+                moveQueen[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
                 {
                     break;
                 }
-                quadrant.SquareToMove(quadrant.line - 1, quadrant.collumn + 1);
+                square.PieceToSquare(square.line - 1, square.collumn + 1);
             }
             //direita.
-            quadrant.SquareToMove(position.line, position.collumn + 1);
-            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
+            square.PieceToSquare(position.line, position.collumn + 1);
+            while (board.ExceptionBoardLimit(square) && Move(square))
             {
-                characteringMoveQueen[quadrant.line, quadrant.collumn] = true;
-                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
+                moveQueen[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
                 {
                     break;
                 }
-                quadrant.SquareToMove(quadrant.line, quadrant.collumn + 1);
+                square.PieceToSquare(square.line, square.collumn + 1);
             }
             //diagonal direita baixo.
-            quadrant.SquareToMove(position.line + 1, position.collumn + 1);
-            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
+            square.PieceToSquare(position.line + 1, position.collumn + 1);
+            while (board.ExceptionBoardLimit(square) && Move(square))
             {
-                characteringMoveQueen[quadrant.line, quadrant.collumn] = true;
-                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
+                moveQueen[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
                 {
                     break;
                 }
-                quadrant.SquareToMove(quadrant.line + 1, quadrant.collumn + 1);
+                square.PieceToSquare(square.line + 1, square.collumn + 1);
             }
             //baixo.
-            quadrant.SquareToMove(position.line + 1, position.collumn);
-            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
+            square.PieceToSquare(position.line + 1, position.collumn);
+            while (board.ExceptionBoardLimit(square) && Move(square))
             {
-                characteringMoveQueen[quadrant.line, quadrant.collumn] = true;
-                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
+                moveQueen[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
                 {
                     break;
                 }
-                quadrant.SquareToMove(quadrant.line + 1, quadrant.collumn);
+                square.PieceToSquare(square.line + 1, square.collumn);
             }
             //diagonal esquerda baixo.
-            quadrant.SquareToMove(position.line + 1, position.collumn - 1);
-            while (board.ExceptionBoardLimit(quadrant) && Move(quadrant))
+            square.PieceToSquare(position.line + 1, position.collumn - 1);
+            while (board.ExceptionBoardLimit(square) && Move(square))
             {
-                characteringMoveQueen[quadrant.line, quadrant.collumn] = true;
-                if (board.Piece(quadrant) != null && board.Piece(quadrant).collor != collor)
+                moveQueen[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
                 {
                     break;
                 }
-                quadrant.SquareToMove(quadrant.line + 1, quadrant.collumn - 1);
+                square.PieceToSquare(square.line + 1, square.collumn - 1);
             }
-            return characteringMoveQueen;
+            //esquerda.
+            square.PieceToSquare(position.line, position.collumn - 1);
+            while (board.ExceptionBoardLimit(square) && Move(square))
+            {
+                moveQueen[square.line, square.collumn] = true;
+                if (board.Piece(square) != null && board.Piece(square).collor != collor)
+                {
+                    break;
+                }
+                square.PieceToSquare(square.line, square.collumn - 1);
+            }
+            return moveQueen;
         }
     }
 }

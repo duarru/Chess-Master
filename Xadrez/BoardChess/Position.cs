@@ -15,10 +15,10 @@
             this.line = line;
             this.collumn = collumn;
         }
-        /// <summary>Quadrantes de movimentação, define os valores da posição.</summary>
+        /// <summary>Square(casas) para onde se mover, define os valores da posição.</summary>
         /// <param name="line"></param>
         /// <param name="collumn"></param>
-        public void SquareToMove(int line, int collumn)
+        public void PieceToSquare(int line, int collumn)
         {
             this.line = line;
             this.collumn = collumn;

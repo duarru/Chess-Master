@@ -23,12 +23,12 @@ namespace Xadrez.Parts
         {
         }
         /// <summary> Constructor da classe Peça.</summary>
-        /// <param name="boardChess"></param>
+        /// <param name="board"></param>
         /// <param name="collor"></param>
-        public Piece(Board boardChess, Collor collor)
+        public Piece(Board board, Collor collor)
         {
             position = null;
-            board = boardChess;
+            this.board = board;
             this.collor = collor;
             movement = 0;
             Console.OutputEncoding = System.Text.Encoding.Unicode; // para as imagens das peças.

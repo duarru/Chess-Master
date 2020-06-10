@@ -30,7 +30,7 @@ namespace Xadrez
 
                         Position putPiece = WindowChess.InputRead().ToPosition();
                         playGame.ExceptionToPut(take, putPiece);
-                        playGame.PerformMotion(take, putPiece);
+                        playGame.MovablePerform(take, putPiece);
                     }
                     catch (ExceptionChess e)
                     {
@@ -48,7 +48,7 @@ namespace Xadrez
             {
                 Console.WriteLine(e.Message);
             }
-            
+
         }
     }
 }

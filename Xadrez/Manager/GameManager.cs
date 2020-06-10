@@ -82,7 +82,7 @@ namespace Xadrez.Manager
         /// <summary>Realiza o movimento.</summary>
         /// <param name="take"></param>
         /// <param name="put"></param>
-        public void PerformMotion(Position take, Position put)
+        public void MovablePerform(Position take, Position put)
         {
             Piece captured = Movable(take, put);
             if (InXeque(currentPlayer))
@@ -145,14 +145,14 @@ namespace Xadrez.Manager
         public HashSet<Piece> PiecesOnBoardChess(Collor collor)
         {
             HashSet<Piece> piecesOnBoard = new HashSet<Piece>();
-            foreach (Piece x in pieces)
+            foreach (Piece fill in pieces)
             {
-                if (x.collor.Equals(collor))
+                if (fill.collor.Equals(collor))
                 {
-                    piecesOnBoard.Add(x);
+                    piecesOnBoard.Add(fill);
                 }
             }
-            piecesOnBoard.ExceptWith(PiecesCaptureSepareteCollor(collor));
+            piecesOnBoard.ExceptWith(PiecesCaptureSepareteCollor(collor));// exceto essa cor.
             return piecesOnBoard;
         }
         /// <summary>Peça adverçaria.</summary>

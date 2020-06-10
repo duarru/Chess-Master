@@ -20,7 +20,7 @@ namespace Xadrez.Parts
             bool[,] MoveBishop = new bool[board.lines, board.collumns];
             Position square = new Position(0, 0);
             //diagonal esquerda.
-            square.SquareToMove(position.line - 1, position.collumn -1);
+            square.PieceToSquare(position.line - 1, position.collumn -1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
                 MoveBishop[square.line, square.collumn] = true;
@@ -28,10 +28,10 @@ namespace Xadrez.Parts
                 {
                     break;
                 }
-                square.SquareToMove(square.line - 1, square.collumn - 1);
+                square.PieceToSquare(square.line - 1, square.collumn - 1);
             }
             //diagonal direita.
-            square.SquareToMove(position.line - 1, position.collumn + 1);
+            square.PieceToSquare(position.line - 1, position.collumn + 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
                 MoveBishop[square.line, square.collumn] = true;
@@ -39,10 +39,10 @@ namespace Xadrez.Parts
                 {
                     break;
                 }
-                square.SquareToMove(square.line - 1, square.collumn + 1);
+                square.PieceToSquare(square.line - 1, square.collumn + 1);
             }
             //diagonal direita baixo.
-            square.SquareToMove(position.line + 1, position.collumn + 1);
+            square.PieceToSquare(position.line + 1, position.collumn + 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
                 MoveBishop[square.line, square.collumn] = true;
@@ -50,10 +50,10 @@ namespace Xadrez.Parts
                 {
                     break;
                 }
-                square.SquareToMove(square.line + 1, square.collumn + 1);
+                square.PieceToSquare(square.line + 1, square.collumn + 1);
             }
             //diagonal esquerda baixo.
-            square.SquareToMove(position.line + 1, position.collumn - 1);
+            square.PieceToSquare(position.line + 1, position.collumn - 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
                 MoveBishop[square.line, square.collumn] = true;
@@ -61,7 +61,7 @@ namespace Xadrez.Parts
                 {
                     break;
                 }
-                square.SquareToMove(square.line + 1, square.collumn - 1);
+                square.PieceToSquare(square.line + 1, square.collumn - 1);
             }
             return MoveBishop;
         }

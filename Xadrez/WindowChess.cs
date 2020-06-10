@@ -34,7 +34,7 @@ namespace Xadrez
                 {
                     ConsoleColor foreground = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write($" {check[0]}{check[1]}{check[2]}{check[1]}{check[3]}");
+                    Console.Write($" {check[0]}{check[1]}{check[2]}{check[0]}{check[3]}");
                     Console.ForegroundColor = foreground;
                 }
                 Console.WriteLine();
