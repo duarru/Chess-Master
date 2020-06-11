@@ -4,6 +4,8 @@ using Xadrez.Pallets;
 using Xadrez.Parts;
 using System.Collections.Generic;
 using System;
+using Microsoft.VisualBasic;
+using System.ComponentModel.Design;
 
 namespace Xadrez.Manager
 {
@@ -25,6 +27,7 @@ namespace Xadrez.Manager
         public List<string> image = new List<string>() { "\u2654", "\u27ae", " \u2716  " };//{♔, ➮, ✖}
         /// <summary>Check verdadeiro ou falso.</summary>
         public bool check { get; private set; }
+        public Piece en_passant { get; private set; }
 
         /// <summary>Construtor partida de xadrez.</summary>
         public GameManager()
@@ -37,6 +40,7 @@ namespace Xadrez.Manager
             ShowPieces();
             winner = false;
             check = false;
+            en_passant = null;
         }
         public Collor Player()
         {
@@ -66,7 +70,7 @@ namespace Xadrez.Manager
             ///<summary>
             /// Torre menor.
             /// </summary>
-            if(piece is King && put.collumn == take.collumn + 2)
+            if (piece is King && put.collumn == take.collumn + 2)
             {
                 Position takeRoke = new Position(take.line, take.collumn + 3);
                 Position putRoke = new Position(take.line, take.collumn + 1);
@@ -84,6 +88,27 @@ namespace Xadrez.Manager
                 Piece rock = chess.TakePiece(takeRoke);
                 rock.Move();
                 chess.PutPiece(rock, putRoke);
+            }
+
+            ///<summary>
+            ///En passant
+            /// </summary>
+            if (piece is Pawn)
+            {
+                if (take.collumn != put.collumn && captured == null)
+                {
+                    Position pawn;
+                    if (piece.collor.Equals(Collor.WHITE))
+                    {
+                        pawn = new Position(put.line + 1, put.collumn);
+                    }
+                    else
+                    {
+                        pawn = new Position(put.line - 1, put.collumn);
+                    }
+                    captured = chess.TakePiece(pawn);
+                    this.captured.Add(captured);
+                }
             }
             return captured;
         }
@@ -122,6 +147,27 @@ namespace Xadrez.Manager
                 rock.RewindMovement();
                 chess.PutPiece(rock, takeRoke);
             }
+
+            ///<summary>
+            ///En passant.
+            /// </summary>
+            if (piece is Pawn)
+            {
+                if (take.collumn != put.collumn && captured == null)
+                {
+                    Piece putPawn = chess.TakePiece(put);
+                    Position pawn;
+                    if (piece.collor.Equals(Collor.WHITE))
+                    {
+                        pawn = new Position(3, put.collumn);
+                    }
+                    else
+                    {
+                        pawn = new Position(4, put.collumn);
+                    }
+                    chess.PutPiece(piece, pawn);
+                }
+            }
             chess.PutPiece(piece, take);
         }
         /// <summary>Realiza o movimento.</summary>
@@ -152,6 +198,19 @@ namespace Xadrez.Manager
             {
                 turn++;
                 ChangePlayer();
+            }
+
+            Piece putPiece = chess.Piece(put);
+            ///<summary>
+            ///En passant
+            /// </summary>
+            if((putPiece is Pawn) && (put.line.Equals(take.line - 2)) ||
+                (putPiece is Pawn) && (put.line.Equals(take.line + 2))){
+                en_passant = putPiece;
+            }
+            else
+            {
+                en_passant = null;
             }
         }
         /// <summary>Muda o jogador,controla a vez de cada um.</summary>
@@ -324,35 +383,35 @@ namespace Xadrez.Manager
             LoadSquarePiece('b', 1, new Knight(chess, Collor.WHITE));
             LoadSquarePiece('c', 1, new Bishop(chess, Collor.WHITE));
             LoadSquarePiece('d', 1, new Queen(chess, Collor.WHITE));
-            LoadSquarePiece('e', 1, new King(chess, Collor.WHITE,this));
+            LoadSquarePiece('e', 1, new King(chess, Collor.WHITE, this));
             LoadSquarePiece('f', 1, new Bishop(chess, Collor.WHITE));
             LoadSquarePiece('g', 1, new Knight(chess, Collor.WHITE));
             LoadSquarePiece('h', 1, new Rock(chess, Collor.WHITE));
-            LoadSquarePiece('a', 2, new Pawn(chess, Collor.WHITE));
-            LoadSquarePiece('b', 2, new Pawn(chess, Collor.WHITE));
-            LoadSquarePiece('c', 2, new Pawn(chess, Collor.WHITE));
-            LoadSquarePiece('d', 2, new Pawn(chess, Collor.WHITE));
-            LoadSquarePiece('e', 2, new Pawn(chess, Collor.WHITE));
-            LoadSquarePiece('f', 2, new Pawn(chess, Collor.WHITE));
-            LoadSquarePiece('g', 2, new Pawn(chess, Collor.WHITE));
-            LoadSquarePiece('h', 2, new Pawn(chess, Collor.WHITE));
+            LoadSquarePiece('a', 2, new Pawn(chess, Collor.WHITE,this));
+            LoadSquarePiece('b', 2, new Pawn(chess, Collor.WHITE, this));
+            LoadSquarePiece('c', 2, new Pawn(chess, Collor.WHITE, this));
+            LoadSquarePiece('d', 2, new Pawn(chess, Collor.WHITE, this));
+            LoadSquarePiece('e', 2, new Pawn(chess, Collor.WHITE, this));
+            LoadSquarePiece('f', 2, new Pawn(chess, Collor.WHITE, this));
+            LoadSquarePiece('g', 2, new Pawn(chess, Collor.WHITE, this));
+            LoadSquarePiece('h', 2, new Pawn(chess, Collor.WHITE, this));
 
             LoadSquarePiece('a', 8, new Rock(chess, Collor.BLACK));
             LoadSquarePiece('b', 8, new Knight(chess, Collor.BLACK));
             LoadSquarePiece('c', 8, new Bishop(chess, Collor.BLACK));
-            LoadSquarePiece('e', 8, new King(chess, Collor.BLACK,this));
+            LoadSquarePiece('e', 8, new King(chess, Collor.BLACK, this));
             LoadSquarePiece('d', 8, new Queen(chess, Collor.BLACK));
             LoadSquarePiece('f', 8, new Bishop(chess, Collor.BLACK));
             LoadSquarePiece('g', 8, new Knight(chess, Collor.BLACK));
             LoadSquarePiece('h', 8, new Rock(chess, Collor.BLACK));
-            LoadSquarePiece('a', 7, new Pawn(chess, Collor.BLACK));
-            LoadSquarePiece('b', 7, new Pawn(chess, Collor.BLACK));
-            LoadSquarePiece('c', 7, new Pawn(chess, Collor.BLACK));
-            LoadSquarePiece('d', 7, new Pawn(chess, Collor.BLACK));
-            LoadSquarePiece('e', 7, new Pawn(chess, Collor.BLACK));
-            LoadSquarePiece('f', 7, new Pawn(chess, Collor.BLACK));
-            LoadSquarePiece('g', 7, new Pawn(chess, Collor.BLACK));
-            LoadSquarePiece('h', 7, new Pawn(chess, Collor.BLACK));
+            LoadSquarePiece('a', 7, new Pawn(chess, Collor.BLACK, this));
+            LoadSquarePiece('b', 7, new Pawn(chess, Collor.BLACK, this));
+            LoadSquarePiece('c', 7, new Pawn(chess, Collor.BLACK, this));
+            LoadSquarePiece('d', 7, new Pawn(chess, Collor.BLACK, this));
+            LoadSquarePiece('e', 7, new Pawn(chess, Collor.BLACK, this));
+            LoadSquarePiece('f', 7, new Pawn(chess, Collor.BLACK, this));
+            LoadSquarePiece('g', 7, new Pawn(chess, Collor.BLACK, this));
+            LoadSquarePiece('h', 7, new Pawn(chess, Collor.BLACK, this));
         }
     }
 }

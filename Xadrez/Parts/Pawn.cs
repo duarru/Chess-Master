@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using Xadrez.BoardChess;
 using Xadrez.Exception;
+using Xadrez.Manager;
 using Xadrez.Pallets;
 
 namespace Xadrez.Parts
 {
     class Pawn : Piece
     {
-        public Pawn(Board board, Collor collor) : base(board, collor)
+        private GameManager passant;
+        public Pawn(Board board, Collor collor, GameManager passant) : base(board, collor)
         {
+            this.passant = passant;
         }
         /// <summary>Existe inimigo, retorna cor e peça.</summary>
         /// <param name="square"></param>
@@ -62,6 +65,27 @@ namespace Xadrez.Parts
                 {
                     movePawn[square.line, square.collumn] = true;
                 }
+                ///<summary>
+                ///Movimento especial en passant.
+                /// </summary>
+                if (position.line.Equals(3))
+                {
+                    Position leftSquare = new Position(position.line , position.collumn - 1);
+                    if (board.ExceptionBoardLimit(leftSquare)
+                        && CaptureRadius(leftSquare)
+                        && board.Piece(leftSquare) == passant.en_passant)
+                    {
+                        movePawn[leftSquare.line - 1, leftSquare.collumn] = true;
+                    }
+
+                    Position rightSquare = new Position(position.line , position.collumn + 1);
+                    if (board.ExceptionBoardLimit(rightSquare)
+                        && CaptureRadius(rightSquare)
+                        && board.Piece(rightSquare) == passant.en_passant)
+                    {
+                        movePawn[rightSquare.line - 1, rightSquare.collumn] = true;
+                    }
+                }
             }
             else
             {
@@ -90,6 +114,27 @@ namespace Xadrez.Parts
                     if (board.ExceptionBoardLimit(square) && CaptureRadius(square))
                     {
                         movePawn[square.line, square.collumn] = true;
+                    }
+                    ///<summary>
+                    ///Movimento especial en passant.
+                    /// </summary>
+                    if (position.line.Equals(4))
+                    {
+                        Position leftSquare = new Position(position.line, position.collumn - 1);
+                        if (board.ExceptionBoardLimit(leftSquare)
+                            && CaptureRadius(leftSquare)
+                            && board.Piece(leftSquare) == passant.en_passant)
+                        {
+                            movePawn[leftSquare.line + 1, leftSquare.collumn] = true;
+                        }
+
+                        Position rightSquare = new Position(position.line, position.collumn + 1);
+                        if (board.ExceptionBoardLimit(rightSquare)
+                            && CaptureRadius(rightSquare)
+                            && board.Piece(rightSquare) == passant.en_passant)
+                        {
+                            movePawn[rightSquare.line + 1, rightSquare.collumn] = true;
+                        }
                     }
                 }
             }
