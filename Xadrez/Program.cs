@@ -37,11 +37,6 @@ namespace Xadrez
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
-                    catch (System.IndexOutOfRangeException range)
-                    {
-                        Console.WriteLine($" {range.Message}");
-                        Console.ReadLine();
-                    }
                 }
                 Console.Clear();
                 WindowChess.StartChessMatch(playGame);

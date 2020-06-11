@@ -17,8 +17,11 @@ namespace Xadrez.Parts
         public Collor collor { get; protected set; }
         /// <summary>A quantidade de movimento.</summary>
         public int movement { get; protected set; }
-        /// <summary>Imagens unicode.</summary>
-        public List<string> image = new List<string>() { " \u2654  ", " \u2655  ", " \u2656  ", " \u2657  ", " \u2658  ", " \u2659  "};
+        /// <summary>Imagens lista unicode.
+        /// ♔, ♕, ♖, ♗, ♘, ♙ 
+        /// </summary>
+        public List<string> image = new List<string>() { " \u2654  ", " \u2655  ", " \u2656  "
+                                                       , " \u2657  ", " \u2658  ", " \u2659  "};
         public Piece()
         {
         }

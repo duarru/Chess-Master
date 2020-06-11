@@ -29,7 +29,7 @@ namespace Xadrez
             Console.Write($" Turn {playGame.CountTurn()}");
             if (!playGame.winner)
             {
-                if (playGame.Check)
+                if (playGame.check)
                 {
                     ConsoleColor foreground = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkRed;

@@ -24,7 +24,7 @@ namespace Xadrez.Manager
         /// <summary>Imagens.</summary>
         public List<string> image = new List<string>() { "\u2654", "\u27ae", " \u2716  " };//{♔, ➮, ✖}
         /// <summary>Check verdadeiro ou falso.</summary>
-        public bool Check { get; private set; }
+        public bool check { get; private set; }
 
         /// <summary>Construtor partida de xadrez.</summary>
         public GameManager()
@@ -36,7 +36,7 @@ namespace Xadrez.Manager
             captured = new HashSet<Piece>();
             ShowPieces();
             winner = false;
-            Check = false;
+            check = false;
         }
         public Collor Player()
         {
@@ -62,6 +62,29 @@ namespace Xadrez.Manager
             {
                 this.captured.Add(captured);
             }
+
+            ///<summary>
+            /// Torre menor.
+            /// </summary>
+            if(piece is King && put.collumn == take.collumn + 2)
+            {
+                Position takeRoke = new Position(take.line, take.collumn + 3);
+                Position putRoke = new Position(take.line, take.collumn + 1);
+                Piece rock = chess.TakePiece(takeRoke);
+                rock.Move();
+                chess.PutPiece(rock, putRoke);
+            }
+            ///<summary>
+            /// Torre maior.
+            /// </summary>
+            if (piece is King && put.collumn == take.collumn - 2)
+            {
+                Position takeRoke = new Position(take.line, take.collumn - 4);
+                Position putRoke = new Position(take.line, take.collumn - 1);
+                Piece rock = chess.TakePiece(takeRoke);
+                rock.Move();
+                chess.PutPiece(rock, putRoke);
+            }
             return captured;
         }
         /// <summary>vDesfaze o movimento e devolve uma eventual peça capturada</summary>
@@ -76,6 +99,28 @@ namespace Xadrez.Manager
             {
                 chess.PutPiece(captured, put);
                 this.captured.Remove(captured);
+            }
+            ///<summary>
+            /// Torre menor.
+            /// </summary>
+            if (piece is King && put.collumn == take.collumn + 2)
+            {
+                Position takeRoke = new Position(take.line, take.collumn + 3);
+                Position putRoke = new Position(take.line, take.collumn + 1);
+                Piece rock = chess.TakePiece(takeRoke);
+                rock.RewindMovement();
+                chess.PutPiece(rock, putRoke);
+            }
+            ///<summary>
+            /// Torre maior.
+            /// </summary>
+            if (piece is King && put.collumn == take.collumn - 2)
+            {
+                Position takeRoke = new Position(take.line, take.collumn - 4);
+                Position putRoke = new Position(take.line, take.collumn - 1);
+                Piece rock = chess.TakePiece(putRoke);
+                rock.RewindMovement();
+                chess.PutPiece(rock, takeRoke);
             }
             chess.PutPiece(piece, take);
         }
@@ -93,11 +138,11 @@ namespace Xadrez.Manager
 
             if (InChedk(AnotherPlayer(currentPlayer)))
             {
-                Check = true;
+                check = true;
             }
             else
             {
-                Check = false;
+                check = false;
             }
             if (CheckMate(AnotherPlayer(currentPlayer)))
             {
@@ -279,7 +324,7 @@ namespace Xadrez.Manager
             LoadSquarePiece('b', 1, new Knight(chess, Collor.WHITE));
             LoadSquarePiece('c', 1, new Bishop(chess, Collor.WHITE));
             LoadSquarePiece('d', 1, new Queen(chess, Collor.WHITE));
-            LoadSquarePiece('e', 1, new King(chess, Collor.WHITE));
+            LoadSquarePiece('e', 1, new King(chess, Collor.WHITE,this));
             LoadSquarePiece('f', 1, new Bishop(chess, Collor.WHITE));
             LoadSquarePiece('g', 1, new Knight(chess, Collor.WHITE));
             LoadSquarePiece('h', 1, new Rock(chess, Collor.WHITE));
@@ -295,8 +340,8 @@ namespace Xadrez.Manager
             LoadSquarePiece('a', 8, new Rock(chess, Collor.BLACK));
             LoadSquarePiece('b', 8, new Knight(chess, Collor.BLACK));
             LoadSquarePiece('c', 8, new Bishop(chess, Collor.BLACK));
-            LoadSquarePiece('d', 8, new King(chess, Collor.BLACK));
-            LoadSquarePiece('e', 8, new Queen(chess, Collor.BLACK));
+            LoadSquarePiece('e', 8, new King(chess, Collor.BLACK,this));
+            LoadSquarePiece('d', 8, new Queen(chess, Collor.BLACK));
             LoadSquarePiece('f', 8, new Bishop(chess, Collor.BLACK));
             LoadSquarePiece('g', 8, new Knight(chess, Collor.BLACK));
             LoadSquarePiece('h', 8, new Rock(chess, Collor.BLACK));

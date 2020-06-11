@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using Xadrez.BoardChess;
+using Xadrez.Exception;
 using Xadrez.Pallets;
 
 namespace Xadrez.Parts
@@ -21,7 +23,7 @@ namespace Xadrez.Parts
         /// <summary>Livre, se for o primeiro movimento.</summary>
         /// <param name="square"></param>
         /// <returns></returns>
-        private bool FisrMovement(Position square)
+        private bool NothingEnemy(Position square)
         {
             return board.Piece(square) == null;
         }
@@ -38,13 +40,13 @@ namespace Xadrez.Parts
             {
                 //cima.
                 square.PieceToSquare(position.line - 1, position.collumn);
-                if (board.ExceptionBoardLimit(square) && FisrMovement(square))
+                if (board.ExceptionBoardLimit(square) && NothingEnemy(square))
                 {
                     movePawn[square.line, square.collumn] = true;
                 }
                 //duas casas para cima.
                 square.PieceToSquare(position.line - 2, position.collumn);
-                if (board.ExceptionBoardLimit(square) && movement.Equals(0))
+                if (board.ExceptionBoardLimit(square) && movement.Equals(0) && NothingEnemy(square))
                 {
                     movePawn[square.line, square.collumn] = true;
                 }
@@ -67,13 +69,13 @@ namespace Xadrez.Parts
                 {
                     //baxo.
                     square.PieceToSquare(position.line + 1, position.collumn);
-                    if (board.ExceptionBoardLimit(square) && FisrMovement(square))
+                    if (board.ExceptionBoardLimit(square) && NothingEnemy(square))
                     {
                         movePawn[square.line, square.collumn] = true;
                     }
                     //duas casas para baixo.
                     square.PieceToSquare(position.line + 2, position.collumn);
-                    if (board.ExceptionBoardLimit(square) && movement.Equals(0))
+                    if (board.ExceptionBoardLimit(square) && movement.Equals(0) && NothingEnemy(square))
                     {
                         movePawn[square.line, square.collumn] = true;
                     }
