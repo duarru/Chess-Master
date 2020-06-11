@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System;
 using Microsoft.VisualBasic;
 using System.ComponentModel.Design;
+using System.Drawing;
 
 namespace Xadrez.Manager
 {
@@ -181,7 +182,25 @@ namespace Xadrez.Manager
                 RewindMove(take, put, captured);
                 throw new ExceptionChess($"{image[2]} Your cannot put yourself in check.");
             }
-
+            Piece putPiece = chess.Piece(put);
+            
+            ///<summary>
+            ///Movimento especial promoção. 
+            /// </summary>
+            if(putPiece is Piece)
+            {
+                if (putPiece.collor.Equals(Collor.WHITE) && put.line.Equals(0) ||
+                    putPiece.collor.Equals(Collor.BLACK) && put.line.Equals(7))
+                {
+                    putPiece = chess.Piece(put);
+                    putPiece = chess.TakePiece(put);
+                    pieces.Remove(putPiece);
+                    Piece queen = new Queen(chess, putPiece.collor);
+                    chess.PutPiece(queen, put);
+                    pieces.Add(queen);
+                }
+            }
+            
             if (InChedk(AnotherPlayer(currentPlayer)))
             {
                 check = true;
@@ -200,7 +219,6 @@ namespace Xadrez.Manager
                 ChangePlayer();
             }
 
-            Piece putPiece = chess.Piece(put);
             ///<summary>
             ///En passant
             /// </summary>
