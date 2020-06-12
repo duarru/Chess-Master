@@ -7,13 +7,21 @@ namespace Xadrez.BoardChess
 {
     class Board
     {
-        /// <summary>Linha da classe Tabuleiro (Board).</summary>
+        /// <summary>
+        /// Linha da classe Tabuleiro (Board).
+        /// </summary>
         public int lines { get; set; }
-        /// <summary>Coluna da classe Tabuleiro (Board).</summary>
+        /// <summary>
+        /// Coluna da classe Tabuleiro (Board).
+        /// </summary>
         public int collumns { get; set; }
-        /// <summary>Matriz privativa das peças</summary>
+        /// <summary>
+        /// Matriz privativa das peças
+        /// </summary>
         private Piece[,] pieces;
-        /// <summary>Lista das imagens para os metodos de exceção do tabuleiro.</summary>
+        /// <summary>
+        /// Lista das imagens para os metodos de exceção do tabuleiro.
+        /// </summary>
         public List<string> image = new List<string> { " \u2716  " };
 
 
@@ -83,6 +91,7 @@ namespace Xadrez.BoardChess
             }
             return true;
         }
+
         /// <summary>Verifica se a posição é válida.</summary>
         /// <param name="square"></param>
         public void ExceptionValidedLimit(Position square)

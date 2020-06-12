@@ -9,15 +9,28 @@ namespace Xadrez.Parts
         public Queen(Board board, Collor collor) : base(board, collor)
         {
         }
+
+        /// <summary>
+        /// Imagem da rainha.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return image[1];
         }
+
+        /// <summary>
+        /// Caracteristica do movimento da rainha.
+        /// </summary>
+        /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
             bool[,] moveQueen = new bool[board.lines, board.collumns];
             Position square = new Position(0, 0);
-            //diagonal esquerda cima.
+
+            ///<summary>
+            ///diagonal esquerda cima.
+            /// </summary>
             square.PieceToSquare(position.line - 1, position.collumn - 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -28,7 +41,10 @@ namespace Xadrez.Parts
                 }
                 square.PieceToSquare(square.line - 1, square.collumn - 1);
             }
-            //cima.
+
+            ///<summary>
+            ///cima.
+            /// </summary>
             square.PieceToSquare(position.line - 1, position.collumn);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -39,7 +55,10 @@ namespace Xadrez.Parts
                 }
                 square.PieceToSquare(square.line - 1, square.collumn);
             }
-            //diagonal direita.
+
+            ///<summary>
+            ///diagonal direita.
+            ///</summary>
             square.PieceToSquare(position.line - 1, position.collumn + 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -50,7 +69,10 @@ namespace Xadrez.Parts
                 }
                 square.PieceToSquare(square.line - 1, square.collumn + 1);
             }
-            //direita.
+            
+            ///<summary>
+            ///direita.
+            ///</summary>
             square.PieceToSquare(position.line, position.collumn + 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -61,7 +83,10 @@ namespace Xadrez.Parts
                 }
                 square.PieceToSquare(square.line, square.collumn + 1);
             }
-            //diagonal direita baixo.
+            
+            ///<summary>
+            ///diagonal direita baixo.
+            ///</summary>summary>
             square.PieceToSquare(position.line + 1, position.collumn + 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -72,7 +97,10 @@ namespace Xadrez.Parts
                 }
                 square.PieceToSquare(square.line + 1, square.collumn + 1);
             }
-            //baixo.
+            
+            ///<summary>
+            ///baixo.
+            ///</summary>
             square.PieceToSquare(position.line + 1, position.collumn);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -83,7 +111,10 @@ namespace Xadrez.Parts
                 }
                 square.PieceToSquare(square.line + 1, square.collumn);
             }
-            //diagonal esquerda baixo.
+            
+            ///<summary>
+            ///diagonal esquerda baixo.
+            ///</summary>>
             square.PieceToSquare(position.line + 1, position.collumn - 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -94,7 +125,10 @@ namespace Xadrez.Parts
                 }
                 square.PieceToSquare(square.line + 1, square.collumn - 1);
             }
-            //esquerda.
+            
+            ///<summary>
+            ///esquerda.
+            ///</summary>>
             square.PieceToSquare(position.line, position.collumn - 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {

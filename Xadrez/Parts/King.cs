@@ -13,60 +13,93 @@ namespace Xadrez.Parts
         {
             this.situation = situation;
         }
+
+        /// <summary>
+        /// Torre para casa ao lado do rei
+        /// </summary>
+        /// <param name="square"></param>
+        /// <returns></returns>
         private bool RockForSquareKing(Position square)
         {
             Piece rock = board.Piece(square);
             return rock != null && rock is Rock && rock.collor == collor && rock.movement == 0;
         }
-        /// <summary>Metodo sobrescrito abstrato, caracteristica especifica do movimento do rei.</summary>
+
+        /// <summary>
+        /// Metodo sobrescrito abstrato, caracteristica especifica do movimento do rei.
+        /// </summary>
         /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
             bool[,] moveKing = new bool[board.lines, board.collumns];
             Position square = new Position(0, 0);
-            //cima.
+
+            ///<summary>
+            ///cima.
+            ///</summary>
             square.PieceToSquare(position.line - 1, position.collumn);
             if (board.ExceptionBoardLimit(square) && Move(square))
             {
                 moveKing[square.line, square.collumn] = true;
             }
-            //diagonal superior direita.
+
+            ///<summary>
+            ///diagonal superior direita.
+            ///</summary>
             square.PieceToSquare(position.line - 1, position.collumn + 1);
             if (board.ExceptionBoardLimit(square) && Move(square))
             {
                 moveKing[square.line, square.collumn] = true;
             }
-            //direita.
+
+            ///<summary>
+            ///direita.
+            ///</summary>
             square.PieceToSquare(position.line, position.collumn + 1);
             if (board.ExceptionBoardLimit(square) && Move(square))
             {
                 moveKing[square.line, square.collumn] = true;
             }
-            //diagonal inferior direita.
+
+            ///<summary>
+            ///diagonal inferior direita.
+            ///</summary>
             square.PieceToSquare(position.line + 1, position.collumn + 1);
             if (board.ExceptionBoardLimit(square) && Move(square))
             {
                 moveKing[square.line, square.collumn] = true;
             }
-            //baixo.
+
+            ///<summary>
+            ///baixo.
+            ///</summary>
             square.PieceToSquare(position.line + 1, position.collumn);
             if (board.ExceptionBoardLimit(square) && Move(square))
             {
                 moveKing[square.line, square.collumn] = true;
             }
-            //diagonal inferior esquerda.
+
+            ///<summary>
+            ///diagonal inferior esquerda.
+            /// </summary>
             square.PieceToSquare(position.line + 1, position.collumn - 1);
             if (board.ExceptionBoardLimit(square) && Move(square))
             {
                 moveKing[square.line, square.collumn] = true;
             }
-            //esquerda
+
+            ///<summary>
+            ///esquerda
+            ///</summary>
             square.PieceToSquare(position.line, position.collumn - 1);
             if (board.ExceptionBoardLimit(square) && Move(square))
             {
                 moveKing[square.line, square.collumn] = true;
             }
-            //diagonal superior esquerda.
+            
+            ///<summary>
+            ///diagonal superior esquerda.
+            ///</summary>>
             square.PieceToSquare(position.line - 1, position.collumn - 1);
             if (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -91,6 +124,7 @@ namespace Xadrez.Parts
                         moveKing[position.line, position.collumn + 2] = true;
                     }
                 }
+
                 ///<summary>
                 ///Torre maior.
                 /// </summary>
@@ -110,7 +144,9 @@ namespace Xadrez.Parts
             return moveKing;
         }
 
-        /// <summary>Sobreposição retorna a imagem do rei (King).</summary>
+        /// <summary>
+        /// Sobreposição retorna a imagem do rei (King).
+        /// </summary>
         /// <returns></returns>
         public override string ToString()
         {

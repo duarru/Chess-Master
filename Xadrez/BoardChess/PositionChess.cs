@@ -2,9 +2,13 @@
 {
     class PositionChess
     {
-        /// <summary>Coluna da classe Posição do Xadrez.</summary>
+        /// <summary>
+        /// Coluna da classe Posição do Xadrez.
+        /// </summary>
         public char collumn { get; set; }
-        /// <summary>Linha da classe Posição do Xadrez.</summary>
+        /// <summary>
+        /// Linha da classe Posição do Xadrez.
+        /// </summary>
         public int line { get; set; }
 
         /// <summary>Constructor da classe Posição do Xadrez.</summary>

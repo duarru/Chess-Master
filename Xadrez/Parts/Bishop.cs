@@ -7,19 +7,24 @@ namespace Xadrez.Parts
         public Bishop(Board board, Collor collor) : base(board, collor)
         {
         }
+
         /// <summary>Unicode para imagem do bispo, fonte MS Gothic.</summary>
         /// <returns></returns>
         public override string ToString()
         {
             return image[3];
         }
+
         /// <summary>Movimentos possiveis, caracteristicos da peça.</summary>
         /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
             bool[,] MoveBishop = new bool[board.lines, board.collumns];
             Position square = new Position(0, 0);
-            //diagonal esquerda.
+
+            ///<summary>
+            ///diagonal esquerda.
+            ///</summary>
             square.PieceToSquare(position.line - 1, position.collumn -1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -30,7 +35,10 @@ namespace Xadrez.Parts
                 }
                 square.PieceToSquare(square.line - 1, square.collumn - 1);
             }
-            //diagonal direita.
+
+            ///<summary>
+            ///diagonal direita.
+            ///</summary>
             square.PieceToSquare(position.line - 1, position.collumn + 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -41,7 +49,10 @@ namespace Xadrez.Parts
                 }
                 square.PieceToSquare(square.line - 1, square.collumn + 1);
             }
-            //diagonal direita baixo.
+
+            ///<summary>
+            ///diagonal direita baixo.
+            ///</summary>
             square.PieceToSquare(position.line + 1, position.collumn + 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -52,7 +63,10 @@ namespace Xadrez.Parts
                 }
                 square.PieceToSquare(square.line + 1, square.collumn + 1);
             }
-            //diagonal esquerda baixo.
+
+            ///<summary>
+            ///diagonal esquerda baixo.
+            ///</summary>
             square.PieceToSquare(position.line + 1, position.collumn - 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {

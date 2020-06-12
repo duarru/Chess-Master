@@ -10,13 +10,19 @@ namespace Xadrez.Parts
         public Rock(Board board, Collor collor) : base(board, collor)
         {
         }
-        /// <summary>Movimento caracteristico da peça torre.</summary>
+        
+        /// <summary>
+        /// Movimento caracteristico da peça torre.
+        /// </summary>
         /// <returns></returns>
         public override bool[,] CharacteringMove()
         {
             bool[,] moveRock = new bool[board.lines, board.collumns];
             Position square = new Position(0, 0);
-            //cima.
+            
+            ///<summary>
+            ///cima.
+            ///</summary>>
             square.PieceToSquare(position.line - 1, position.collumn);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -27,7 +33,10 @@ namespace Xadrez.Parts
                 }
                 square.line = square.line - 1;
             }
-            //baixo.
+            
+            ///<summary>
+            ///baixo.
+            ///</summary>
             square.PieceToSquare(position.line + 1, position.collumn);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -38,7 +47,10 @@ namespace Xadrez.Parts
                 }
                 square.line = square.line + 1;
             }
-            //direita.
+            
+            ///<summary>
+            ///direita.
+            ///</summary>
             square.PieceToSquare(position.line, position.collumn + 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -49,7 +61,10 @@ namespace Xadrez.Parts
                 }
                 square.collumn = square.collumn + 1;
             }
-            //esquerda.
+            
+            ///<summary>
+            ///esquerda.
+            ///</summary>
             square.PieceToSquare(position.line, position.collumn - 1);
             while (board.ExceptionBoardLimit(square) && Move(square))
             {
@@ -62,7 +77,9 @@ namespace Xadrez.Parts
             }
             return moveRock;
         }
-        /// <summary>Sobreposição retorna a imagem da torre (Rock).</summary>
+        /// <summary>
+        /// Sobreposição retorna a imagem da torre (Rock).
+        /// </summary>
         /// <returns></returns>
         public override string ToString() {
             return image[2];

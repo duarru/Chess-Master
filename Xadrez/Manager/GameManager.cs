@@ -4,30 +4,47 @@ using Xadrez.Pallets;
 using Xadrez.Parts;
 using System.Collections.Generic;
 using System;
-using Microsoft.VisualBasic;
-using System.ComponentModel.Design;
-using System.Drawing;
 
 namespace Xadrez.Manager
 {
     class GameManager
     {
-        /// <summary>Tabuleiro da classe GameManager.</summary>
+        /// <summary>
+        /// Tabuleiro da classe GameManager.
+        /// </summary>
         public Board chess { get; private set; }
-        /// <summary>Turno da jogada.</summary>
+        /// <summary>
+        /// Turno da jogada.
+        /// </summary>
         public int turn { get; private set; }
-        /// <summary>Jogador autal.</summary>
+        /// <summary>
+        /// Jogador autal.
+        /// </summary>
+        /// 
         public Collor currentPlayer { get; private set; }
-        /// <summary>Conjunto de peças da classe GameManager.</summary>
+        /// <summary>
+        /// Conjunto de peças da classe GameManager.
+        /// </summary>
         public HashSet<Piece> pieces { get; set; }
-        /// <summary>Conjuntos de peças capturadas da classe GamaManager.</summary>
+        /// <summary>
+        /// Conjuntos de peças capturadas da classe GamaManager.
+        /// </summary>
         public HashSet<Piece> captured { get; set; }
-        /// <summary>Vencedor verdadeiro ou falso.</summary>
+        /// <summary>
+        /// Vencedor verdadeiro ou falso.
+        /// </summary>
         public bool winner { get; private set; }
-        /// <summary>Imagens.</summary>
+        /// <summary>
+        /// Imagens.
+        /// </summary>
         public List<string> image = new List<string>() { "\u2654", "\u27ae", " \u2716  " };//{♔, ➮, ✖}
-        /// <summary>Check verdadeiro ou falso.</summary>
+        /// <summary>
+        /// Check verdadeiro ou falso.
+        /// </summary>
         public bool check { get; private set; }
+        /// <summary>
+        /// Movimento especial do peão.
+        /// </summary>
         public Piece en_passant { get; private set; }
 
         /// <summary>Construtor partida de xadrez.</summary>
@@ -43,10 +60,16 @@ namespace Xadrez.Manager
             check = false;
             en_passant = null;
         }
+
+        /// <summary>
+        /// Retorna a cor.
+        /// </summary>
+        /// <returns></returns>
         public Collor Player()
         {
             return currentPlayer;
         }
+
         /// <summary>Conta o turno das jogadas.</summary>
         /// <returns></returns>
         public int CountTurn()
@@ -63,6 +86,10 @@ namespace Xadrez.Manager
             piece.Move();
             Piece captured = chess.TakePiece(put);
             chess.PutPiece(piece, put);
+
+            ///<summary>
+            ///Se verdade a captura add a lista.
+            ///</summary>
             if (captured != null)
             {
                 this.captured.Add(captured);
@@ -79,6 +106,7 @@ namespace Xadrez.Manager
                 rock.Move();
                 chess.PutPiece(rock, putRoke);
             }
+
             ///<summary>
             /// Torre maior.
             /// </summary>
@@ -111,9 +139,13 @@ namespace Xadrez.Manager
                     this.captured.Add(captured);
                 }
             }
+            
             return captured;
         }
-        /// <summary>vDesfaze o movimento e devolve uma eventual peça capturada</summary>
+
+        /// <summary>
+        /// Desfaze o movimento e devolve uma eventual peça capturada
+        /// </summary>
         /// <param name="take"></param>
         /// <param name="put"></param>
         /// <param name="captured"></param>
@@ -126,6 +158,7 @@ namespace Xadrez.Manager
                 chess.PutPiece(captured, put);
                 this.captured.Remove(captured);
             }
+
             ///<summary>
             /// Torre menor.
             /// </summary>
@@ -137,6 +170,7 @@ namespace Xadrez.Manager
                 rock.RewindMovement();
                 chess.PutPiece(rock, putRoke);
             }
+
             ///<summary>
             /// Torre maior.
             /// </summary>
@@ -171,6 +205,7 @@ namespace Xadrez.Manager
             }
             chess.PutPiece(piece, take);
         }
+
         /// <summary>Realiza o movimento.</summary>
         /// <param name="take"></param>
         /// <param name="put"></param>
@@ -231,6 +266,7 @@ namespace Xadrez.Manager
                 en_passant = null;
             }
         }
+
         /// <summary>Muda o jogador,controla a vez de cada um.</summary>
         /// <param name="current"></param>
         /// <param name="turn"></param>
@@ -246,6 +282,7 @@ namespace Xadrez.Manager
                 currentPlayer = Collor.WHITE;
             }
         }
+
         /// <summary>Conjunto das peças capturadas separadas por cor.</summary>
         /// <param name="collor"></param>
         /// <returns></returns>
@@ -261,6 +298,7 @@ namespace Xadrez.Manager
             }
             return separetePieceCollor;
         }
+
         /// <summary>Conjunto das peças em jogo.</summary>
         /// <param name="collor"></param>
         /// <returns></returns>
@@ -277,6 +315,7 @@ namespace Xadrez.Manager
             piecesOnBoard.ExceptWith(PiecesCaptureSepareteCollor(collor));// exceto essa cor.
             return piecesOnBoard;
         }
+
         /// <summary>Peça adverçaria.</summary>
         /// <param name="collor"></param>
         /// <returns></returns>
@@ -291,6 +330,7 @@ namespace Xadrez.Manager
                 return Collor.WHITE;
             }
         }
+
         /// <summary>Devolve o rei de dada cor.</summary>
         /// <param name="collor"></param>
         /// <returns>null se não existir rei.</returns>
@@ -305,6 +345,7 @@ namespace Xadrez.Manager
             }
             return null;
         }
+
         /// <summary>Está em xeque.</summary>
         /// <param name="collor"></param>
         /// <returns></returns>
@@ -357,6 +398,7 @@ namespace Xadrez.Manager
             }
             return true;
         }
+
         /// <summary>Excecção de movimento.</summary>
         /// <param name="square"></param>
         public void ExceptionTakeMove(Position square)
@@ -375,6 +417,7 @@ namespace Xadrez.Manager
                 throw new ExceptionChess($"{image[2]} There is not movement");
             }
         }
+
         /// <summary>Exceção para soltar a peça.</summary>
         /// <param name="take"></param>
         /// <param name="put"></param>
@@ -385,6 +428,7 @@ namespace Xadrez.Manager
                 throw new ExceptionChess($"{image[2]}It's not a valided moving");
             }
         }
+
         /// <summary>Coloca uma nova peça.</summary>
         /// <param name="collumn"></param>
         /// <param name="line"></param>
@@ -394,7 +438,10 @@ namespace Xadrez.Manager
             chess.PutPiece(piece, new PositionChess(collumn, line).ToPosition());
             pieces.Add(piece);
         }
-        /// <summary>Posição inicial.</summary>
+
+        /// <summary>
+        /// Posição inicial.
+        /// </summary>
         private void ShowPieces()
         {
             LoadSquarePiece('a', 1, new Rock(chess, Collor.WHITE));
